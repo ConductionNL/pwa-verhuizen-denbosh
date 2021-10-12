@@ -1,5 +1,6 @@
 import Button from "@material-ui/core/Button";
 import React from "react";
+import {Link} from "@material-ui/core";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
@@ -20,14 +21,14 @@ function Index() {
   }
 
   return <>
-    <Layout title={title} description="waar kan ik deze description zien">
-      <Grid container spacing={3}>
-        <Stepper currentStep={2} />
-        <Grid item sm={12}>
-          <PageHeader title={title}/>
-          <br/>
-          <h5>Wie gaat er verhuizen?</h5>
-          <p>Onderstaande personen kunnen door jou verhuist worden.</p>
+  <Layout title={title} description="waar kan ik deze description zien">
+    <Grid container spacing={3}>
+      <Stepper currentStep={2}/>
+      <Grid item sm={12}>
+        <PageHeader title={title}/>
+        <br/>
+        <h5>Wie gaat er verhuizen?</h5>
+        <p>Onderstaande personen kunnen door jou verhuist worden.</p>
 
         <form onSubmit={handleCoMovers}>
           <CheckboxList/>
@@ -46,9 +47,9 @@ function Index() {
           </Grid>
         </form>
       </Grid>
-
-    </Layout>
-  </>
+    </Grid>
+  </Layout>
+</>
 }
 
 export default Index
