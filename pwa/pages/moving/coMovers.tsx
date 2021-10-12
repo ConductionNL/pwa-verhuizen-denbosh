@@ -33,6 +33,7 @@ function Index() {
         <form onSubmit={handleCoMovers}>
           <CheckboxList/>
 
+          <br/>
           <Grid
             justify="space-between" // Add it here :)
             container>

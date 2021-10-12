@@ -7,6 +7,7 @@ import {Link, TextField} from "@material-ui/core";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
+import SendIcon from "@material-ui/icons/Send";
 
 function Index() {
   const title = 'Controle';
@@ -24,24 +25,27 @@ function Index() {
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
-        <Stepper currentStep={4} />
+        <Stepper currentStep={4}/>
         <Grid item sm={12}>
           <PageHeader title={title}/>
           <br/>
           <h5>Controleer je gegevens</h5>
 
           <form onSubmit={handleContact}>
-           <CheckList/>
+            <CheckList/>
+            <br/>
             <Grid
               justify="space-between" // Add it here :)
               container>
               <Grid item>
-                <Link href={'/moving/contact'}>
+                <Link href="/moving/contact">
                   <Button variant="contained"> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained">Volgende</Button>
+                <Button variant="contained" color="primary" endIcon={<SendIcon/>}>
+                  Versturen
+                </Button>
               </Grid>
             </Grid>
           </form>
