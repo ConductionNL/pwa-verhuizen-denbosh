@@ -9,6 +9,7 @@ import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
 import PaperCard from "../../components/common/paperCard";
 import {useRouter} from "next/router";
+import Stepper from "../../components/moving/stepper";
 
 
 function Index() {
@@ -30,12 +31,9 @@ function Index() {
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
-        {/*<Hidden smDown>*/}
-        {/*  <Grid item md={3}>*/}
-        {/*    Willen we deze action menu?*/}
-        {/*    <ActionMenu/>*/}
-        {/*  </Grid>*/}
-        {/*</Hidden>*/}
+
+        <Stepper currentStep={0} />
+
         <Grid item sm={12}>
           <PageHeader title={title}/>
           <br/>

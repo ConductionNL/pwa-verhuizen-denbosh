@@ -8,6 +8,7 @@ import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import {useRouter} from "next/router";
+import Stepper from "../../components/moving/stepper";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,19 +43,13 @@ function Index() {
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
 
-      <Grid container spacing={3}>
-        <Hidden smDown>
-          <Grid item md={3}>
-            Willen we deze action menu?
-            <ActionMenu/>
-          </Grid>
-        </Hidden>
-        <Grid item sm={12} md={9}>
-          <PageHeader title={title}/>
-          <br/>
-          <h5>Wanneer ga je verhuizen?</h5>
-          <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst liggen.</p>
+      <Stepper currentStep={1} />
 
+      <Grid item sm={12}>
+        <PageHeader title={title}/>
+        <br/>
+        <h5>Wat wordt je nieuwe adres?</h5>
+        <p>Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.</p>
           <form onSubmit={handleDate}>
             <TextField
               id="date"
