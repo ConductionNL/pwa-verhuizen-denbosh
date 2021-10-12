@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Index() {
   const classes = useStyles();
-  const title = 'Verhuizen';
+  const title = 'Verhuisdatum';
   const router = useRouter();
 
   const handleDate = (event) => {

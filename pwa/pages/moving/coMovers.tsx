@@ -13,7 +13,7 @@ import CheckboxList from "../../components/moving/list";
 import Stepper from "../../components/moving/stepper";
 
 function Index() {
-  const title = 'Verhuizen';
+  const title = 'Meeverhuizers';
   const router = useRouter();
 
   const handleCoMovers = (event) => {

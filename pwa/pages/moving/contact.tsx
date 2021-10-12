@@ -10,9 +10,10 @@ import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import {useRouter} from "next/router";
 import CheckboxList from "../../components/moving/list";
+import Stepper from "../../components/moving/stepper";
 
 function Index() {
-  const title = 'Verhuizen';
+  const title = 'Contactgegevens';
   const router = useRouter();
 
   const handleContact = (event) => {
@@ -26,14 +27,9 @@ function Index() {
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
 
-      <Grid container spacing={3}>
-        <Hidden smDown>
-          <Grid item md={3}>
-            Willen we deze action menu?
-            <ActionMenu/>
-          </Grid>
-        </Hidden>
-        <Grid item sm={12} md={9}>
+      <Stepper currentStep={3}/>
+
+        <Grid item sm={12} >
           <PageHeader title={title}/>
           <br/>
           <h5>Hoe kunnen we je bereiken?</h5>
@@ -72,7 +68,6 @@ function Index() {
             </Grid>
           </form>
         </Grid>
-      </Grid>
 
     </Layout>
   </>
