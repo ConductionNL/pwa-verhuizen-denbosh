@@ -18,9 +18,40 @@ function Index() {
 
   const router = useRouter();
 
+
+  const checkInputs = () => {
+    //gaat alles goed?
+    let valid = true;
+
+    //alle inputs ophalen
+    let postalInput = document.getElementById('postalCode');
+    let houseNumberInput = document.getElementById('houseNumber');
+    let houseNumberSuffixInput = document.getElementById('houseNumberSuffix');
+
+    //check of inputs valid zijn
+    if (postalInput.value.length == 0) {
+      alert("Vul een postcode in");
+      return false;
+    }
+
+    if (houseNumberInput.value.length == 0) {
+      alert("Vul een huisnummer in");
+      return false;
+    }
+
+    return valid;
+  }
+
   const handleAddress = (event) => {
     event.preventDefault();
 
+
+    let valid = checkInputs();
+
+    if (!valid) {
+      alert
+      return;
+    }
     // Session set address
 
 
@@ -41,10 +72,10 @@ function Index() {
           <p>Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.</p>
 
           <form onSubmit={handleAddress}>
-            <TextField id="postalCode" label="Postcode" variant="outlined"/>
+            <TextField required id="postalCode" label="Postcode" variant="outlined"/>
             <br/>
             <br/>
-            <TextField id="houseNumber" label="Huisnummer" variant="outlined"/>
+            <TextField required id="houseNumber" label="Huisnummer" variant="outlined"/>
             <br/>
             <br/>
             <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"/>
