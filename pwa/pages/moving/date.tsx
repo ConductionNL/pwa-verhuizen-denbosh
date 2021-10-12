@@ -66,11 +66,14 @@ function Index() {
             />
             <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
 
-            <Grid
-              justify="space-between" // Add it here :)
-              container>
-              <Grid item>
-                {/*<link href='/moving/address'>*/}
+          <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
+
+          <br/>
+          <Grid
+            justify="space-between" // Add it here :)
+            container>
+            <Grid item>
+              <Link href="/moving/address">
                 <Button variant="contained"> Ga terug</Button>
                 {/*</link>*/}
               </Grid>
