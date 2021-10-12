@@ -8,6 +8,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import check from "./check";
+import SendIcon from "@material-ui/icons/Send";
 
 function Index() {
   const title = 'Controle';
@@ -83,23 +84,16 @@ function Index() {
             />
           </Grid>
           <br/>
-          <h5>Hoe kunnen we je bereiken?</h5>
-          <p>Vul je emailadres en/of je telefoonnummer in.</p>
-
-          <form onSubmit={handleContact}>
-            <Grid item md={12}>
-              <TextField
-                error={false}
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email"
-                type="email"
-                variant="outlined"
-              />
+          <Grid
+            justify="space-between" // Add it here :)
+            container>
+            <Grid item>
+              <Link href="/moving/coMovers">
+                <Button variant="contained"> Ga terug</Button>
+              </Link>
             </Grid>
             <Grid item>
-              <Button color="primary" type="submit" variant="contained">Versturen</Button>
+                <Button color="primary" type="submit" variant="contained">Volgende</Button>
             </Grid>
           </Grid>
         </form>

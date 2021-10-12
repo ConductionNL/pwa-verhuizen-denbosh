@@ -159,7 +159,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getSteps() {
-  return ['Nieuw adres', 'Verhuisdatum', 'Meeverhuizers', 'Contactgegevens', 'Controle', 'Bevestiging'];
+  return ['Nieuw adres', 'Verhuisdatum', 'Meeverhuizers', 'Contactgegevens', 'Controle'];
 }
 
 function getStepContent(step: number) {
@@ -174,8 +174,6 @@ function getStepContent(step: number) {
       return 'Contactgegevens';
     case 4:
       return 'Controle';
-    case 5:
-      return 'Bevestiging';
     default:
       return 'Unknown step';
   }

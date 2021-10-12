@@ -43,7 +43,7 @@ function Index() {
                 </Link>
               </Grid>
               <Grid item>
-                <Button variant="contained" endIcon={<SendIcon/>}>
+                <Button variant="contained" color="primary" endIcon={<SendIcon/>}>
                   Versturen
                 </Button>
               </Grid>
