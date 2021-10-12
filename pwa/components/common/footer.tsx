@@ -100,7 +100,7 @@ export default function Footer() {
             <Box>Wolvenhoek 1, 's-Hertogenbosch
             </Box>
             <Box>
-            <Link href="tel:14 075" color="inherit">
+            <Link href="tel:(073) 615 51 55" color="inherit">
               (073) 615 51 55
             </Link>
             </Box>
