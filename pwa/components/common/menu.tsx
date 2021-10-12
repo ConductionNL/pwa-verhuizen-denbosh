@@ -31,6 +31,7 @@ import Grid from "@material-ui/core/Grid";
 import {eraseCookie, getCookie, setCookie} from "../../components/utility/CookieHandler";
 import {useGet} from "restful-react";
 import {useAppContext} from "../context/state";
+import {useUserContext} from "../context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -106,7 +107,8 @@ const useStyles = makeStyles((theme) => ({
 const handleLogout = (context) => {
 
   if (typeof window !== "undefined") {
-      context.user = null;
+    context.setUser(null);
+    sessionStorage.setItem('user', null);
 
       // @ts-ignore
       window.location.href = 'http://localhost/logout';
@@ -137,6 +139,7 @@ export default function MainMenu() {
   };
 
   let context = useAppContext();
+  let userContext = useUserContext();
 
   return (
     <div className={classes.grow}>
@@ -184,11 +187,11 @@ export default function MainMenu() {
             <Box marginRight={2}>
               <Typography variant="h6" color="inherit">
                     {
-                      context.user !== null
+                      userContext.user !== null
                         ?
-                          <span onClick={() => {handleLogout(context)}} style={{color: 'white'}}>Uitloggen</span>
+                          <span onClick={() => {handleLogout(userContext)}} style={{color: 'white'}}>Uitloggen</span>
                         :
-                          <Link href="http://localhost/login/adfs/conduction" >
+                          <Link href="http://localhost/login/digispoof" >
                             <span style={{color: 'white'}}>Inloggen</span>
                           </Link>
                     }

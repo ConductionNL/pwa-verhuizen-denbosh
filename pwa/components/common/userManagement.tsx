@@ -7,23 +7,23 @@ import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import {useAppContext} from "../context/state";
 import {useGet} from "restful-react";
+import {useUserContext} from "../context/userContext";
 
 
 export default function UserManagement() {
 
   const handleLogin = () => {
 
-    let context = useAppContext();
+    let context = useUserContext();
     const { data: info } = useGet({
       path: context.meUrl,
     });
 
     if (info !== null && info !== undefined) {
-      context.user = info;
+      context.setUser(info);
+      sessionStorage.setItem('user', JSON.stringify(info));
     }
 
-    console.log(info);
-    console.log(context);
   }
 
   return (
