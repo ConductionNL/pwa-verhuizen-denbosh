@@ -3,12 +3,23 @@ import type { AppProps /*, AppContext */ } from "next/app";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {AppWrapper} from "../components/context/state";
+import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+
+const theme = createMuiTheme();
+
+const useStyles = makeStyles((theme) => {
+  root: {
+    // some css that access to theme
+  }
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AppWrapper>
-      <Component {...pageProps} />
-    </AppWrapper>
+    <ThemeProvider theme={theme}>
+      <AppWrapper>
+        <Component {...pageProps} />
+      </AppWrapper>
+    </ThemeProvider>
   );
 }
 
