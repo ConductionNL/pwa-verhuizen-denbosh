@@ -15,18 +15,22 @@ function Index() {
   const [emailInputError, setEmailInputError] = useState(false);
   const [emailInputHelperText, setEmailInputHelperText] = useState('');
 
+  const [telephoneInputError, setTelephoneInputError] = useState(false);
+  const [telephoneInputHelperText, setTelephoneInputHelperText] = useState('');
+
   const checkInputs = () => {
     //gaat alles goed?
     let valid = true;
 
     //alle inputs ophalen
     let emailInput = document.getElementById('email');
-
-    console.log(emailInput);
+    let telephoneInput = document.getElementById('telephone');
 
     //bij alle inputs error property weghalen
     setEmailInputError(false);
     setEmailInputHelperText('');
+    setTelephoneInputError(false);
+    setTelephoneInputHelperText('');
 
     //check of inputs valid zijn
     if (emailInput.value.length == 0) {
@@ -36,6 +40,11 @@ function Index() {
       valid = false;
     }
 
+    if (telephoneInput.value.length > 10) {
+      setTelephoneInputError(true);
+      setTelephoneInputHelperText('Invalid telephone');
+      valid = false;
+    }
 
     return valid;
   }
@@ -79,7 +88,8 @@ function Index() {
             </Grid>
             <Grid item md={12}>
               <TextField
-                error
+                error={telephoneInputError}
+                helperText={telephoneInputHelperText}
                 margin="normal"
                 fullWidth
                 id="telephone"
