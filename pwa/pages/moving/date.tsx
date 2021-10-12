@@ -7,14 +7,25 @@ import ActionMenu from "../../components/common/actionmenu";
 import Hidden from "@material-ui/core/Hidden";
 import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
-import PaperCard from "../../components/common/paperCard";
+import { makeStyles } from '@material-ui/core/styles';
 import {useRouter} from "next/router";
 
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+}));
+
 function Index() {
-
-  const title = 'Datum';
-
+  const classes = useStyles();
+  const title = 'Verhuizen';
   const router = useRouter();
 
   const handleAddress = (event) => {
@@ -22,44 +33,46 @@ function Index() {
 
     // Session set address
 
-
     router.push("/moving/date")
   }
+  const [value, setValue] = React.useState(null);
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
-        {/*<Hidden smDown>*/}
-        {/*  <Grid item md={3}>*/}
-        {/*    Willen we deze action menu?*/}
-        {/*    <ActionMenu/>*/}
-        {/*  </Grid>*/}
-        {/*</Hidden>*/}
+        <Hidden smDown>
+          <Grid item md={3}>
+            Willen we deze action menu?
+            <ActionMenu/>
+          </Grid>
+        </Hidden>
         <Grid item sm={12} md={9}>
           <PageHeader title={title}/>
           <br/>
-          <h5>Wat wordt je nieuwe adres?</h5>
-          <p>Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.</p>
+          <h5>Wanneer ga je verhuizen?</h5>
+          <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst liggen.</p>
 
           <form onSubmit={handleAddress}>
-            <TextField id="postalCode" label="Postcode" variant="outlined"/>
-            <br/>
-            <br/>
-            <TextField id="houseNumber" label="Huisnummer" variant="outlined"/>
-            <br/>
-            <br/>
-            <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"/>
-            <br/>
-            <br/>
+            <TextField
+              id="date"
+              label="Verhuisdatum"
+              type="date"
+              defaultValue="2021-10-12"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              style={{marginBottom: 20}}
+            />
+
+            <span style={{marginBottom: 20}}><p>Verhuisdaum: </p></span>
 
             <Grid
               justify="space-between" // Add it here :)
               container>
               <Grid item>
-                <Link href="/moving/address">
-                  <Button variant="contained">Ga terug</Button>
-                </Link>
+                <Button variant="contained"> Ga terug</Button>
               </Grid>
               <Grid item>
                 <Button color="primary" type="submit" variant="contained">Volgende</Button>
