@@ -8,11 +8,11 @@ import Avatar from '@material-ui/core/Avatar';
 import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import {CalendarToday, LocationOn, People, Person} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -25,26 +25,50 @@ export default function CheckList() {
       <ListItem>
         <ListItemAvatar>
           <Avatar>
-            <ImageIcon />
+            <Person />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+        <ListItemText primary="indiener" secondary="Jan 9, 2014" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
           <Avatar>
-            <WorkIcon />
+            <LocationOn/>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
+        <ListItemText primary="oud adres" secondary="Jan 7, 2014" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
           <Avatar>
-            <BeachAccessIcon />
+            <LocationOn/>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
+        <ListItemText primary="nieuw adres" secondary="Jan 7, 2014" />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <CalendarToday />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="verhuisdatum" secondary="July 20, 2014" />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <People />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="verhuizende personen" secondary="July 20, 2014" />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <Person />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="contactinformatie" secondary="July 20, 2014" />
       </ListItem>
     </List>
   );
