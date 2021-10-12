@@ -9,7 +9,7 @@ import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
 
 function Index() {
-  const title = 'Verhuizen';
+  const title = 'Controle';
   const router = useRouter();
 
   const handleContact = (event) => {
