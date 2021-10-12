@@ -10,7 +10,7 @@ import CheckList from "../../components/moving/listCheck";
 import SendIcon from "@material-ui/icons/Send";
 
 function Index() {
-  const title = 'Controle';
+  const title = 'Bevestiging';
   const router = useRouter();
 
   const handleContact = (event) => {
@@ -18,7 +18,7 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/confirmation")
+    router.push("/moving/contact")
   }
 
   return <>
@@ -29,26 +29,29 @@ function Index() {
         <Grid item sm={12}>
           <PageHeader title={title}/>
           <br/>
-          <h5>Controleer je gegevens</h5>
 
-          <form onSubmit={handleContact}>
-            <CheckList/>
-            <br/>
-            <Grid
-              justify="space-between" // Add it here :)
-              container>
-              <Grid item>
-                <Link href="/moving/contact">
-                  <Button variant="contained"> Ga terug</Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Button type="submit" variant="contained" color="primary" endIcon={<SendIcon/>}>
-                  Versturen
-                </Button>
-              </Grid>
+          <h4>Succesvol verzonden!</h4>
+          <h5>Er is iets fout gegaan.. probeer het opnieuw</h5>
+          <br/>
+          <Button variant="contained" color="primary" endIcon={<SendIcon/>}>
+            Versturen
+          </Button>
+          <br/>
+          <br/>
+          <Grid
+            justify="space-between" // Add it here :)
+            container>
+            <Grid item>
+              <Link href="/moving/check">
+                <Button variant="contained"> Ga terug</Button>
+              </Link>
             </Grid>
-          </form>
+            <Grid item>
+              {/*<Button type="submit" variant="contained" color="primary" endIcon={<SendIcon/>}>*/}
+              {/*  Versturen*/}
+              {/*</Button>*/}
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
 

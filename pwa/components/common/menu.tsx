@@ -144,25 +144,25 @@ export default function MainMenu() {
         <Container>
           <Toolbar>
 
-            {
-            <div className={classes.sectionMobile}>
-              <IconButton aria-label="show 17 new notifications" color="inherit"
-                          onClick={toggleDrawer('displayUserDrawer', true)}>
-                <MenuIcon/>
-              </IconButton>
-              <Drawer anchor={'left'} open={state['displayUserDrawer']}
-                      onClose={toggleDrawer('displayUserDrawer', false)}>
-                <div
-                  className={classes.list}
-                  role="presentation"
-                  onClick={toggleDrawer('displayUserDrawer', false)}
-                  onKeyDown={toggleDrawer('displayUserDrawer', false)}
-                >
-                  <ActionMenu/>
-                </div>
-              </Drawer>
-            </div>
-            }
+            {/*{*/}
+            {/*<div className={classes.sectionMobile}>*/}
+            {/*  <IconButton aria-label="show 17 new notifications" color="inherit"*/}
+            {/*              onClick={toggleDrawer('displayUserDrawer', true)}>*/}
+            {/*    <MenuIcon/>*/}
+            {/*  </IconButton>*/}
+            {/*  <Drawer anchor={'left'} open={state['displayUserDrawer']}*/}
+            {/*          onClose={toggleDrawer('displayUserDrawer', false)}>*/}
+            {/*    <div*/}
+            {/*      className={classes.list}*/}
+            {/*      role="presentation"*/}
+            {/*      onClick={toggleDrawer('displayUserDrawer', false)}*/}
+            {/*      onKeyDown={toggleDrawer('displayUserDrawer', false)}*/}
+            {/*    >*/}
+            {/*      <ActionMenu/>*/}
+            {/*    </div>*/}
+            {/*  </Drawer>*/}
+            {/*</div>*/}
+            {/*}*/}
 
             <div className={classes.grow}/>
 

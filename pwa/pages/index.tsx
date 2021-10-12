@@ -28,7 +28,7 @@ const handleLogin = () => {
 
 const Welcome = () => (
   <>
-    <Layout title="Welkom op Open-Inwoner!" description="waar kan ik deze description zien">
+    <Layout title="Welkom bij verhuizen 's Hertogenbosch!" description="waar kan ik deze description zien">
       {
         handleLogin()
       }
