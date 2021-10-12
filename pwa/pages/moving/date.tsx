@@ -70,9 +70,9 @@ function Index() {
               justify="space-between" // Add it here :)
               container>
               <Grid item>
-                {/*<link href='/moving/address'>*/}
-                <Button variant="contained"> Ga terug</Button>
-                {/*</link>*/}
+                <Link href={'/moving/address'}>
+                  <Button variant="contained"> Ga terug</Button>
+                </Link>
               </Grid>
               <Grid item>
                 <Button color="primary" type="submit" variant="contained">Volgende</Button>

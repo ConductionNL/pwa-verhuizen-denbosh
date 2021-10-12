@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {TextField} from "@material-ui/core";
+import {Link, TextField} from "@material-ui/core";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
@@ -36,7 +36,9 @@ function Index() {
               justify="space-between" // Add it here :)
               container>
               <Grid item>
-                <Button variant="contained"> Ga terug</Button>
+                <Link href={'/moving/contact'}>
+                  <Button variant="contained"> Ga terug</Button>
+                </Link>
               </Grid>
               <Grid item>
                 <Button color="primary" type="submit" variant="contained">Volgende</Button>
