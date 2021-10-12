@@ -8,7 +8,7 @@ import CheckboxList from "../../components/moving/listCoMovers";
 import Stepper from "../../components/moving/stepper";
 
 function Index() {
-  const title = 'Verhuizen';
+  const title = 'Meeverhuizers';
   const router = useRouter();
 
   const handleCoMovers = (event) => {
@@ -29,21 +29,22 @@ function Index() {
           <h5>Wie gaat er verhuizen?</h5>
           <p>Onderstaande personen kunnen door jou verhuist worden.</p>
 
-          <form onSubmit={handleCoMovers}>
-            <CheckboxList />
+        <form onSubmit={handleCoMovers}>
+          <CheckboxList/>
 
-            <Grid
-              justify="space-between" // Add it here :)
-              container>
-              <Grid item>
+          <Grid
+            justify="space-between" // Add it here :)
+            container>
+            <Grid item>
+              <Link href="/moving/date">
                 <Button variant="contained"> Ga terug</Button>
-              </Grid>
-              <Grid item>
-                <Button color="primary" type="submit" variant="contained">Volgende</Button>
-              </Grid>
+              </Link>
             </Grid>
-          </form>
-        </Grid>
+            <Grid item>
+              <Button color="primary" type="submit" variant="contained">Volgende</Button>
+            </Grid>
+          </Grid>
+        </form>
       </Grid>
 
     </Layout>

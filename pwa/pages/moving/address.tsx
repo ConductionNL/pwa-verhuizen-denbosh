@@ -32,7 +32,7 @@ function Index() {
 
       <Grid container spacing={3}>
 
-        <Stepper currentStep={0} />
+        <Stepper currentStep={0}/>
 
         <Grid item sm={12}>
           <PageHeader title={title}/>
@@ -55,7 +55,9 @@ function Index() {
               justify="space-between" // Add it here :)
               container>
               <Grid item>
-                <Button variant="contained"> Ga terug</Button>
+                <Link href="/moving">
+                  <Button variant="contained"> Ga terug</Button>
+                </Link>
               </Grid>
               <Grid item>
                 <Button color="primary" type="submit" variant="contained">Volgende</Button>

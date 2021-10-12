@@ -8,7 +8,7 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 
 function Index() {
-  const title = 'Verhuizen';
+  const title = 'Contactgegevens';
   const router = useRouter();
 
   const handleContact = (event) => {
@@ -63,7 +63,6 @@ function Index() {
             </Grid>
           </form>
         </Grid>
-      </Grid>
 
     </Layout>
   </>

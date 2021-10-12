@@ -4,9 +4,10 @@ import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Index() {
   const classes = useStyles();
-  const title = 'Verhuizen';
+  const title = 'Verhuisdatum';
   const router = useRouter();
 
   const handleDate = (event) => {
@@ -46,8 +47,9 @@ function Index() {
       <Grid item sm={12}>
         <PageHeader title={title}/>
         <br/>
-        <h5>Wat wordt je nieuwe adres?</h5>
-        <p>Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.</p>
+        <h5>Wanneer ga je verhuizen?</h5>
+        <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
+          liggen.</p>
 
           <form onSubmit={handleDate}>
             <TextField
