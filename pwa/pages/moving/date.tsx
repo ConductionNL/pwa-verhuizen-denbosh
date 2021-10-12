@@ -42,14 +42,14 @@ function Index() {
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
       <Grid container spacing={3}>
-      <Stepper currentStep={1} />
+        <Stepper currentStep={1}/>
 
-      <Grid item sm={12}>
-        <PageHeader title={title}/>
-        <br/>
-        <h5>Wanneer ga je verhuizen?</h5>
-        <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
-          liggen.</p>
+        <Grid item sm={12}>
+          <PageHeader title={title}/>
+          <br/>
+          <h5>Wanneer ga je verhuizen?</h5>
+          <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
+            liggen.</p>
 
           <form onSubmit={handleDate}>
             <TextField
@@ -66,16 +66,16 @@ function Index() {
             />
             <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
 
-          <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
+            <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
 
-          <br/>
-          <Grid
-            justify="space-between" // Add it here :)
-            container>
-            <Grid item>
-              <Link href="/moving/address">
-                <Button variant="contained"> Ga terug</Button>
-                {/*</link>*/}
+            <br/>
+            <Grid
+              justify="space-between" // Add it here :)
+              container>
+              <Grid item>
+                <Link href="/moving/address">
+                  <Button variant="contained"> Ga terug</Button>
+                </Link>
               </Grid>
               <Grid item>
                 <Button color="primary" type="submit" variant="contained">Volgende</Button>
