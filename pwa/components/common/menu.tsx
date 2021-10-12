@@ -100,7 +100,8 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
   appbar: {
-    backgroundColor: '#AD9156'
+    backgroundColor: '#AD9156',
+    boxShadow: "none"
   },
 }));
 
@@ -167,34 +168,34 @@ export default function MainMenu() {
 
             <div className={classes.grow}/>
 
-            <Box style={{marginRight: "15px"}}>
-              <Typography variant="h6" color="inherit">
-                {
-                  context.user !== null &&
-                  <Link href="/user" >
-                  <span style={{color: 'white'}}>
-                    {
-                      context.user.name
-                    }
-                  </span>
-                  </Link>
-                }
+            {/*<Box style={{marginRight: "15px"}}>*/}
+            {/*  <Typography variant="h6" color="inherit">*/}
+            {/*    {*/}
+            {/*      context.user !== null &&*/}
+            {/*      <Link href="/user" >*/}
+            {/*      <span style={{color: 'white'}}>*/}
+            {/*        {*/}
+            {/*          context.user.name*/}
+            {/*        }*/}
+            {/*      </span>*/}
+            {/*      </Link>*/}
+            {/*    }*/}
 
-              </Typography>
-            </Box>
-            <Box marginRight={2}>
-              <Typography variant="h6" color="inherit">
-                    {
-                      context.user !== null
-                        ?
-                          <span onClick={() => {handleLogout(context)}} style={{color: 'white'}}>Uitloggen</span>
-                        :
-                          <Link href="http://localhost/login/adfs/conduction" >
-                            <span style={{color: 'white'}}>Inloggen</span>
-                          </Link>
-                    }
-              </Typography>
-            </Box>
+            {/*  </Typography>*/}
+            {/*</Box>*/}
+            {/*<Box marginRight={2}>*/}
+            {/*  <Typography variant="h6" color="inherit">*/}
+            {/*        {*/}
+            {/*          context.user !== null*/}
+            {/*            ?*/}
+            {/*              <span onClick={() => {handleLogout(context)}} style={{color: 'white'}}>Uitloggen</span>*/}
+            {/*            :*/}
+            {/*              <Link href="http://localhost/login/adfs/conduction" >*/}
+            {/*                <span style={{color: 'white'}}>Inloggen</span>*/}
+            {/*              </Link>*/}
+            {/*        }*/}
+            {/*  </Typography>*/}
+            {/*</Box>*/}
 
           </Toolbar>
         </Container>
