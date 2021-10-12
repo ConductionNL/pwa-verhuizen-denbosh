@@ -4,7 +4,7 @@ import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
 import {useRouter} from "next/router";
-import CheckboxList from "../../components/moving/list";
+import CheckboxList from "../../components/moving/listCoMovers";
 import Stepper from "../../components/moving/stepper";
 
 function Index() {

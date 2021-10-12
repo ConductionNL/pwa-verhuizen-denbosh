@@ -62,7 +62,7 @@ function Index() {
               }}
               style={{marginBottom: 20}}
             />
-            <span style={{marginBottom: 20}}><p>Verhuisdaum: {date}</p></span>
+            <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
 
             <Grid
               justify="space-between" // Add it here :)
