@@ -2,8 +2,6 @@ import Button from "@material-ui/core/Button";
 import React, {ReactNode} from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
-import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@material-ui/core/Hidden";
 import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,7 +40,7 @@ function Index() {
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
-
+      <Grid container spacing={3}>
       <Stepper currentStep={1} />
 
       <Grid item sm={12}>
@@ -50,6 +48,7 @@ function Index() {
         <br/>
         <h5>Wat wordt je nieuwe adres?</h5>
         <p>Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.</p>
+
           <form onSubmit={handleDate}>
             <TextField
               id="date"
@@ -63,14 +62,15 @@ function Index() {
               }}
               style={{marginBottom: 20}}
             />
-
             <span style={{marginBottom: 20}}><p>Verhuisdaum: {date}</p></span>
 
             <Grid
               justify="space-between" // Add it here :)
               container>
               <Grid item>
+                {/*<link href='/moving/address'>*/}
                 <Button variant="contained"> Ga terug</Button>
+                {/*</link>*/}
               </Grid>
               <Grid item>
                 <Button color="primary" type="submit" variant="contained">Volgende</Button>

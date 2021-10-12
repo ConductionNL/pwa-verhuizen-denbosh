@@ -1,15 +1,11 @@
 import Button from "@material-ui/core/Button";
-import React, {ReactNode} from "react";
-import Link from 'next/link'
+import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
-import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@material-ui/core/Hidden";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import {TextField} from "@material-ui/core";
 import {useRouter} from "next/router";
-import CheckboxList from "../../components/moving/list";
+import Stepper from "../../components/moving/stepper";
 
 function Index() {
   const title = 'Verhuizen';
@@ -27,13 +23,8 @@ function Index() {
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
-        <Hidden smDown>
-          <Grid item md={3}>
-            Willen we deze action menu?
-            <ActionMenu/>
-          </Grid>
-        </Hidden>
-        <Grid item sm={12} md={9}>
+        <Stepper currentStep={3} />
+        <Grid item sm={12}>
           <PageHeader title={title}/>
           <br/>
           <h5>Hoe kunnen we je bereiken?</h5>
