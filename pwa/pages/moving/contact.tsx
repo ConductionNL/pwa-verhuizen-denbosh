@@ -6,14 +6,44 @@ import PageHeader from "../../components/common/pageheader";
 import {TextField} from "@material-ui/core";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
+import check from "./check";
 
 function Index() {
   const title = 'Contactgegevens';
   const router = useRouter();
 
+  const checkInputs = () => {
+    //gaat alles goed?
+    let valid = true;
+
+    //alle inputs ophalen
+    let emailInput = document.getElementById('email');
+
+    console.log(emailInput);
+
+    //bij alle inputs error property weghalen
+    emailInput.removeAttribute('error');
+
+    //check of inputs valid zijn
+    if (emailInput.value.length == 0) {
+      //hier moeten we zorgen dat de error getoond word
+      emailInput.setAttribute('helperText', 'test');
+      emailInput.setAttribute('error', 'true');
+      valid = false;
+    }
+
+
+    return valid;
+  }
+
   const handleContact = (event) => {
     event.preventDefault();
 
+    let valid = checkInputs();
+
+    if (!valid) {
+      return;
+    }
     // Session set address
 
     router.push("/moving/check")
@@ -33,6 +63,7 @@ function Index() {
           <form onSubmit={handleContact}>
             <Grid item md={12}>
               <TextField
+                error={false}
                 margin="normal"
                 fullWidth
                 id="email"
