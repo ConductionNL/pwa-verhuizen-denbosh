@@ -13,7 +13,7 @@ import {useRouter} from "next/router";
 
 function Index() {
 
-  const title = 'Adres';
+  const title = 'Datum';
 
   const router = useRouter();
 
@@ -36,7 +36,7 @@ function Index() {
         {/*    <ActionMenu/>*/}
         {/*  </Grid>*/}
         {/*</Hidden>*/}
-        <Grid item sm={12}>
+        <Grid item sm={12} md={9}>
           <PageHeader title={title}/>
           <br/>
           <h5>Wat wordt je nieuwe adres?</h5>
@@ -57,7 +57,9 @@ function Index() {
               justify="space-between" // Add it here :)
               container>
               <Grid item>
-                <Button variant="contained"> Ga terug</Button>
+                <Link href="/moving/address">
+                  <Button variant="contained">Ga terug</Button>
+                </Link>
               </Grid>
               <Grid item>
                 <Button color="primary" type="submit" variant="contained">Volgende</Button>
