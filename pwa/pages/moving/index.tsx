@@ -1,12 +1,12 @@
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React, {ReactNode} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@material-ui/core/Hidden";
+import Hidden from "@mui/material/Hidden";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box} from "@material-ui/core";
+import {Tab, Tabs, Typography, Box} from "@mui/material";
 import PaperCard from "../../components/common/paperCard";
 
 

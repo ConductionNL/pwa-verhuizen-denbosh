@@ -1,13 +1,13 @@
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React from "react";
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Link, TextField} from "@material-ui/core";
+import {Link, TextField} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
-import SendIcon from "@material-ui/icons/Send";
+import SendIcon from "@mui/icons-material/Send";
 
 function Index() {
   const title = 'Controle';
@@ -35,7 +35,7 @@ function Index() {
             <CheckList/>
             <br/>
             <Grid
-              justify="space-between" // Add it here :)
+              justifyContent="space-between" // Add it here :)
               container>
               <Grid item>
                 <Link href="/moving/contact">
@@ -53,7 +53,7 @@ function Index() {
       </Grid>
 
     </Layout>
-  </>
+  </>;
 }
 
 export default Index

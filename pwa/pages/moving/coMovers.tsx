@@ -1,8 +1,8 @@
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React from "react";
-import {Link} from "@material-ui/core";
+import {Link} from "@mui/material";
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
 import {useRouter} from "next/router";
 import CheckboxList from "../../components/moving/listCoMovers";
@@ -35,7 +35,7 @@ function Index() {
 
           <br/>
           <Grid
-            justify="space-between" // Add it here :)
+            justifyContent="space-between" // Add it here :)
             container>
             <Grid item>
               <Link href={'/moving/date'}>
@@ -50,7 +50,7 @@ function Index() {
       </Grid>
     </Grid>
   </Layout>
-</>
+</>;
 }
 
 export default Index

@@ -1,12 +1,12 @@
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React, {ReactNode} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@material-ui/core/Hidden";
+import Hidden from "@mui/material/Hidden";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
+import {Tab, Tabs, Typography, Box, TextField} from "@mui/material";
 import PaperCard from "../../components/common/paperCard";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
@@ -83,7 +83,7 @@ function Index() {
             <br/>
 
             <Grid
-              justify="space-between" // Add it here :)
+              justifyContent="space-between" // Add it here :)
               container>
               <Grid item>
                 <Link href="/moving">
@@ -130,7 +130,7 @@ function Index() {
       </Grid>
 
     </Layout>
-  </>
+  </>;
 }
 
 export default Index
