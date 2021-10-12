@@ -3,13 +3,13 @@ import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
+import {Tab, Tabs, Typography, Box, TextField, Link} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 
 function Index() {
-  const title = 'Contactgegevens';
+  const title = 'Controle';
   const router = useRouter();
 
   const handleContact = (event) => {
@@ -62,7 +62,7 @@ function Index() {
               </Link>
             </Grid>
             <Grid item>
-              <Button color="primary" type="submit" variant="contained">Volgende</Button>
+              <Button color="primary" type="submit" variant="contained">Versturen</Button>
             </Grid>
           </Grid>
         </form>
