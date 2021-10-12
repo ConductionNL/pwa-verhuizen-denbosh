@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField, Link} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import {Link, TextField} from "@material-ui/core";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import check from "./check";
