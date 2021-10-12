@@ -1,15 +1,11 @@
 import Button from "@material-ui/core/Button";
-import React, {ReactNode} from "react";
-import Link from 'next/link'
+import React from "react";
+import {Link} from "@material-ui/core";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
-import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@material-ui/core/Hidden";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
-import {makeStyles} from '@material-ui/core/styles';
 import {useRouter} from "next/router";
-import CheckboxList from "../../components/moving/list";
+import CheckboxList from "../../components/moving/listCoMovers";
 import Stepper from "../../components/moving/stepper";
 
 function Index() {
@@ -25,8 +21,8 @@ function Index() {
   }
 
   return <>
-    <Layout title={title} description="waar kan ik deze description zien">
-
+  <Layout title={title} description="waar kan ik deze description zien">
+    <Grid container spacing={3}>
       <Stepper currentStep={2}/>
       <Grid item sm={12}>
         <PageHeader title={title}/>
@@ -51,9 +47,9 @@ function Index() {
           </Grid>
         </form>
       </Grid>
-
-    </Layout>
-  </>
+    </Grid>
+  </Layout>
+</>
 }
 
 export default Index

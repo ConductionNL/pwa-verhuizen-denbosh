@@ -6,9 +6,10 @@ import PageHeader from "../../components/common/pageheader";
 import {TextField} from "@material-ui/core";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
+import CheckList from "../../components/moving/listCheck";
 
 function Index() {
-  const title = 'Contactgegevens';
+  const title = 'Verhuizen';
   const router = useRouter();
 
   const handleContact = (event) => {
@@ -16,41 +17,21 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/check")
+    router.push("/moving/contact")
   }
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
-        <Stepper currentStep={3} />
+        <Stepper currentStep={4} />
         <Grid item sm={12}>
           <PageHeader title={title}/>
           <br/>
-          <h5>Hoe kunnen we je bereiken?</h5>
-          <p>Vul je emailadres en/of je telefoonnummer in.</p>
+          <h5>Controleer je gegevens</h5>
 
           <form onSubmit={handleContact}>
-            <Grid item md={12}>
-              <TextField
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email"
-                type="email"
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={12}>
-              <TextField
-                margin="normal"
-                fullWidth
-                id="telephone"
-                label="Telephone"
-                type="text"
-                variant="outlined"
-              />
-            </Grid>
+           <CheckList/>
             <Grid
               justify="space-between" // Add it here :)
               container>
@@ -64,6 +45,7 @@ function Index() {
           </form>
         </Grid>
       </Grid>
+
     </Layout>
   </>
 }

@@ -2,8 +2,6 @@ import Button from "@material-ui/core/Button";
 import React, {ReactNode} from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
-import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@material-ui/core/Hidden";
 import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
@@ -43,8 +41,8 @@ function Index() {
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
-
-      <Stepper currentStep={1}/>
+      <Grid container spacing={3}>
+      <Stepper currentStep={1} />
 
       <Grid item sm={12}>
         <PageHeader title={title}/>
@@ -53,35 +51,35 @@ function Index() {
         <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
           liggen.</p>
 
-        <form onSubmit={handleDate}>
-          <TextField
-            id="date"
-            label="Verhuisdatum"
-            type="date"
-            defaultValue={new Date().toISOString().split('T')[0]}
-            onChange={handleChange}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            style={{marginBottom: 20}}
-          />
+          <form onSubmit={handleDate}>
+            <TextField
+              id="date"
+              label="Verhuisdatum"
+              type="date"
+              defaultValue="2021-10-12"
+              onChange={handleChange}
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              style={{marginBottom: 20}}
+            />
+            <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
 
-          <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
-
-          <Grid
-            justify="space-between" // Add it here :)
-            container>
-            <Grid item>
-              <Link href="/moving/address">
+            <Grid
+              justify="space-between" // Add it here :)
+              container>
+              <Grid item>
+                {/*<link href='/moving/address'>*/}
                 <Button variant="contained"> Ga terug</Button>
-              </Link>
+                {/*</link>*/}
+              </Grid>
+              <Grid item>
+                <Button color="primary" type="submit" variant="contained">Volgende</Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button color="primary" type="submit" variant="contained">Volgende</Button>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Grid>
       </Grid>
     </Layout>
   </>
