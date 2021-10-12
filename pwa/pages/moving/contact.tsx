@@ -1,10 +1,11 @@
 import Button from "@material-ui/core/Button";
-import React from "react";
+import React, {useState} from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField, Link} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
+import {Link, TextField} from "@material-ui/core";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import check from "./check";
@@ -14,26 +15,39 @@ function Index() {
   const title = 'Controle';
   const router = useRouter();
 
+  const [emailInputError, setEmailInputError] = useState(false);
+  const [emailInputHelperText, setEmailInputHelperText] = useState('');
+
+  const [telephoneInputError, setTelephoneInputError] = useState(false);
+  const [telephoneInputHelperText, setTelephoneInputHelperText] = useState('');
+
   const checkInputs = () => {
     //gaat alles goed?
     let valid = true;
 
     //alle inputs ophalen
     let emailInput = document.getElementById('email');
-
-    console.log(emailInput);
+    let telephoneInput = document.getElementById('telephone');
 
     //bij alle inputs error property weghalen
-    emailInput.removeAttribute('error');
+    setEmailInputError(false);
+    setEmailInputHelperText('');
+    setTelephoneInputError(false);
+    setTelephoneInputHelperText('');
 
     //check of inputs valid zijn
     if (emailInput.value.length == 0) {
       //hier moeten we zorgen dat de error getoond word
-      emailInput.setAttribute('helperText', 'test');
-      emailInput.setAttribute('error', 'true');
+      setEmailInputError(true);
+      setEmailInputHelperText('Invalid email');
       valid = false;
     }
 
+    if (telephoneInput.value.length > 10) {
+      setTelephoneInputError(true);
+      setTelephoneInputHelperText('Invalid telephone');
+      valid = false;
+    }
 
     return valid;
   }

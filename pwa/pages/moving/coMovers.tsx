@@ -38,7 +38,7 @@ function Index() {
             justify="space-between" // Add it here :)
             container>
             <Grid item>
-              <Link href="/moving/date">
+              <Link href={'/moving/date'}>
                 <Button variant="contained"> Ga terug</Button>
               </Link>
             </Grid>
