@@ -37,7 +37,7 @@ const Welcome = () => (
           <PaperCard
             title="Verhuizen"
             description="Het doorgeven van een verhuizing."
-            link="/moving/start"
+            link="/moving"
             linkText="Lees meer "
           />
         </Grid>
