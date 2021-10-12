@@ -20,7 +20,7 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/date")
+    router.push("/moving/contact")
   }
 
   return <>
