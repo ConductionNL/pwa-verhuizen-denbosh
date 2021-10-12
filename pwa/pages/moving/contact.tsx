@@ -1,5 +1,5 @@
 import Button from "@material-ui/core/Button";
-import React from "react";
+import React, {useState} from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@material-ui/core/Grid";
 import PageHeader from "../../components/common/pageheader";
@@ -12,6 +12,9 @@ function Index() {
   const title = 'Contactgegevens';
   const router = useRouter();
 
+  const [emailInputError, setEmailInputError] = useState(false);
+  const [emailInputHelperText, setEmailInputHelperText] = useState('');
+
   const checkInputs = () => {
     //gaat alles goed?
     let valid = true;
@@ -22,13 +25,14 @@ function Index() {
     console.log(emailInput);
 
     //bij alle inputs error property weghalen
-    emailInput.removeAttribute('error');
+    setEmailInputError(false);
+    setEmailInputHelperText('');
 
     //check of inputs valid zijn
     if (emailInput.value.length == 0) {
       //hier moeten we zorgen dat de error getoond word
-      emailInput.setAttribute('helperText', 'test');
-      emailInput.setAttribute('error', 'true');
+      setEmailInputError(true);
+      setEmailInputHelperText('Invalid email');
       valid = false;
     }
 
@@ -63,7 +67,8 @@ function Index() {
           <form onSubmit={handleContact}>
             <Grid item md={12}>
               <TextField
-                error={false}
+                error={emailInputError}
+                helperText={emailInputHelperText}
                 margin="normal"
                 fullWidth
                 id="email"
@@ -74,6 +79,7 @@ function Index() {
             </Grid>
             <Grid item md={12}>
               <TextField
+                error
                 margin="normal"
                 fullWidth
                 id="telephone"
