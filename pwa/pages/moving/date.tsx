@@ -6,9 +6,10 @@ import ActionMenu from "../../components/common/actionmenu";
 import Hidden from "@material-ui/core/Hidden";
 import PageHeader from "../../components/common/pageheader";
 import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -43,39 +44,44 @@ function Index() {
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
 
-        <Grid item sm={12} md={9}>
-          <PageHeader title={title}/>
-          <br/>
-          <h5>Wanneer ga je verhuizen?</h5>
-          <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst liggen.</p>
+      <Stepper currentStep={1}/>
 
-          <form onSubmit={handleDate}>
-            <TextField
-              id="date"
-              label="Verhuisdatum"
-              type="date"
-              defaultValue="2021-10-12"
-              onChange={handleChange}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{marginBottom: 20}}
-            />
+      <Grid item sm={12}>
+        <PageHeader title={title}/>
+        <br/>
+        <h5>Wanneer ga je verhuizen?</h5>
+        <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
+          liggen.</p>
 
-            <span style={{marginBottom: 20}}><p>Verhuisdaum: {date}</p></span>
+        <form onSubmit={handleDate}>
+          <TextField
+            id="date"
+            label="Verhuisdatum"
+            type="date"
+            defaultValue={new Date().toISOString().split('T')[0]}
+            onChange={handleChange}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            style={{marginBottom: 20}}
+          />
 
-            <Grid
-              justify="space-between" // Add it here :)
-              container>
-              <Grid item>
+          <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
+
+          <Grid
+            justify="space-between" // Add it here :)
+            container>
+            <Grid item>
+              <Link href="/moving/address">
                 <Button variant="contained"> Ga terug</Button>
-              </Grid>
-              <Grid item>
-                <Button color="primary" type="submit" variant="contained">Volgende</Button>
-              </Grid>
+              </Link>
             </Grid>
-          </form>
+            <Grid item>
+              <Button color="primary" type="submit" variant="contained">Volgende</Button>
+            </Grid>
+          </Grid>
+        </form>
       </Grid>
     </Layout>
   </>
