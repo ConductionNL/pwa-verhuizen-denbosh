@@ -1,8 +1,6 @@
 apiVersion: v2
-name: api-platform
-description: A Helm chart for an API Platform project
-home: https://api-platform.com
-icon: https://api-platform.com/logo-250x250.png
+name: pwa-verhuizen-s-hertogenbosch
+description: A Helm chart for the Verhuizen PWA of 's-Hertogenbosch
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -25,7 +23,8 @@ version: 0.1.0
 appVersion: 0.1.0
 
 dependencies:
-  - name: postgresql
-    version: ~10.1.4
-    repository: https://charts.bitnami.com/bitnami/
-    condition: postgresql.enabled
+  - name: commonground-gateway
+    alias: gateway
+    version: 0.1.0
+    repository: https://raw.githubusercontent.com/ConductionNL/commonground-gateway/master/api/helm/
+    condition: gateway.enabled

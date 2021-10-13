@@ -1,6 +1,6 @@
 dependencies:
-- name: postgresql
-  repository: https://charts.bitnami.com/bitnami/
-  version: 10.1.4
-digest: sha256:4e7b02071f854f238d8f5f9310b800e9ad96ff5a2c3851b412276eb36151fba6
-generated: "2020-12-12T23:18:10.199734+01:00"
+- name: commonground-gateway
+  repository: https://raw.githubusercontent.com/ConductionNL/commonground-gateway/master/api/helm/
+  version: 0.1.0
+digest: sha256:5e9066b2197c3399ca0d238b9c955043bc309b3d646d4e2e0374a3699713138a
+generated: "2021-10-13T12:38:56.916606599+02:00"
