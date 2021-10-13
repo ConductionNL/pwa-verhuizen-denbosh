@@ -30,21 +30,22 @@ function Index() {
       <Grid container spacing={3}>
         <Stepper currentStep={5}/>
         <Grid item sm={12}>
-          {
-            request != null && request.status == 'submitted' ?
+          {/*{*/}
+          {/*  request != null && request.status == 'submitted' ?*/}
               <Typography variant="h4">
                 Je verhuizing is aangevraagd
-              </Typography> :
-              <Typography variant="h4">
-                Er is iets misgegeaan probeer het opnieuw
               </Typography>
-          }
-          {
-            request != null && request.status == 'submitted' &&
+          {/*:*/}
+          {/*    <Typography variant="h4">*/}
+          {/*      Er is iets misgegeaan probeer het opnieuw*/}
+          {/*    </Typography>*/}
+          {/*}*/}
+          {/*{*/}
+          {/*  request != null && request.status == 'submitted' &&*/}
             <Typography mb="10px">
               De volgende gegevens zijn succesvol verzonden naar de gemeente.
             </Typography>
-          }
+          {/*}*/}
           <CheckList/>
         </Grid>
       </Grid>

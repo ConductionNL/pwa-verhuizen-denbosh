@@ -42,7 +42,7 @@ function Index() {
     event.preventDefault();
 
     // Session set address
-    save()
+    // save()
 
     router.push("/moving/confirmation", undefined, { shallow: true })
   }

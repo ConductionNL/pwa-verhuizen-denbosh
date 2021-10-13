@@ -40,10 +40,21 @@ function Index() {
     });
   }
 
+  const {mutate: newRequest} = useMutate({
+    verb: "POST",
+    path: `http://localhost/api/requests`,
+  });
+
   const {mutate: post} = useMutate({
     verb: "POST",
     path: `/requests/` + id,
   });
+
+  // if (request == null) {
+  //   newRequest({
+  //     name: "test"
+  //   }).then(() => {console.log(newRequest)});
+  // }
 
   const save = () => {
     let data: {
@@ -66,7 +77,7 @@ function Index() {
     let houseNumberInput = document.getElementById('houseNumber');
     let houseNumberSuffixInput = document.getElementById('houseNumberSuffix');
 
-    save();
+    // save();
 
     return valid;
   }

@@ -101,7 +101,7 @@ function Index() {
       return;
     }
     // Session set address
-    save()
+    // save()
 
     router.push("/moving/check", undefined, { shallow: true })
   }

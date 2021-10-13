@@ -70,7 +70,7 @@ function Index() {
       return;
     }
 
-    save();
+    // save();
 
     router.push("/moving/coMovers", undefined, {shallow: true})
   }
