@@ -82,7 +82,7 @@ function Index() {
               container>
               <Grid item>
                 <Link href="/moving/address">
-                  <Button variant="contained" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
