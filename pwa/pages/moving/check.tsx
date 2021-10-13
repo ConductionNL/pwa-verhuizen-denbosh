@@ -3,11 +3,12 @@ import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Link, TextField} from "@mui/material";
+import {Link, TextField, Typography} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
 import SendIcon from "@mui/icons-material/Send";
+import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 
 function Index() {
   const title = 'Controle';
@@ -27,9 +28,9 @@ function Index() {
       <Grid container spacing={3}>
         <Stepper currentStep={4}/>
         <Grid item sm={12}>
-          <PageHeader title={title}/>
-          <br/>
-          <h5>Controleer je gegevens</h5>
+          <Typography variant="h4">
+            Controleer je gegevens
+          </Typography>
 
           <form onSubmit={handleContact}>
             <CheckList/>
@@ -39,12 +40,12 @@ function Index() {
               container>
               <Grid item>
                 <Link href="/moving/contact">
-                  <Button variant="contained"> Ga terug</Button>
+                  <Button variant="contained" startIcon={<ChevronLeft />}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button type="submit" variant="contained" color="primary" endIcon={<SendIcon/>}>
-                  Versturen
+                <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight />}>
+                  Nu verzenden
                 </Button>
               </Grid>
             </Grid>

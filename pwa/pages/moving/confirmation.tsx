@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Link, TextField} from "@mui/material";
+import {Link, TextField, Typography} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
@@ -25,33 +25,15 @@ function Index() {
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
-        <Stepper currentStep={4}/>
+        <Stepper currentStep={5}/>
         <Grid item sm={12}>
-          <PageHeader title={title}/>
-          <br/>
-
-          <h4>Succesvol verzonden!</h4>
-          <h5>Er is iets fout gegaan.. probeer het opnieuw</h5>
-          <br/>
-          <Button variant="contained" color="primary" endIcon={<SendIcon/>}>
-            Versturen
-          </Button>
-          <br/>
-          <br/>
-          <Grid
-            justifyContent="space-between" // Add it here :)
-            container>
-            <Grid item>
-              <Link href="/moving/check">
-                <Button variant="contained"> Ga terug</Button>
-              </Link>
-            </Grid>
-            <Grid item>
-              {/*<Button type="submit" variant="contained" color="primary" endIcon={<SendIcon/>}>*/}
-              {/*  Versturen*/}
-              {/*</Button>*/}
-            </Grid>
-          </Grid>
+          <Typography variant="h4">
+            Je verhuizing is aangevraagd
+          </Typography>
+          <Typography mb="10px">
+            De volgende gegevens zijn succesvol verzonden naar de gemeente.
+          </Typography>
+          <CheckList/>
         </Grid>
       </Grid>
 
