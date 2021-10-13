@@ -38,7 +38,7 @@ function Index() {
   const router = useRouter();
 
   const maxDateOfMoveObject = new Date();
-  maxDateOfMoveObject.setDate(maxDateOfMoveObject.getDate() + 50);
+  maxDateOfMoveObject.setDate(maxDateOfMoveObject.getDate() + 28);
   // let maxDateOfMove = maxDateOfMoveObject.toISOString().split('T')[0];
 
   const handleDate = (event) => {
