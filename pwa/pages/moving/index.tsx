@@ -29,6 +29,8 @@ function Index() {
         setLoading(true);
       }
     }
+
+    console.log(context.baseUrl);
   },[]);
 
   return <>
@@ -53,7 +55,7 @@ function Index() {
             Fetch data
             </LoadingButton>
             :
-            <Link href={context.baseUrl + "/digid/login?returnUrl=http://localhost:3000/moving?state=8412312632"}>
+            <Link href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl +  "/moving?state=8412312632"}>
             <Button variant="contained" style={{backgroundColor: "#F5F5F5", color: "black", marginBottom: '20px'}} endIcon={<ChevronRight />}>
             <img style={{width: '40px', marginRight: '10px'}} src="https://www.logius.nl/sites/default/files/afbeeldingen/producten/digid_eo_rgb_100px_4.png" alt=""/>Inloggen Met DigiD
             </Button>
