@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React, {ReactNode} from "react";
+import React, {ReactNode, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
@@ -12,6 +12,9 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import {useGet} from "restful-react";
+import {useUserContext} from "../../components/context/userContext";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -23,43 +26,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Index() {
+export default function Address() {
 
   const title = 'Adres';
 
+  const [postalCode, setPostalCode] = useState("1339PC");
+  const [houseNumber, setHouseNumber] = useState("49");
+  const [houseNumberSuffix, setHouseNumberSuffix] = useState("");
+
+  let context = useAppContext();
   const router = useRouter();
+  const { data: info } = useGet({
+    path: "/gateways/zaken/zaken",
+    debounce: true,
+  });
 
-
-  const checkInputs = () => {
-    //gaat alles goed?
-    let valid = true;
-
-    //alle inputs ophalen
-    let postalInput = document.getElementById('postalCode');
-    let houseNumberInput = document.getElementById('houseNumber');
-    let houseNumberSuffixInput = document.getElementById('houseNumberSuffix');
-
-    return valid;
+  if (info !== undefined) {
+    console.log(info);
   }
 
-  const handleAddress = (event) => {
-    event.preventDefault();
 
+  const handleAddress = () => {
 
-    let valid = checkInputs();
+    let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
+    let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
+    let suffix = (document.getElementById('houseNumber') as HTMLInputElement).value;
 
-    if (!valid) {
-      return;
+    if (postalCode.length != 0 && houseNumber.length != 0) {
+      // const { data: info } = useGet({
+      //   path: "/as/adressen",
+      //   debounce: true,
+      // });
+      // console.log(info);
     }
-    // Session set address
 
-
-    router.push("/moving/date", undefined, { shallow: true })
   }
 
   const classes = useStyles();
 
-  return <>
+  return (<>
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
@@ -74,14 +79,14 @@ function Index() {
             Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
           </Typography>
 
-          <form onSubmit={handleAddress}>
-            <TextField id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
+          <form>
+            <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField id="houseNumber" label="Huisnummer" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
 
@@ -102,7 +107,6 @@ function Index() {
       </Grid>
 
     </Layout>
-  </>;
+  </>);
 }
 
-export default Index

@@ -28,9 +28,6 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
 
   return (
     <>
-      <RestfulProvider
-        base={context.apiUrl}
-        requestOptions={(url, method, requestBody) => ({ headers: { Accept: 'application/json' }, credentials: 'include', mode: 'cors' })}>
         <Head>
           <title>{title}</title>
         </Head>
@@ -46,7 +43,6 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
         </Container>
 
         <Footer />
-      </RestfulProvider>
     </>
   );
 

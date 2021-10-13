@@ -8,6 +8,7 @@ services:
       - db
     volumes:
       - ./gateway:/srv/api/fixtures:rw,cached
+      - ./certs:/var/certs:rw,cached
     environment:
       #- DATABASE_URL=postgres://api-platform:!ChangeMe!@db/api?serverVersion=10.1
       - DATABASE_URL=mysql://api-platform:!ChangeMe!@db/api?serverVersion=10.1
@@ -39,6 +40,9 @@ services:
       - db-mysql:/var/lib/mysql:rw
     ports:
       - "3366:3306"
+
+  redis:
+    image: redis:4-alpine
 
 volumes:
   db-data: {}
