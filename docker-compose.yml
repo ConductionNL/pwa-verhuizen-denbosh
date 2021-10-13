@@ -40,6 +40,9 @@ services:
     ports:
       - "3366:3306"
 
+  redis:
+    image: redis:4-alpine
+
 volumes:
   db-data: {}
   db-mysql: {}
