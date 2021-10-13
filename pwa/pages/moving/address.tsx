@@ -48,9 +48,9 @@ export default function Address() {
 
   const handleAddress = () => {
 
-    let postalCode = document.getElementById('postalCode').value;
-    let houseNumber = document.getElementById('houseNumber').value;
-    let suffix = document.getElementById('houseNumber').value;
+    let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
+    let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
+    let suffix = (document.getElementById('houseNumber') as HTMLInputElement).value;
 
     if (postalCode.length != 0 && houseNumber.length != 0) {
       // const { data: info } = useGet({

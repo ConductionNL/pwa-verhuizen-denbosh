@@ -31,8 +31,8 @@ function Index() {
   const checkInputs = () => {
     let valid = true;
 
-    let emailInput = document.getElementById('email');
-    let telephoneInput = document.getElementById('telephone');
+    let emailInput = (document.getElementById('email') as HTMLInputElement);
+    let telephoneInput = (document.getElementById('telephone') as HTMLInputElement);
 
     setEmailInputError(false);
     setEmailInputHelperText('');
