@@ -19,7 +19,7 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/confirmation")
+    router.push("/moving/confirmation", undefined, { shallow: true })
   }
 
   return <>

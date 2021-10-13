@@ -54,7 +54,7 @@ function Index() {
     // Session set address
 
 
-    router.push("/moving/date")
+    router.push("/moving/date", undefined, { shallow: true })
   }
 
   const classes = useStyles();

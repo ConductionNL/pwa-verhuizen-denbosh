@@ -18,7 +18,7 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/contact")
+    router.push("/moving/contact", undefined, { shallow: true })
   }
 
   return <>

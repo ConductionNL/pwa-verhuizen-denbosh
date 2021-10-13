@@ -42,7 +42,7 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/coMovers")
+    router.push("/moving/coMovers", undefined, { shallow: true })
   }
 
   const [value, setValue] = React.useState(new Date());

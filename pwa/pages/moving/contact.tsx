@@ -64,7 +64,7 @@ function Index() {
     }
     // Session set address
 
-    router.push("/moving/check")
+    router.push("/moving/check", undefined, { shallow: true })
   }
 
   const classes = useStyles();
