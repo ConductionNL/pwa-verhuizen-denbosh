@@ -39,17 +39,6 @@ function Index() {
     let houseNumberInput = document.getElementById('houseNumber');
     let houseNumberSuffixInput = document.getElementById('houseNumberSuffix');
 
-    //check of inputs valid zijn
-    if (postalInput.value.length == 0) {
-      alert("Vul een postcode in");
-      return false;
-    }
-
-    if (houseNumberInput.value.length == 0) {
-      alert("Vul een huisnummer in");
-      return false;
-    }
-
     return valid;
   }
 
