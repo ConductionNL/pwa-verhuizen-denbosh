@@ -38,11 +38,6 @@ export default function Address() {
 
   let context = useAppContext();
   const router = useRouter();
-  const { data: info } = useGet({
-    path: "/gateways/zaken/zaken"
-  })
-
-
 
   const handleAddress = () => {
 
@@ -63,10 +58,11 @@ export default function Address() {
 
   }
 
-  console.log(info);
-
   const classes = useStyles();
 
+  const route = () => {
+    router.push('/moving/date');
+  }
   return (<>
     <Layout title={title} description="waar kan ik deze description zien">
 
@@ -82,7 +78,7 @@ export default function Address() {
             Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
           </Typography>
 
-          <form>
+          <form onSubmit={route}>
             <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
