@@ -1,21 +1,22 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import PersonIcon from '@material-ui/icons/Person';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PersonIcon from '@mui/icons-material/Person';
 
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from 'next/router';
-import HomeIcon from "@material-ui/icons/Home";
-import SearchIcon from "@material-ui/icons/Search";
-import ChatIcon from "@material-ui/icons/Chat";
-import {Paper} from "@material-ui/core";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import ChatIcon from "@mui/icons-material/Chat";
+import {Paper} from "@mui/material";
+import LogoutIcon from "@mui/icons-material/ExitToApp";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -63,6 +64,7 @@ export default function Footer() {
             <BottomNavigationAction label="Klantvragen" icon={<SearchIcon/>}/>
             <BottomNavigationAction label="Notificaties" icon={<NotificationsIcon/>}/>
             <BottomNavigationAction label="Chatten" icon={<ChatIcon/>}/>
+            <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
             </BottomNavigation>
             </Paper>
             <Box
@@ -74,7 +76,7 @@ export default function Footer() {
             >
             <Container maxWidth="lg">
             <Grid container spacing={5}>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
             <Box borderBottom={1}>Help</Box>
             <Box>
             <Link href="/" color="inherit">
@@ -93,36 +95,19 @@ export default function Footer() {
             </Box>
             </Grid>
 
-            <Grid item xs={12} sm={4}>
-            <Box borderBottom={1}>Participerende gemeenten</Box>
-            <Box>Deventer
-            </Box>
-            <Box>Enschede
-            </Box>
-            <Box>Groningen
-            </Box>
-            <Box>Leeuwarden</Box>
-            <Box>Zaanstad
-            </Box>
-            <Box>Zwolle
-            </Box>
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={6}>
             <Box borderBottom={1}>Contact</Box>
-            <Box>
-            Stadhuisplein 100 <br/>
-            1506 MZ Zaandam
+            <Box>Wolvenhoek 1, 's-Hertogenbosch
             </Box>
             <Box>
-            <Link href="tel:14 075" color="inherit">
-            14 075
+            <Link href="tel:(073) 615 51 55" color="inherit">
+              (073) 615 51 55
             </Link>
             </Box>
             <Box>
-            <Link href="mailto:info@Zaanstad.nl" color="inherit">
-            info@Zaanstad.nl
-            </Link>
+              Postadres: <br/>
+              Postbus 12345 <br/>
+              5200 GZ ‘s-Hertogenbosch
             </Box>
             </Grid>
             </Grid>

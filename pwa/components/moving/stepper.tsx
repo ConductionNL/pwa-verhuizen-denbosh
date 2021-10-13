@@ -1,40 +1,47 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import withStyles from '@mui/styles/withStyles';
 import clsx from 'clsx';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Check from '@material-ui/icons/Check';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
-import StepConnector from '@material-ui/core/StepConnector';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { StepIconProps } from '@material-ui/core/StepIcon';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Check from '@mui/icons-material/Check';
+import SettingsIcon from '@mui/icons-material/Settings';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import VideoLabelIcon from '@mui/icons-material/VideoLabel';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { StepIconProps } from '@mui/material/StepIcon';
+import {Avatar, Box} from "@mui/material";
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import { styled } from '@mui/material/styles';
 
-const QontoConnector = withStyles({
-  alternativeLabel: {
+
+const QontoConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,
     left: 'calc(-50% + 16px)',
     right: 'calc(50% + 16px)',
   },
-  active: {
-    '& $line': {
+  [`&.${stepConnectorClasses.active}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
       borderColor: '#784af4',
     },
   },
-  completed: {
-    '& $line': {
+  [`&.${stepConnectorClasses.completed}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
       borderColor: '#784af4',
     },
   },
-  line: {
-    borderColor: '#eaeaf0',
+  [`& .${stepConnectorClasses.line}`]: {
+    borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
     borderTopWidth: 3,
     borderRadius: 1,
   },
-})(StepConnector);
+}));
 
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -44,7 +51,7 @@ const useQontoStepIconStyles = makeStyles({
     alignItems: 'center',
   },
   active: {
-    color: '#784af4',
+    color: '#439BD3',
   },
   circle: {
     width: 8,
@@ -53,7 +60,7 @@ const useQontoStepIconStyles = makeStyles({
     backgroundColor: 'currentColor',
   },
   completed: {
-    color: '#784af4',
+    color: '#439BD3',
     zIndex: 1,
     fontSize: 18,
   },
@@ -197,43 +204,20 @@ export default function CustomizedSteppers(currentStep) {
   };
 
   return (
-    <div className={classes.root}>
-      <Stepper alternativeLabel activeStep={activeStep}>
+    <Box sx={{ width: '100%', marginTop: '20px', textAlign: "center" }}>
+      <Avatar sx={{ backgroundColor: "#439BD3", marginLeft: "auto", marginRight: "auto" }}>
+        <LocalShippingIcon />
+      </Avatar>
+      <Typography mb={1} fontWeight="medium">
+        Ik ga verhuizen
+      </Typography>
+      <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      {/*<div>*/}
-      {/*  {activeStep === steps.length ? (*/}
-      {/*    <div>*/}
-      {/*      <Typography className={classes.instructions}>*/}
-      {/*        All steps completed - you&apos;re finished*/}
-      {/*      </Typography>*/}
-      {/*      <Button onClick={handleReset} className={classes.button}>*/}
-      {/*        Reset*/}
-      {/*      </Button>*/}
-      {/*    </div>*/}
-      {/*  ) : (*/}
-      {/*    <div>*/}
-      {/*      <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>*/}
-      {/*      <div>*/}
-      {/*        <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>*/}
-      {/*          Back*/}
-      {/*        </Button>*/}
-      {/*        <Button*/}
-      {/*          variant="contained"*/}
-      {/*          color="primary"*/}
-      {/*          onClick={handleNext}*/}
-      {/*          className={classes.button}*/}
-      {/*        >*/}
-      {/*          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}*/}
-      {/*        </Button>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  )}*/}
-      {/*</div>*/}
-    </div>
+    </Box>
   );
 }

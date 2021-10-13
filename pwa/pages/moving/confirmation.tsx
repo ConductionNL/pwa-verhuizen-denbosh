@@ -8,10 +8,9 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
 import SendIcon from "@mui/icons-material/Send";
-import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 
 function Index() {
-  const title = 'Controle';
+  const title = 'Bevestiging';
   const router = useRouter();
 
   const handleContact = (event) => {
@@ -19,37 +18,22 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/confirmation", undefined, { shallow: true })
+    router.push("/moving/contact", undefined, { shallow: true })
   }
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
-        <Stepper currentStep={4}/>
+        <Stepper currentStep={5}/>
         <Grid item sm={12}>
           <Typography variant="h4">
-            Controleer je gegevens
+            Je verhuizing is aangevraagd
           </Typography>
-
-          <form onSubmit={handleContact}>
-            <CheckList/>
-            <br/>
-            <Grid
-              justifyContent="space-between" // Add it here :)
-              container>
-              <Grid item>
-                <Link href="/moving/contact">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight />}>
-                  Nu verzenden
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
+          <Typography mb="10px">
+            De volgende gegevens zijn succesvol verzonden naar de gemeente.
+          </Typography>
+          <CheckList/>
         </Grid>
       </Grid>
 
