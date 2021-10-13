@@ -37,15 +37,25 @@ function Index() {
   const title = 'Verhuisdatum';
   const router = useRouter();
 
+  const maxDateOfMoveObject = new Date();
+  maxDateOfMoveObject.setDate(maxDateOfMoveObject.getDate() + 50);
+  // let maxDateOfMove = maxDateOfMoveObject.toISOString().split('T')[0];
+
   const handleDate = (event) => {
     event.preventDefault();
 
     // Session set address
+    let dateInput = document.getElementById('dateInput');
+    if (dateInput.value == null || dateInput.value == '') {
+      alert("Vul een correcte datum in")
+      return;
+    }
 
-    router.push("/moving/coMovers", undefined, { shallow: true })
+
+    router.push("/moving/coMovers", undefined, {shallow: true})
   }
 
-  const [value, setValue] = React.useState(new Date());
+  const [date, setValue] = React.useState(new Date());
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -62,19 +72,34 @@ function Index() {
           </Typography>
 
           <form onSubmit={handleDate}>
+            {/*<LocalizationProvider dateAdapter={AdapterDateFns}>*/}
+            {/*  <StaticDatePicker*/}
+            {/*    className={classes.calendarAlign}*/}
+            {/*    displayStaticWrapperAs="desktop"*/}
+            {/*    openTo="day"*/}
+            {/*    value={value}*/}
+            {/*    onChange={(newValue) => {*/}
+            {/*      setValue(newValue);*/}
+            {/*    }}*/}
+            {/*    renderInput={(params) => <TextField {...params} />}*/}
+            {/*  />*/}
+            {/*</LocalizationProvider>*/}
+
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <StaticDatePicker
-                className={classes.calendarAlign}
+                minDate={new Date()}
+                maxDate={maxDateOfMoveObject}
                 displayStaticWrapperAs="desktop"
                 openTo="day"
-                value={value}
+                value={date}
                 onChange={(newValue) => {
                   setValue(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            <span style={{marginBottom: 20}}><p>Verhuisdatum: </p></span>
+            <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
+            <input type="hidden" id="dateInput" value={date.toISOString().split('T')[0]} />
 
             <br/>
             <Grid
@@ -82,11 +107,11 @@ function Index() {
               container>
               <Grid item>
                 <Link href="/moving/address">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>
