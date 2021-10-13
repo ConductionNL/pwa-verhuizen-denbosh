@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React, {ReactNode, useState} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
@@ -12,7 +12,7 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
-import {useGet} from "restful-react";
+import {useGet, useMutate} from "restful-react";
 import {useUserContext} from "../../components/context/userContext";
 import {useAppContext} from "../../components/context/state";
 
@@ -36,7 +36,55 @@ export default function Address() {
 
   let context = useAppContext();
   const router = useRouter();
-  const { data: info } = useGet({
+
+  const [requestId, setRequestId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+
+      let user = sessionStorage.getItem('user');
+      console.log('user');
+      console.log(user);
+
+      if (user == null) {
+        router.push('/moving');
+      }
+      // console.log('if request is undefined');
+      // console.log(sessionStorage.getItem('request') === undefined || sessionStorage.getItem('request') === null);
+      console.log(sessionStorage.getItem('request'));
+      // if (sessionStorage.getItem('request') === undefined || sessionStorage.getItem('request') === null || sessionStorage.getItem('request') === 'undefined') {
+
+        createRequest({
+          organization: 'https://conduction.nl',
+          submitters: [user.name]
+        }).then((request) => {
+          sessionStorage.setItem('request', request.id);
+          console.log('created request');
+          console.log(request);
+        });
+      // } else {
+      //   console.log('requestid');
+      //   console.log(sessionStorage.getItem('request'));
+      // }
+    }
+  }, []);
+
+  const {mutate: createRequest} = useMutate({
+    verb: "POST",
+    path: `/gateways/vrc/requests`,
+  });
+
+  if (typeof window !== "undefined") {
+    const {data: request} = useGet({
+      path: "/gateways/vrc/requests/" + sessionStorage.getItem('request'),
+      debounce: true,
+    });
+    console.log('retrieved request');
+    console.log(request);
+  }
+
+
+  const {data: info} = useGet({
     path: "/gateways/zaken/zaken",
     debounce: true,
   });
@@ -80,13 +128,17 @@ export default function Address() {
           </Typography>
 
           <form>
-            <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
+
+            <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined"
+                       className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined"
+                       className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
+                       className={classes.inputLength}/>
             <br/>
             <br/>
 
@@ -95,11 +147,11 @@ export default function Address() {
               container>
               <Grid item>
                 <Link href="/moving">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>
