@@ -13,6 +13,7 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
+import {useGet, useMutate} from "restful-react";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -37,23 +38,45 @@ function Index() {
   const title = 'Verhuisdatum';
   const router = useRouter();
 
-  const maxDateOfMoveObject = new Date();
-  maxDateOfMoveObject.setDate(maxDateOfMoveObject.getDate() + 28);
-  // let maxDateOfMove = maxDateOfMoveObject.toISOString().split('T')[0];
+  // const id = getIdFromStorage..
+  const id = 'new';
+
+  if (id != 'new') {
+    var {data: request} = useGet({
+      path: "/requests" + id
+    });
+  }
+
+  const {mutate: post} = useMutate({
+    verb: "POST",
+    path: `/requests/` + id,
+  });
+
+  const save = () => {
+    request.properties.datum = date.toISOString().split('T')[0];
+    post(request).then(() => {updateSession(request.id)});
+  }
+
+  const updateSession = (id) => {
+    // Set id in session
+  }
 
   const handleDate = (event) => {
     event.preventDefault();
 
-    // Session set address
-    let dateInput = document.getElementById('dateInput');
-    if (dateInput.value == null || dateInput.value == '') {
+    if (date.toISOString().split('T')[0] == null || date.toISOString().split('T')[0] == '') {
       alert("Vul een correcte datum in")
       return;
     }
 
+    save();
 
     router.push("/moving/coMovers", undefined, {shallow: true})
   }
+
+  const maxDateOfMoveObject = new Date();
+  maxDateOfMoveObject.setDate(maxDateOfMoveObject.getDate() + 28);
+  // let maxDateOfMove = maxDateOfMoveObject.toISOString().split('T')[0];
 
   const [date, setValue] = React.useState(new Date());
 
@@ -86,20 +109,33 @@ function Index() {
             {/*</LocalizationProvider>*/}
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <StaticDatePicker
+              {
+                request != null && request.properties != null && request.properties.includes("datum") && request.properties.datum != null ?
+                <StaticDatePicker
+                minDate={new Date()}
+                maxDate={maxDateOfMoveObject}
+                displayStaticWrapperAs="desktop"
+                openTo="day"
+                value={request.properties.datum}
+                onChange={(newValue) => {
+                setValue(newValue);
+              }}
+                renderInput={(params) => <TextField {...params} />}
+                /> :
+                <StaticDatePicker
                 minDate={new Date()}
                 maxDate={maxDateOfMoveObject}
                 displayStaticWrapperAs="desktop"
                 openTo="day"
                 value={date}
                 onChange={(newValue) => {
-                  setValue(newValue);
-                }}
+                setValue(newValue);
+              }}
                 renderInput={(params) => <TextField {...params} />}
-              />
+                />
+              }
             </LocalizationProvider>
             <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
-            <input type="hidden" id="dateInput" value={date.toISOString().split('T')[0]} />
 
             <br/>
             <Grid
