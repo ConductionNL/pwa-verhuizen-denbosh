@@ -1,12 +1,13 @@
 import Button from "@mui/material/Button";
 import React from "react";
-import {Link} from "@mui/material";
+import {Link, Typography} from "@mui/material";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
 import {useRouter} from "next/router";
 import CheckboxList from "../../components/moving/listCoMovers";
 import Stepper from "../../components/moving/stepper";
+import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 
 function Index() {
   const title = 'Meeverhuizers';
@@ -25,10 +26,12 @@ function Index() {
     <Grid container spacing={3}>
       <Stepper currentStep={2}/>
       <Grid item sm={12}>
-        <PageHeader title={title}/>
-        <br/>
-        <h5>Wie gaat er verhuizen?</h5>
-        <p>Onderstaande personen kunnen door jou verhuist worden.</p>
+        <Typography variant="h4">
+          Wie gaat er verhuizen?
+        </Typography>
+        <Typography mb="10px">
+          Onderstaande personen kunnen door jou verhuist worden.
+        </Typography>
 
         <form onSubmit={handleCoMovers}>
           <CheckboxList/>
@@ -39,11 +42,11 @@ function Index() {
             container>
             <Grid item>
               <Link href={'/moving/date'}>
-                <Button variant="contained"> Ga terug</Button>
+                <Button variant="contained" startIcon={<ChevronLeft />}> Ga terug</Button>
               </Link>
             </Grid>
             <Grid item>
-              <Button color="primary" type="submit" variant="contained">Volgende</Button>
+              <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
             </Grid>
           </Grid>
         </form>

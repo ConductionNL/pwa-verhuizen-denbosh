@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  inputLength: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '400px',
+    },
+  },
 }));
 
 export default function CheckboxList() {
@@ -32,7 +38,7 @@ export default function CheckboxList() {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, backgroundColor: 'background.paper' }}>
+    <List className={classes.inputLength} sx={{backgroundColor: 'background.paper' }}>
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
@@ -51,7 +57,7 @@ export default function CheckboxList() {
                   inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`Kind ${value + 1}`} />
             </ListItemButton>
           </ListItem>
         );
