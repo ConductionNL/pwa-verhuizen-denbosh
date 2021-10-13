@@ -2,10 +2,13 @@
 import type { AppProps /*, AppContext */ } from "next/app";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import {AppWrapper} from "../components/context/state";
+import {AppWrapper, useAppContext} from "../components/context/state";
 import { ThemeProvider, Theme, StyledEngineProvider, createTheme } from '@mui/material/styles';
 
 import makeStyles from '@mui/styles/makeStyles';
+import {UserContextWrapper} from "../components/context/userContext";
+import {RestfulProvider} from "restful-react";
+import {RestfulProviderWrapper} from "../components/utility/RestfulProviderWrapper";
 
 
 declare module '@mui/styles/defaultTheme' {
@@ -23,14 +26,19 @@ const useStyles = makeStyles((theme) => {
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <AppWrapper>
-          <Component {...pageProps} />
-        </AppWrapper>
-      </ThemeProvider>
-    </StyledEngineProvider>
+      <AppWrapper>
+        <UserContextWrapper>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <RestfulProviderWrapper>
+                <Component {...pageProps} />
+              </RestfulProviderWrapper>
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </UserContextWrapper>
+      </AppWrapper>
   );
 }
 
