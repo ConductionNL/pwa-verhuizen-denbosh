@@ -8,17 +8,20 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
 import SendIcon from "@mui/icons-material/Send";
+import {useGet} from "restful-react";
 
 function Index() {
   const title = 'Bevestiging';
   const router = useRouter();
+  var request = null;
 
-  const handleContact = (event) => {
-    event.preventDefault();
+  // const id = getIdFromStorage..
+  const id = 'new';
 
-    // Session set address
-
-    router.push("/moving/contact", undefined, { shallow: true })
+  if (id != 'new') {
+    request = useGet({
+      path: "/requests" + id
+    });
   }
 
   return <>
@@ -27,12 +30,21 @@ function Index() {
       <Grid container spacing={3}>
         <Stepper currentStep={5}/>
         <Grid item sm={12}>
-          <Typography variant="h4">
-            Je verhuizing is aangevraagd
-          </Typography>
-          <Typography mb="10px">
-            De volgende gegevens zijn succesvol verzonden naar de gemeente.
-          </Typography>
+          {
+            request != null && request.status == 'submitted' ?
+              <Typography variant="h4">
+                Je verhuizing is aangevraagd
+              </Typography> :
+              <Typography variant="h4">
+                Er is iets misgegeaan probeer het opnieuw
+              </Typography>
+          }
+          {
+            request != null && request.status == 'submitted' &&
+            <Typography mb="10px">
+              De volgende gegevens zijn succesvol verzonden naar de gemeente.
+            </Typography>
+          }
           <CheckList/>
         </Grid>
       </Grid>

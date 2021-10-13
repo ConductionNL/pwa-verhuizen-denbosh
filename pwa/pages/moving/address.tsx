@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import {useGet, useMutate} from "restful-react";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -28,6 +29,32 @@ function Index() {
   const title = 'Adres';
 
   const router = useRouter();
+  var request = null;
+
+  // const id = getIdFromStorage..
+  const id = 'new';
+
+  if (id != 'new') {
+     request = useGet({
+      path: "/requests" + id
+    });
+  }
+
+  const {mutate: post} = useMutate({
+    verb: "POST",
+    path: `/requests/` + id,
+  });
+
+  const save = () => {
+    let data: {
+    }
+
+    post(data).then(() => {updateSession(request.id)});
+  }
+
+  const updateSession = (id) => {
+    // Set id in session
+  }
 
 
   const checkInputs = () => {
@@ -38,6 +65,8 @@ function Index() {
     let postalInput = document.getElementById('postalCode');
     let houseNumberInput = document.getElementById('houseNumber');
     let houseNumberSuffixInput = document.getElementById('houseNumberSuffix');
+
+    save();
 
     return valid;
   }

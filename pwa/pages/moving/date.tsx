@@ -37,12 +37,13 @@ function Index() {
   const classes = useStyles();
   const title = 'Verhuisdatum';
   const router = useRouter();
+  var request = null;
 
   // const id = getIdFromStorage..
   const id = 'new';
 
   if (id != 'new') {
-    var {data: request} = useGet({
+     request = useGet({
       path: "/requests" + id
     });
   }

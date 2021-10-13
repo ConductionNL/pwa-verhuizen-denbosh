@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
+import {useGet, useMutate} from "restful-react";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -21,6 +22,38 @@ const useStyles = makeStyles((theme) => ({
 function Index() {
   const title = 'Controle';
   const router = useRouter();
+  var request = null;
+
+  // const id = getIdFromStorage..
+  const id = 'new';
+
+  if (id != 'new') {
+    request = useGet({
+      path: "/requests" + id
+    });
+  }
+
+  const {mutate: post} = useMutate({
+    verb: "POST",
+    path: `/requests/` + id,
+  });
+
+  const save = () => {
+    let emailInput = document.getElementById('email');
+    let telephoneInput = document.getElementById('telephone');
+
+    request.properties.contactgegevens = {
+      email: emailInput.value,
+      telefoonnummer: telephoneInput.value
+    };
+
+    post(request).then(() => {updateSession(request.id)});
+  }
+
+  const updateSession = (id) => {
+    // Set id in session
+  }
+
 
   const [emailInputError, setEmailInputError] = useState(false);
   const [emailInputHelperText, setEmailInputHelperText] = useState('');
@@ -68,6 +101,7 @@ function Index() {
       return;
     }
     // Session set address
+    save()
 
     router.push("/moving/check", undefined, { shallow: true })
   }
