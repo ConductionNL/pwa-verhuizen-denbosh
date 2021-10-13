@@ -37,7 +37,7 @@ export default function Address() {
   let context = useAppContext();
   const router = useRouter();
   const { data: info } = useGet({
-    path: context.apiUrl + "/gateways/zaken/zaken",
+    path: "/gateways/zaken/zaken",
     debounce: true,
   });
 
