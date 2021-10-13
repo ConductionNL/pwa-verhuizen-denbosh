@@ -14,13 +14,14 @@ export default function UserManagement() {
 
   const handleLogin = () => {
 
-    let context = useUserContext();
+    let userContext = useUserContext();
+    let context = useAppContext();
     const { data: info } = useGet({
       path: context.meUrl,
     });
 
     if (info !== null && info !== undefined) {
-      context.setUser(info);
+      userContext.setUser(info);
       sessionStorage.setItem('user', JSON.stringify(info));
     }
 
