@@ -11,12 +11,15 @@ import PaperCard from "../../components/common/paperCard";
 import SendIcon from '@mui/icons-material/Send';
 import {ChevronRight} from "@mui/icons-material";
 import {LoadingButton} from "@mui/lab";
+import {useAppContext} from "../../components/context/state";
 
 function Index() {
 
   const title = 'Verhuizing doorgeven';
 
   const [loading, setLoading] = useState(false);
+
+  const context = useAppContext();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -50,7 +53,7 @@ function Index() {
             Fetch data
             </LoadingButton>
             :
-            <Link href="http://localhost/digid/login?returnUrl=http://localhost:3000/moving?state=8412312632">
+            <Link href={context.baseUrl + "/digid/login?returnUrl=http://localhost:3000/moving?state=8412312632"}>
             <Button variant="contained" style={{backgroundColor: "#F5F5F5", color: "black", marginBottom: '20px'}} endIcon={<ChevronRight />}>
             <img style={{width: '40px', marginRight: '10px'}} src="https://www.logius.nl/sites/default/files/afbeeldingen/producten/digid_eo_rgb_100px_4.png" alt=""/>Inloggen Met DigiD
             </Button>
