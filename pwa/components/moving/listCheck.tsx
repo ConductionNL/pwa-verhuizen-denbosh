@@ -28,7 +28,7 @@ export default function CheckList() {
             <Person />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Indiener" secondary="Jan 9, 2014" />
+        <ListItemText primary="Indiener" secondary="John Doe" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -36,7 +36,7 @@ export default function CheckList() {
             <LocationOn/>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Oud adres" secondary="Jan 7, 2014" />
+        <ListItemText primary="Oud adres" secondary="Appelstraat 1, 1234AB 's Hertogenbosch" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -44,7 +44,7 @@ export default function CheckList() {
             <LocationOn/>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Nieuw adres" secondary="Jan 7, 2014" />
+        <ListItemText primary="Nieuw adres" secondary="Appelstraat 2, 1234AB 's Hertogenbosch" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -68,7 +68,7 @@ export default function CheckList() {
             <Person />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Contactgegevens" secondary="July 20, 2014" />
+        <ListItemText primary="Contactgegevens" secondary="Email: john@doe.com, telefoonnummer: +3161234567" />
       </ListItem>
     </List>
   );
