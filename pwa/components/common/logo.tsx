@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
 
 export default function Logo() {
   return (

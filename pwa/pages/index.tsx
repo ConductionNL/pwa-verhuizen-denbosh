@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 import ActionMenu from 'components/common/actionmenu';
 import { RestfulProvider } from "restful-react";
@@ -28,7 +28,7 @@ const handleLogin = () => {
 
 const Welcome = () => (
   <>
-    <Layout title="Welkom op Open-Inwoner!" description="waar kan ik deze description zien">
+    <Layout title="Welkom bij verhuizen 's Hertogenbosch!" description="waar kan ik deze description zien">
       {
         handleLogin()
       }
@@ -37,7 +37,7 @@ const Welcome = () => (
           <PaperCard
             title="Verhuizen"
             description="Het doorgeven van een verhuizing."
-            link="/moving/start"
+            link="/moving"
             linkText="Lees meer "
           />
         </Grid>
