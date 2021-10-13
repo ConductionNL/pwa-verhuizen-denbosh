@@ -3,9 +3,20 @@ import React, {useState} from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Link, TextField} from "@mui/material";
+import {Link, TextField, Typography} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
+import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import makeStyles from "@mui/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+  inputLength: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '400px',
+    },
+  },
+}));
 
 function Index() {
   const title = 'Controle';
@@ -18,30 +29,25 @@ function Index() {
   const [telephoneInputHelperText, setTelephoneInputHelperText] = useState('');
 
   const checkInputs = () => {
-    //gaat alles goed?
     let valid = true;
 
-    //alle inputs ophalen
     let emailInput = document.getElementById('email');
     let telephoneInput = document.getElementById('telephone');
 
-    //bij alle inputs error property weghalen
     setEmailInputError(false);
     setEmailInputHelperText('');
     setTelephoneInputError(false);
     setTelephoneInputHelperText('');
 
-    //check of inputs valid zijn
     if (emailInput.value.length == 0) {
-      //hier moeten we zorgen dat de error getoond word
       setEmailInputError(true);
-      setEmailInputHelperText('Invalid email');
+      setEmailInputHelperText('Vul een geldig e-mailadres in');
       valid = false;
     }
 
-    if (telephoneInput.value.length > 10) {
+    if (telephoneInput.value.length == 0) {
       setTelephoneInputError(true);
-      setTelephoneInputHelperText('Invalid telephone');
+      setTelephoneInputHelperText('Vul een geldig telefoonnummer in');
       valid = false;
     }
 
@@ -61,51 +67,61 @@ function Index() {
     router.push("/moving/check")
   }
 
+  const classes = useStyles();
+
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
 
-      <Stepper currentStep={3}/>
+      <Grid container spacing={3}>
 
-      <Grid item sm={12}>
-        <PageHeader title={title}/>
-        <br/>
-        <h5>Hoe kunnen we je bereiken?</h5>
-        <p>Vul je emailadres en/of je telefoonnummer in.</p>
-        <form onSubmit={handleContact}>
-          <Grid item md={12}>
+        <Stepper currentStep={3}/>
+
+        <Grid item sm={12}>
+          <Typography variant="h4">
+            Hoe kunnen we je bereiken?
+          </Typography>
+          <Typography mb="10px">
+            Vul je emailadres en/of je telefoonnummer in.
+          </Typography>
+
+          <form onSubmit={handleContact}>
             <TextField
+              className={classes.inputLength}
               error={emailInputError}
               helperText={emailInputHelperText}
-              margin="normal"
-              fullWidth
               id="email"
               label="Email"
               type="email"
               variant="outlined"
             />
-          </Grid>
-          <Grid item md={12}>
+            <br/>
+            <br/>
             <TextField
-              error
-              margin="normal"
-              fullWidth
+              className={classes.inputLength}
+              error={telephoneInputError}
+              helperText={telephoneInputHelperText}
               id="telephone"
-              label="Telephone"
+              label="Telefoonnummer"
               type="text"
               variant="outlined"
             />
-          </Grid>
-          <Grid
-            justifyContent="space-between" // Add it here :)
-            container>
-            <Grid item>
-              <Button variant="contained"> Ga terug</Button>
+            <br/>
+            <br/>
+
+            <Grid
+              justifyContent="space-between" // Add it here :)
+              container>
+              <Grid item>
+                <Link href="/coMovers">
+                  <Button variant="contained" startIcon={<ChevronLeft />}> Ga terug</Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button color="primary" type="submit" variant="contained">Volgende</Button>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Grid>
       </Grid>
 
     </Layout>
