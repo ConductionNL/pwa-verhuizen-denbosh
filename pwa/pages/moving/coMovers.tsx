@@ -1,12 +1,13 @@
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React from "react";
-import {Link} from "@material-ui/core";
+import {Link, Typography} from "@mui/material";
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
 import {useRouter} from "next/router";
 import CheckboxList from "../../components/moving/listCoMovers";
 import Stepper from "../../components/moving/stepper";
+import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 
 function Index() {
   const title = 'Meeverhuizers';
@@ -17,7 +18,7 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/contact")
+    router.push("/moving/contact", undefined, { shallow: true })
   }
 
   return <>
@@ -25,32 +26,34 @@ function Index() {
     <Grid container spacing={3}>
       <Stepper currentStep={2}/>
       <Grid item sm={12}>
-        <PageHeader title={title}/>
-        <br/>
-        <h5>Wie gaat er verhuizen?</h5>
-        <p>Onderstaande personen kunnen door jou verhuist worden.</p>
+        <Typography variant="h4">
+          Wie gaat er verhuizen?
+        </Typography>
+        <Typography mb="10px">
+          Onderstaande personen kunnen door jou verhuist worden.
+        </Typography>
 
         <form onSubmit={handleCoMovers}>
           <CheckboxList/>
 
           <br/>
           <Grid
-            justify="space-between" // Add it here :)
+            justifyContent="space-between" // Add it here :)
             container>
             <Grid item>
               <Link href={'/moving/date'}>
-                <Button variant="contained"> Ga terug</Button>
+                <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
               </Link>
             </Grid>
             <Grid item>
-              <Button color="primary" type="submit" variant="contained">Volgende</Button>
+              <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
             </Grid>
           </Grid>
         </form>
       </Grid>
     </Grid>
   </Layout>
-</>
+</>;
 }
 
 export default Index

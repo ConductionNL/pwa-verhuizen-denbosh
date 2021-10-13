@@ -1,33 +1,34 @@
 import React from 'react';
-import {alpha, makeStyles} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Container from '@material-ui/core/Container';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { alpha } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import LockIcon from '@material-ui/icons/Lock';
-import MailIcon from '@material-ui/icons/Mail';
-import PersonIcon from '@material-ui/icons/Person';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import LockIcon from '@mui/icons-material/Lock';
+import MailIcon from '@mui/icons-material/Mail';
+import PersonIcon from '@mui/icons-material/Person';
 
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MoreIcon from '@mui/icons-material/MoreVert';
 import Link from "next/link";
-import Drawer from '@material-ui/core/Drawer';
+import Drawer from '@mui/material/Drawer';
 import {useRouter} from 'next/router';
 
 
 import ActionMenu from "../../components/common/actionmenu";
 import PageHeader from "./pageheader";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import {eraseCookie, getCookie, setCookie} from "../../components/utility/CookieHandler";
 import {useGet} from "restful-react";
 import {useAppContext} from "../context/state";
@@ -76,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -99,7 +100,8 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
   appbar: {
-    backgroundColor: '#AD9156'
+    backgroundColor: '#AD9156',
+    boxShadow: "none"
   },
 }));
 
@@ -166,34 +168,34 @@ export default function MainMenu() {
 
             <div className={classes.grow}/>
 
-            <Box style={{marginRight: "15px"}}>
-              <Typography variant="h6" color="inherit">
-                {
-                  context.user !== null &&
-                  <Link href="/user" >
-                  <span style={{color: 'white'}}>
-                    {
-                      context.user.name
-                    }
-                  </span>
-                  </Link>
-                }
+            {/*<Box style={{marginRight: "15px"}}>*/}
+            {/*  <Typography variant="h6" color="inherit">*/}
+            {/*    {*/}
+            {/*      context.user !== null &&*/}
+            {/*      <Link href="/user" >*/}
+            {/*      <span style={{color: 'white'}}>*/}
+            {/*        {*/}
+            {/*          context.user.name*/}
+            {/*        }*/}
+            {/*      </span>*/}
+            {/*      </Link>*/}
+            {/*    }*/}
 
-              </Typography>
-            </Box>
-            <Box marginRight={2}>
-              <Typography variant="h6" color="inherit">
-                    {
-                      context.user !== null
-                        ?
-                          <span onClick={() => {handleLogout(context)}} style={{color: 'white'}}>Uitloggen</span>
-                        :
-                          <Link href="http://localhost/login/adfs/conduction" >
-                            <span style={{color: 'white'}}>Inloggen</span>
-                          </Link>
-                    }
-              </Typography>
-            </Box>
+            {/*  </Typography>*/}
+            {/*</Box>*/}
+            {/*<Box marginRight={2}>*/}
+            {/*  <Typography variant="h6" color="inherit">*/}
+            {/*        {*/}
+            {/*          context.user !== null*/}
+            {/*            ?*/}
+            {/*              <span onClick={() => {handleLogout(context)}} style={{color: 'white'}}>Uitloggen</span>*/}
+            {/*            :*/}
+            {/*              <Link href="http://localhost/login/adfs/conduction" >*/}
+            {/*                <span style={{color: 'white'}}>Inloggen</span>*/}
+            {/*              </Link>*/}
+            {/*        }*/}
+            {/*  </Typography>*/}
+            {/*</Box>*/}
 
           </Toolbar>
         </Container>

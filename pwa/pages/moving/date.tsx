@@ -1,13 +1,18 @@
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React, {ReactNode} from "react";
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box, TextField} from "@material-ui/core";
-import {makeStyles} from '@material-ui/core/styles';
+import {Tab, Tabs, Typography, Box} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import Link from "next/link";
+import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import StaticDatePicker from '@mui/lab/StaticDatePicker';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 200,
+  },
+  calendarAlign: {
+    margin: 'auto !important',
+    [theme.breakpoints.up('md')]: {
+      margin: '0 !important',
+    },
   },
 }));
 
@@ -31,13 +42,10 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/coMovers")
+    router.push("/moving/coMovers", undefined, { shallow: true })
   }
 
-  const [date, setDate] = React.useState();
-  const handleChange = (event) => {
-    setDate(event.target.value);
-  };
+  const [value, setValue] = React.useState(new Date());
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -45,45 +53,47 @@ function Index() {
         <Stepper currentStep={1}/>
 
         <Grid item sm={12}>
-          <PageHeader title={title}/>
-          <br/>
-          <h5>Wanneer ga je verhuizen?</h5>
-          <p>Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
-            liggen.</p>
+          <Typography variant="h4">
+            Wanneer ga je verhuizen?
+          </Typography>
+          <Typography mb="10px">
+            Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
+            liggen.
+          </Typography>
 
           <form onSubmit={handleDate}>
-            <TextField
-              id="date"
-              label="Verhuisdatum"
-              type="date"
-              defaultValue="2021-10-12"
-              onChange={handleChange}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              style={{marginBottom: 20}}
-            />
-            <span style={{marginBottom: 20}}><p>Verhuisdatum: {date}</p></span>
-            
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <StaticDatePicker
+                className={classes.calendarAlign}
+                displayStaticWrapperAs="desktop"
+                openTo="day"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+            <span style={{marginBottom: 20}}><p>Verhuisdatum: </p></span>
+
             <br/>
             <Grid
-              justify="space-between" // Add it here :)
+              justifyContent="space-between" // Add it here :)
               container>
               <Grid item>
                 <Link href="/moving/address">
-                  <Button variant="contained"> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained">Volgende</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>
         </Grid>
       </Grid>
     </Layout>
-  </>
+  </>;
 }
 
 export default Index

@@ -1,14 +1,15 @@
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import React, {ReactNode} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@material-ui/core/Hidden";
+import Hidden from "@mui/material/Hidden";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box} from "@material-ui/core";
+import {Tab, Tabs, Typography, Box, List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import PaperCard from "../../components/common/paperCard";
-
+import SendIcon from '@mui/icons-material/Send';
+import {ChevronRight} from "@mui/icons-material";
 
 function Index() {
 
@@ -18,18 +19,32 @@ function Index() {
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid item sm={12}>
-        <PageHeader title={title}/>
-        <br/>
-        <h5>U gaat een verhuizing doorgeven in of naar de gemeente 's-Hertogenbosch.</h5>
-        <br/>
-        <h5>U moet in dit formulier inloggen met DigiD.</h5>
-        <Button variant="outlined" color="primary">Inloggen</Button>
-        <br/>
-        <br/>
-        <h5>U kunt hier starten met het verhuis proces.</h5>
-        <Link href="/moving/address">
-          <Button variant="outlined" color="primary">Starten</Button>
-        </Link>
+        <div style={{textAlign: "center"}}>
+          <Typography color="#19224C" fontWeight="bold" mt='40px' mb='40px' variant="h4" component="h2">
+            {title}
+          </Typography>
+          <Typography variant="h6" color="#19224C">
+            U gaat een verhuizing doorgeven in of naar de gemeente 's-Hertogenbosch.
+          </Typography>
+          <br/>
+          <Typography variant="h6" color="#19224C" mb="40px">
+            U moet in dit formulier inloggen met DigiD.
+          </Typography>
+          <Link href="/moving/address">
+            <Button variant="contained" style={{backgroundColor: "#F5F5F5", color: "black", marginBottom: '20px'}} endIcon={<ChevronRight />}>
+              <img style={{width: '40px', marginRight: '10px'}} src="https://www.logius.nl/sites/default/files/afbeeldingen/producten/digid_eo_rgb_100px_4.png" alt=""/>Inloggen Met DigiD
+            </Button>
+          </Link>
+          <div>
+            <Typography variant="p" fontWeight="bold">
+              Heeft u nog geen DigiD?
+            </Typography>
+            <br/>
+            <Typography variant="p">
+              Vraag uw DigiD aan op <a href="https://www.digid.nl" target="_blank">www.digid.nl</a>
+            </Typography>
+          </div>
+        </div>
         {/*<Box paddingTop={3} paddingBottom={2}>*/}
         {/*  <Grid container spacing={2}>*/}
         {/*    <Grid item xs={12} sm={8} md={6}>*/}
