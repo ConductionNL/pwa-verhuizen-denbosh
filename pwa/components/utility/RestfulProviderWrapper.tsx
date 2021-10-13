@@ -5,6 +5,8 @@ export function RestfulProviderWrapper({ children }) {
 
   const context = useAppContext();
 
+  console.log(context.apiUrl);
+
   return (
     <RestfulProvider
       base={context.apiUrl}

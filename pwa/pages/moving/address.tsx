@@ -15,6 +15,7 @@ import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import {useGet} from "restful-react";
 import {useUserContext} from "../../components/context/userContext";
 import {useAppContext} from "../../components/context/state";
+import {type} from "os";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -30,37 +31,39 @@ export default function Address() {
 
   const title = 'Adres';
 
-  const [postalCode, setPostalCode] = useState("1339PC");
-  const [houseNumber, setHouseNumber] = useState("49");
+  const [postalCode, setPostalCode] = useState("");
+  const [houseNumber, setHouseNumber] = useState("");
   const [houseNumberSuffix, setHouseNumberSuffix] = useState("");
+  const [addresses, setAddresses] = useState(null);
 
   let context = useAppContext();
   const router = useRouter();
   const { data: info } = useGet({
-    path: "/gateways/zaken/zaken",
-    debounce: true,
-  });
+    path: "/gateways/zaken/zaken"
+  })
 
-  if (info !== undefined) {
-    console.log(info);
-  }
 
 
   const handleAddress = () => {
 
-    let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
-    let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
-    let suffix = (document.getElementById('houseNumber') as HTMLInputElement).value;
+    if (typeof window !== 'undefined') {
+      let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
+      let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
+      let suffix = (document.getElementById('houseNumberSuffix') as HTMLInputElement).value;
 
-    if (postalCode.length != 0 && houseNumber.length != 0) {
-      // const { data: info } = useGet({
-      //   path: "/as/adressen",
-      //   debounce: true,
-      // });
-      // console.log(info);
+      if (typeof postalCode === 'string') {
+        setPostalCode(postalCode.toUpperCase());
+      } else {
+        setPostalCode(postalCode);
+      }
+      setHouseNumber(houseNumber);
+      setHouseNumberSuffix(suffix);
+
     }
 
   }
+
+  console.log(info);
 
   const classes = useStyles();
 
@@ -89,6 +92,14 @@ export default function Address() {
             <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
+
+            {
+              addresses !== null && addresses.map((address) =>
+                <p>
+                  address.id
+                </p>
+              )
+            }
 
             <Grid
               justifyContent="space-between" // Add it here :)
