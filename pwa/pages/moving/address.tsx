@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import {useGet} from "restful-react";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -42,19 +43,20 @@ function Index() {
     return valid;
   }
 
-  const handleAddress = (event) => {
-    event.preventDefault();
+  const handleAddress = () => {
+    let postalCode = document.getElementById('postalCode').value;
+    let houseNumber = document.getElementById('houseNumber').value;
+    let suffix = document.getElementById('houseNumber').value;
 
-
-    let valid = checkInputs();
-
-    if (!valid) {
-      return;
+    if (postalCode.length != 0 && houseNumber.length != 0) {
+      const { data: info } = useGet({
+        path: "/as/adressen?postcode=" + postalCode + "&huisnummer=" + houseNumber + "&huisnummertoevoeging=" + suffix,
+        debounce: true,
+      });
+      console.log(info);
     }
-    // Session set address
 
 
-    router.push("/moving/date", undefined, { shallow: true })
   }
 
   const classes = useStyles();
@@ -74,14 +76,14 @@ function Index() {
             Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
           </Typography>
 
-          <form onSubmit={handleAddress}>
-            <TextField id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
+          <form>
+            <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField id="houseNumber" label="Huisnummer" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
 
