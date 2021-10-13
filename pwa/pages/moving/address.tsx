@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React, {ReactNode} from "react";
+import React, {ReactNode, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
@@ -13,6 +13,8 @@ import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import {useGet} from "restful-react";
+import {useUserContext} from "../../components/context/userContext";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -24,44 +26,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Index() {
+export default function Address() {
 
   const title = 'Adres';
 
+  const [postalCode, setPostalCode] = useState("1339PC");
+  const [houseNumber, setHouseNumber] = useState("49");
+  const [houseNumberSuffix, setHouseNumberSuffix] = useState("");
+
+  let context = useAppContext();
   const router = useRouter();
+  const { data: info } = useGet({
+    path: context.apiUrl + "/gateways/zaken/zaken",
+    debounce: true,
+  });
 
-
-  const checkInputs = () => {
-    //gaat alles goed?
-    let valid = true;
-
-    //alle inputs ophalen
-    let postalInput = document.getElementById('postalCode');
-    let houseNumberInput = document.getElementById('houseNumber');
-    let houseNumberSuffixInput = document.getElementById('houseNumberSuffix');
-
-    return valid;
+  if (info !== undefined) {
+    console.log(info);
   }
 
+
   const handleAddress = () => {
+
     let postalCode = document.getElementById('postalCode').value;
     let houseNumber = document.getElementById('houseNumber').value;
     let suffix = document.getElementById('houseNumber').value;
 
     if (postalCode.length != 0 && houseNumber.length != 0) {
-      const { data: info } = useGet({
-        path: "/as/adressen?postcode=" + postalCode + "&huisnummer=" + houseNumber + "&huisnummertoevoeging=" + suffix,
-        debounce: true,
-      });
-      console.log(info);
+      // const { data: info } = useGet({
+      //   path: "/as/adressen",
+      //   debounce: true,
+      // });
+      // console.log(info);
     }
-
 
   }
 
   const classes = useStyles();
 
-  return <>
+  return (<>
     <Layout title={title} description="waar kan ik deze description zien">
 
       <Grid container spacing={3}>
@@ -104,7 +107,6 @@ function Index() {
       </Grid>
 
     </Layout>
-  </>;
+  </>);
 }
 
-export default Index

@@ -34,15 +34,14 @@ export default function UserManagement() {
         }
         sessionStorage.setItem('user', JSON.stringify(data));
         router.push('/moving/address');
+        return null;
       }
     }
   }
 
   return (
-    <p>
-      {
-        handleLogin()
-      }
-    </p>
+    <div>
+      {handleLogin()}
+    </div>
   );
 }
