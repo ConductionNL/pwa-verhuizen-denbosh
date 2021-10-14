@@ -3,7 +3,7 @@ version: "3.4"
 services:
   pwa:
     &pwa
-    image: ghcr.io/conductionnl/verhuizen-conduction-pwa:dev
+    image: ghcr.io/conductionnl/verhuizen-pwa:dev
     build: pwa
     depends_on:
       - php
