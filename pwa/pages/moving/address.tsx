@@ -144,7 +144,7 @@ export default function Address() {
             label="Postcode"
             required
             variant="outlined"
-            className={classes.inputLength}
+            className={classes.inputStyle}
             error={postalCodeInputError}
             helperText={postalCodeInputHelperText}
           />
@@ -155,14 +155,14 @@ export default function Address() {
             label="Huisnummer"
             required
             variant="outlined"
-            className={classes.inputLength}
+            className={classes.inputStyle}
             error={houseNumberInputError}
             helperText={houseNumberInputHelperText}
           />
           <br/>
           <br/>
           <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
-                     className={classes.inputLength}/>
+                     className={classes.inputStyle}/>
           <br/>
           <br/>
 
