@@ -14,6 +14,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
 import {useGet, useMutate} from "restful-react";
+import {updateRequest} from "../../components/utility/RequestHandler";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -37,18 +39,13 @@ function Index() {
   const classes = useStyles();
   const title = 'Verhuisdatum';
   const router = useRouter();
-  var request = null;
+  let request = null;
+  let context = useAppContext();
 
   const handleDate = (event) => {
     event.preventDefault();
 
-    if (date.toISOString().split('T')[0] == null || date.toISOString().split('T')[0] == '') {
-      alert("Vul een correcte datum in")
-      return;
-    }
-
-    // save();
-
+    updateRequest(context, 'verhuisdatum', date.toISOString().split('T')[0])
     router.push("/moving/coMovers", undefined, {shallow: true})
   }
 
@@ -73,18 +70,6 @@ function Index() {
           </Typography>
 
           <form onSubmit={handleDate}>
-            {/*<LocalizationProvider dateAdapter={AdapterDateFns}>*/}
-            {/*  <StaticDatePicker*/}
-            {/*    className={classes.calendarAlign}*/}
-            {/*    displayStaticWrapperAs="desktop"*/}
-            {/*    openTo="day"*/}
-            {/*    value={value}*/}
-            {/*    onChange={(newValue) => {*/}
-            {/*      setValue(newValue);*/}
-            {/*    }}*/}
-            {/*    renderInput={(params) => <TextField {...params} />}*/}
-            {/*  />*/}
-            {/*</LocalizationProvider>*/}
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               {

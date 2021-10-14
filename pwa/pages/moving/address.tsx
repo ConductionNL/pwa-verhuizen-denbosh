@@ -18,6 +18,7 @@ import {useAppContext} from "../../components/context/state";
 import {type} from "os";
 import SearchIcon from '@mui/icons-material/Search';
 import {ForwardRounded} from "@material-ui/icons";
+import {updateRequest} from "../../components/utility/RequestHandler";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -106,8 +107,21 @@ export default function Address() {
 
   const processAddress = (item) => {
 
+    if (item.huisnummertoevoeging !== null) {
+      updateRequest(
+        context,
+        'adres',
+        item.straat + " " + item.huisnummer + item.huisnummertoevoeging + ", " + item.postcode + " " + item.woonplaats
+      )
+    } else {
+      updateRequest(
+        context,
+        'adres',
+        item.straat + " " + item.huisnummer + ", " + item.postcode + " " + item.woonplaats
+      )
+    }
 
-    console.log(item);
+    router.push('/moving/date');
   }
   return (<>
     <Layout title={title} description="waar kan ik deze description zien">

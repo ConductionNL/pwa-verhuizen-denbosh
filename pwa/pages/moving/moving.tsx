@@ -50,8 +50,7 @@ function Index() {
     event.preventDefault();
 
     createRequest(userContext.user, context);
-
-    // router.push("/moving/address", undefined, { shallow: true })
+    router.push("/moving/address", undefined, { shallow: true })
   }
 
   return <>
