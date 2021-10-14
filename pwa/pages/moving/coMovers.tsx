@@ -28,6 +28,7 @@ function Index() {
   const title = 'Meeverhuizers';
   const router = useRouter();
   var request = null;
+  const classes = useStyles();
 
 
   // const id = getIdFromStorage..
