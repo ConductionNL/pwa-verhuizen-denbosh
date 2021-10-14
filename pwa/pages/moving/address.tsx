@@ -33,9 +33,8 @@ export default function Address() {
 
   const title = 'Adres';
 
-  const [postalCode, setPostalCode] = useState("");
-  const [houseNumber, setHouseNumber] = useState("");
-  const [houseNumberSuffix, setHouseNumberSuffix] = useState("");
+  const [results, setResults] = useState(null);
+
   const [postalCodeInputError, setPostalCodeInputError] = useState(false);
   const [postalCodeInputHelperText, setPostalCodeInputHelperText] = useState('');
 
@@ -44,10 +43,6 @@ export default function Address() {
 
   let context = useAppContext();
   const router = useRouter();
-
-  const { data: results } = useGet({
-    path: "/gateways/as/adressen?postcode=" + postalCode + '&huisnummer=' + houseNumber + "&huisnummertoevoeging=" + houseNumberSuffix,
-  })
 
   const checkInputs = () => {
     let valid = true;
@@ -89,12 +84,17 @@ export default function Address() {
       let suffix = (document.getElementById('houseNumberSuffix') as HTMLInputElement).value;
 
       if (typeof postalCode === 'string') {
-        setPostalCode(postalCode.toUpperCase());
-      } else {
-        setPostalCode(postalCode);
+        postalCode = postalCode.toUpperCase();
       }
-      setHouseNumber(houseNumber);
-      setHouseNumberSuffix(suffix);
+
+      fetch(context.apiUrl + "/gateways/as/adressen?postcode=" + postalCode + '&huisnummer=' + houseNumber + "&huisnummertoevoeging=" + suffix, {
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then(response => response.json())
+        .then((data) =>  {
+            setResults(data);
+        });
 
       }
     }
