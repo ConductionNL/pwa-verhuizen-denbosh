@@ -75,7 +75,7 @@ function Index() {
     setTelephoneInputError(false);
     setTelephoneInputHelperText('');
 
-    if (emailInput.value.length == 0 && telephoneInput.value.length == 0) {
+    if (emailInput.value.length == 0 || telephoneInput.value.length == 0) {
       setEmailInputError(true);
       setEmailInputHelperText('Vul een geldig e-mailadres in');
       setTelephoneInputError(true);
@@ -90,6 +90,12 @@ function Index() {
         setEmailInputHelperText('Vul een geldig e-mailadres in');
         valid = false;
       }
+    }
+
+    if (telephoneInput.value.length != 10) {
+      setTelephoneInputError(true);
+      setTelephoneInputHelperText('Vul een geldig telefoonnummer in');
+      valid = false;
     }
 
     return valid;
@@ -134,7 +140,7 @@ function Index() {
                 helperText={emailInputHelperText}
                 id="email"
                 label="Email"
-                type="email"
+                type="text"
                 variant="outlined"
               />
               <br/>
