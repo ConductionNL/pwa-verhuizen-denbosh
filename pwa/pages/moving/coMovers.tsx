@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import CheckboxList from "../../components/moving/listCoMovers";
 import Stepper from "../../components/moving/stepper";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import {useGet, useMutate} from "restful-react";
 import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +27,31 @@ const useStyles = makeStyles((theme) => ({
 function Index() {
   const title = 'Meeverhuizers';
   const router = useRouter();
-  const classes = useStyles();
+  var request = null;
+
+
+  // const id = getIdFromStorage..
+  const id = 'new';
+
+  if (id != 'new') {
+     request = useGet({
+      path: "/requests" + id
+    });
+  }
+
+  const {mutate: post} = useMutate({
+    verb: "POST",
+    path: `/requests/` + id,
+  });
+
+  const save = () => {
+    request.properties.meeverhuizers = [];
+    post(request).then(() => {updateSession(request.id)});
+  }
+
+  const updateSession = (id) => {
+    // Set id in session
+  }
 
   const handleCoMovers = (event) => {
     event.preventDefault();

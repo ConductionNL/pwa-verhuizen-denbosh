@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
+import {useGet, useMutate} from "restful-react";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -24,6 +25,38 @@ const useStyles = makeStyles((theme) => ({
 function Index() {
   const title = 'Controle';
   const router = useRouter();
+  var request = null;
+
+  // const id = getIdFromStorage..
+  const id = 'new';
+
+  if (id != 'new') {
+    request = useGet({
+      path: "/requests" + id
+    });
+  }
+
+  const {mutate: post} = useMutate({
+    verb: "POST",
+    path: `/requests/` + id,
+  });
+
+  const save = () => {
+    let emailInput = document.getElementById('email');
+    let telephoneInput = document.getElementById('telephone');
+
+    request.properties.contactgegevens = {
+      email: emailInput.value,
+      telefoonnummer: telephoneInput.value
+    };
+
+    post(request).then(() => {updateSession(request.id)});
+  }
+
+  const updateSession = (id) => {
+    // Set id in session
+  }
+
 
   const [emailInputError, setEmailInputError] = useState(false);
   const [emailInputHelperText, setEmailInputHelperText] = useState('');
@@ -42,16 +75,21 @@ function Index() {
     setTelephoneInputError(false);
     setTelephoneInputHelperText('');
 
-    if (emailInput.value.length == 0) {
+    if (emailInput.value.length == 0 && telephoneInput.value.length == 0) {
       setEmailInputError(true);
       setEmailInputHelperText('Vul een geldig e-mailadres in');
-      valid = false;
-    }
-
-    if (telephoneInput.value.length == 0) {
       setTelephoneInputError(true);
       setTelephoneInputHelperText('Vul een geldig telefoonnummer in');
       valid = false;
+    }
+
+    if (emailInput.value.length > 0) {
+      const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      if (re.test(String(emailInput.value).toLowerCase()) == false) {
+        setEmailInputError(true);
+        setEmailInputHelperText('Vul een geldig e-mailadres in');
+        valid = false;
+      }
     }
 
     return valid;
@@ -66,6 +104,7 @@ function Index() {
       return;
     }
     // Session set address
+    // save()
 
     router.push("/moving/check", undefined, {shallow: true})
   }
@@ -116,8 +155,8 @@ function Index() {
               justifyContent="space-between" // Add it here :)
               container>
               <Grid item>
-                <Link href="/coMovers">
-                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+                <Link href="/moving/coMovers">
+                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
