@@ -32,7 +32,7 @@ export default function Header() {
     <header>
 
       <div className={classes.sectionDesktop}>
-        <img style={{maxHeight: '200px'}} src="https://www.s-hertogenbosch.nl/typo3conf/ext/website_shertogenbosch/Resources/Public/Images/logo.svg"/>
+        <img style={{maxHeight: '100px'}} src="https://www.s-hertogenbosch.nl/typo3conf/ext/website_shertogenbosch/Resources/Public/Images/logo.svg"/>
       </div>
 
       <MainMenu />

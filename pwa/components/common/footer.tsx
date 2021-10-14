@@ -22,6 +22,9 @@ import Typography from "@mui/material/Typography";
 import {Login} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
+  footerStyle: {
+    marginTop: 50
+  },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -29,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sectionMobile: {
-    marginTop: 20,
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none',
@@ -57,7 +59,7 @@ export default function Footer() {
   let userContext = useUserContext();
 
   return (
-    <footer>
+    <footer  className={classes.footerStyle}>
       <Paper style={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
         <BottomNavigation
           value={state['bottumNavigation']} onChange={handleChange}
