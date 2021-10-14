@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   calendarAlign: {
     margin: 'auto !important',
     [theme.breakpoints.up('md')]: {
+      displayStaticWrapperAs: "mobile",
       margin: '0 !important',
     },
   },
