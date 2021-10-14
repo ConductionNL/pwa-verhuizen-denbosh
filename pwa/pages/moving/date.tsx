@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   calendarAlign: {
     margin: 'auto !important',
     [theme.breakpoints.up('md')]: {
+      displayStaticWrapperAs: "mobile",
       margin: '0 !important',
     },
   },
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Index() {
   const classes = useStyles();
-  const title = 'Verhuisdatum';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
   let request = null;
   let context = useAppContext();

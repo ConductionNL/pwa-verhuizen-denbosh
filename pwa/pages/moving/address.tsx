@@ -21,17 +21,18 @@ import {ForwardRounded} from "@material-ui/icons";
 import {updateRequest} from "../../components/utility/RequestHandler";
 
 const useStyles = makeStyles((theme) => ({
-  inputLength: {
+  inputStyle: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
+      textAlign: "center",
     },
-  },
+  }
 }));
 
 export default function Address() {
 
-  const title = 'Adres';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
 
   const [results, setResults] = useState(null);
 
