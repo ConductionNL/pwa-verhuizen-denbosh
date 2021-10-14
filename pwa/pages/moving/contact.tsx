@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
       width: '400px',
     },
   },
+  divStyle: {
+    textAlign: "center"
+  },
 }));
 
 function Index() {
@@ -64,7 +67,7 @@ function Index() {
     }
     // Session set address
 
-    router.push("/moving/check", undefined, { shallow: true })
+    router.push("/moving/check", undefined, {shallow: true})
   }
 
   const classes = useStyles();
@@ -85,39 +88,40 @@ function Index() {
           </Typography>
 
           <form onSubmit={handleContact}>
-            <TextField
-              className={classes.inputLength}
-              error={emailInputError}
-              helperText={emailInputHelperText}
-              id="email"
-              label="Email"
-              type="email"
-              variant="outlined"
-            />
-            <br/>
-            <br/>
-            <TextField
-              className={classes.inputLength}
-              error={telephoneInputError}
-              helperText={telephoneInputHelperText}
-              id="telephone"
-              label="Telefoonnummer"
-              type="text"
-              variant="outlined"
-            />
-            <br/>
-            <br/>
-
+            <div className={classes.divStyle}>
+              <TextField
+                className={classes.inputLength}
+                error={emailInputError}
+                helperText={emailInputHelperText}
+                id="email"
+                label="Email"
+                type="email"
+                variant="outlined"
+              />
+              <br/>
+              <br/>
+              <TextField
+                className={classes.inputLength}
+                error={telephoneInputError}
+                helperText={telephoneInputHelperText}
+                id="telephone"
+                label="Telefoonnummer"
+                type="text"
+                variant="outlined"
+              />
+              <br/>
+              <br/>
+            </div>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>
               <Grid item>
                 <Link href="/coMovers">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>

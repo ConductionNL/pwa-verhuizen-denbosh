@@ -2,24 +2,38 @@ import Button from "@mui/material/Button";
 import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import PageHeader from "../../components/common/pageheader";
-import {Link, TextField, Typography} from "@mui/material";
+import {Link, Typography} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
-import SendIcon from "@mui/icons-material/Send";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import makeStyles from "@mui/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+  inputStyle: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '400px',
+    },
+  },
+  boxStyle: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+}));
 
 function Index() {
   const title = 'Controle';
   const router = useRouter();
+  const classes = useStyles();
 
   const handleContact = (event) => {
     event.preventDefault();
 
     // Session set address
 
-    router.push("/moving/confirmation", undefined, { shallow: true })
+    router.push("/moving/confirmation", undefined, {shallow: true})
   }
 
   return <>
@@ -33,18 +47,20 @@ function Index() {
           </Typography>
 
           <form onSubmit={handleContact}>
-            <CheckList/>
+            <div className={classes.boxStyle}>
+              <CheckList/>
+            </div>
             <br/>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>
               <Grid item>
                 <Link href="/moving/contact">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight />}>
+                <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight/>}>
                   Nu verzenden
                 </Button>
               </Grid>

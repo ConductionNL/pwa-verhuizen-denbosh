@@ -1,29 +1,26 @@
 import Button from "@mui/material/Button";
-import React, {ReactNode, useState} from "react";
+import React, {useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import ActionMenu from "../../components/common/actionmenu";
-import Hidden from "@mui/material/Hidden";
-import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box, TextField} from "@mui/material";
-import PaperCard from "../../components/common/paperCard";
+import {Typography, TextField} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
-import {useGet} from "restful-react";
-import {useUserContext} from "../../components/context/userContext";
 import {useAppContext} from "../../components/context/state";
-import {type} from "os";
 
 const useStyles = makeStyles((theme) => ({
-  inputLength: {
+  inputStyle: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
     },
   },
+  divStyle: {
+    marginTop: 20,
+    textAlign: "center"
+  }
 }));
 
 
@@ -79,34 +76,38 @@ export default function Address() {
           </Typography>
 
           <form onSubmit={route}>
-            <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
-            <br/>
-            <br/>
-            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined" className={classes.inputLength}/>
-            <br/>
-            <br/>
-            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
-            <br/>
-            <br/>
+            <div className={classes.divStyle}>
+              <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined"
+                         className={classes.inputStyle}/>
+              <br/>
+              <br/>
+              <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined"
+                         className={classes.inputStyle}/>
+              <br/>
+              <br/>
+              <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
+                         className={classes.inputStyle}/>
+              <br/>
+              <br/>
 
-            {
-              addresses !== null && addresses.map((address) =>
-                <p>
-                  address.id
-                </p>
-              )
-            }
-
+              {
+                addresses !== null && addresses.map((address) =>
+                  <p>
+                    address.id
+                  </p>
+                )
+              }
+            </div>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>
               <Grid item>
                 <Link href="/moving">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>

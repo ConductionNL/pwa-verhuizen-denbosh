@@ -1,13 +1,14 @@
 import Button from "@mui/material/Button";
-import React, {ReactNode} from "react";
+import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import {Tab, Tabs, Typography, Box} from "@mui/material";
+import {Typography, Box} from "@mui/material";
 import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
-import {ChevronLeft, ChevronRight} from "@mui/icons-material";
-import { ForwardRounded } from "@mui/icons-material";
+import {ChevronRight} from "@mui/icons-material";
+import {ForwardRounded} from "@mui/icons-material";
+import {Avatar} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,10 +26,15 @@ const useStyles = makeStyles((theme) => ({
       margin: '0 !important',
     },
   },
-  stepsStyle :
+  stepsStyle:
     {
-      marginRight: 15
+      marginRight: 15,
+      textAlign: "center"
     },
+  boxStyle: {
+    alignItems: "center",
+    justifyContent: "center"
+  },
   titleStyle: {
     marginBottom: 20
   }
@@ -44,7 +50,7 @@ function Index() {
 
     // Session set address
 
-    router.push("/moving/address", undefined, { shallow: true })
+    router.push("/moving/address", undefined, {shallow: true})
   }
 
   const [value, setValue] = React.useState(new Date());
@@ -59,18 +65,29 @@ function Index() {
             Deze stappen ga je doorlopen
           </Typography>
 
-          <div className={classes.stepsStyle}>
-            <span><ForwardRounded/>Geef je nieuwe adres op</span><br/>
-            <span><ForwardRounded/>Geef de datum op wanneer je gaat verhuis</span><br/>
-            <span><ForwardRounded/>Geef aan met wie je gaat verhuizen</span><br/>
-            <span><ForwardRounded/>Geef aan hoe we je kunnen bereiken</span><br/>
-            <br/>
-          </div>
+          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <span>Geef je nieuwe adres op</span>
+          </Box>
+          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <span>Geef de datum op wanneer je gaat verhuis</span>
+          </Box>
+          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <span>Geef aan met wie je gaat verhuizen</span>
+          </Box>
+          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <span>Geef aan hoe we je kunnen bereiken</span>
+          </Box>
+          <br/>
+
           <form onSubmit={handleDate} style={{textAlign: "center"}}>
             <Grid justifyContent="space-between" // Add it here :)
-              container>
+                  container>
               <Grid item sm={12}>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>
