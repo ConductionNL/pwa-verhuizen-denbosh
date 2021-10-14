@@ -9,15 +9,21 @@ import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
 import SendIcon from "@mui/icons-material/Send";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
+import {useGet, useMutate} from "restful-react";
+import {useAppContext} from "../../components/context/state";
+import {submitRequest} from "../../components/utility/RequestHandler";
 
 function Index() {
   const title = 'Controle';
   const router = useRouter();
+  const context = useAppContext();
+  let request = null;
+
 
   const handleContact = (event) => {
     event.preventDefault();
 
-    // Session set address
+    submitRequest(context);
 
     router.push("/moving/confirmation", undefined, { shallow: true })
   }

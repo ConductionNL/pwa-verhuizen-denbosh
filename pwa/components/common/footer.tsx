@@ -59,60 +59,13 @@ export default function Footer() {
           showLabels
           className={classes.sectionMobile}
         >
-
-            <BottomNavigationAction label="Home" icon={<HomeIcon/>}/>
-            <BottomNavigationAction label="Klantvragen" icon={<SearchIcon/>}/>
-            <BottomNavigationAction label="Notificaties" icon={<NotificationsIcon/>}/>
-            <BottomNavigationAction label="Chatten" icon={<ChatIcon/>}/>
-            <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
-            </BottomNavigation>
-            </Paper>
-            <Box
-            px={{xs: 3, sm: 10}}
-            py={{xs: 5, sm: 10}}
-            bgcolor="#00205C"
-            color="white"
-            className={classes.sectionDesktop}
-            >
-            <Container maxWidth="lg">
-            <Grid container spacing={5}>
-            <Grid item xs={12} sm={6}>
-            <Box borderBottom={1}>Help</Box>
-            <Box>
-            <Link href="/" color="inherit">
-            Contact
-            </Link>
-            </Box>
-            <Box>
-            <Link href="/" color="inherit">
-            Support
-            </Link>
-            </Box>
-            <Box>
-            <Link href="/" color="inherit">
-            Privacy
-            </Link>
-            </Box>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-            <Box borderBottom={1}>Contact</Box>
-            <Box>Wolvenhoek 1, 's-Hertogenbosch
-            </Box>
-            <Box>
-            <Link href="tel:(073) 615 51 55" color="inherit">
-              (073) 615 51 55
-            </Link>
-            </Box>
-            <Box>
-              Postadres: <br/>
-              Postbus 12345 <br/>
-              5200 GZ ‘s-Hertogenbosch
-            </Box>
-            </Grid>
-            </Grid>
-            </Container>
-            </Box>
-            </footer>
-            );
-            }
+          <BottomNavigationAction label="Home" icon={<HomeIcon/>}/>
+          <BottomNavigationAction label="Klantvragen" icon={<SearchIcon/>}/>
+          <BottomNavigationAction label="Notificaties" icon={<NotificationsIcon/>}/>
+          <BottomNavigationAction label="Chatten" icon={<ChatIcon/>}/>
+          <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
+        </BottomNavigation>
+      </Paper>
+    </footer>
+  );
+}

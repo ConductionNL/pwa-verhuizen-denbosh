@@ -13,6 +13,9 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
+import {useGet, useMutate} from "restful-react";
+import {updateRequest} from "../../components/utility/RequestHandler";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -36,16 +39,21 @@ function Index() {
   const classes = useStyles();
   const title = 'Verhuisdatum';
   const router = useRouter();
+  let request = null;
+  let context = useAppContext();
 
   const handleDate = (event) => {
     event.preventDefault();
 
-    // Session set address
-
-    router.push("/moving/coMovers", undefined, { shallow: true })
+    updateRequest(context, 'verhuisdatum', date.toISOString().split('T')[0])
+    router.push("/moving/coMovers", undefined, {shallow: true})
   }
 
-  const [value, setValue] = React.useState(new Date());
+  const maxDateOfMoveObject = new Date();
+  maxDateOfMoveObject.setDate(maxDateOfMoveObject.getDate() + 28);
+  // let maxDateOfMove = maxDateOfMoveObject.toISOString().split('T')[0];
+
+  const [date, setValue] = React.useState(new Date());
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -62,19 +70,35 @@ function Index() {
           </Typography>
 
           <form onSubmit={handleDate}>
+
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <StaticDatePicker
-                className={classes.calendarAlign}
+              {
+                request != null && request.properties != null && request.properties.includes("datum") && request.properties.datum != null ?
+                <StaticDatePicker
+                minDate={new Date()}
+                maxDate={maxDateOfMoveObject}
                 displayStaticWrapperAs="desktop"
                 openTo="day"
-                value={value}
+                value={request.properties.datum}
                 onChange={(newValue) => {
-                  setValue(newValue);
-                }}
+                setValue(newValue);
+              }}
                 renderInput={(params) => <TextField {...params} />}
-              />
+                /> :
+                <StaticDatePicker
+                minDate={new Date()}
+                maxDate={maxDateOfMoveObject}
+                displayStaticWrapperAs="desktop"
+                openTo="day"
+                value={date}
+                onChange={(newValue) => {
+                setValue(newValue);
+              }}
+                renderInput={(params) => <TextField {...params} />}
+                />
+              }
             </LocalizationProvider>
-            <span style={{marginBottom: 20}}><p>Verhuisdatum: </p></span>
+            <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
 
             <br/>
             <Grid
@@ -82,11 +106,11 @@ function Index() {
               container>
               <Grid item>
                 <Link href="/moving/address">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>
