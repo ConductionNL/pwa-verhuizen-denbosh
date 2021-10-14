@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import ActionMenu from "../../components/common/actionmenu";
 import Hidden from "@mui/material/Hidden";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box, TextField} from "@mui/material";
+import {Tab, Tabs, Typography, Box, TextField, Avatar} from "@mui/material";
 import PaperCard from "../../components/common/paperCard";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
@@ -16,6 +16,8 @@ import {useGet, useMutate} from "restful-react";
 import {useUserContext} from "../../components/context/userContext";
 import {useAppContext} from "../../components/context/state";
 import {type} from "os";
+import SearchIcon from '@mui/icons-material/Search';
+import {ForwardRounded} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -26,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Address() {
 
   const title = 'Adres';
@@ -34,14 +35,54 @@ export default function Address() {
   const [postalCode, setPostalCode] = useState("");
   const [houseNumber, setHouseNumber] = useState("");
   const [houseNumberSuffix, setHouseNumberSuffix] = useState("");
-  const [addresses, setAddresses] = useState(null);
+  const [postalCodeInputError, setPostalCodeInputError] = useState(false);
+  const [postalCodeInputHelperText, setPostalCodeInputHelperText] = useState('');
+
+  const [houseNumberInputError, setHouseNumberInputError] = useState(false);
+  const [houseNumberInputHelperText, setHouseNumberInputHelperText] = useState('');
 
   let context = useAppContext();
   const router = useRouter();
 
-  const handleAddress = () => {
+  const { data: results } = useGet({
+    path: "/gateways/as/adressen?postcode=" + postalCode + '&huisnummer=' + houseNumber + "&huisnummertoevoeging=" + houseNumberSuffix,
+  })
 
+  const checkInputs = () => {
+    let valid = true;
+
+    let postalCodeInput = (document.getElementById('postalCode') as HTMLInputElement);
+    let houseNumberInput = (document.getElementById('houseNumber') as HTMLInputElement);
+
+    setPostalCodeInputError(false);
+    setPostalCodeInputHelperText('');
+    setHouseNumberInputError(false);
+    setHouseNumberInputHelperText('');
+
+    if (postalCodeInput.value.length == 0) {
+      valid = false;
+      setPostalCodeInputError(true);
+      setPostalCodeInputHelperText('postcode is verplicht');
+    }
+
+    if (houseNumberInput.value.length == 0) {
+      valid = false;
+      setHouseNumberInputError(true);
+      setHouseNumberInputHelperText('huisnummer is verplicht');
+    }
+
+    return valid;
+  }
+
+  const handleAddress = () => {
     if (typeof window !== 'undefined') {
+
+      let valid = checkInputs();
+
+      if (!valid) {
+        return;
+      }
+
       let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
       let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
       let suffix = (document.getElementById('houseNumberSuffix') as HTMLInputElement).value;
@@ -54,14 +95,19 @@ export default function Address() {
       setHouseNumber(houseNumber);
       setHouseNumberSuffix(suffix);
 
+      }
     }
-
-  }
 
   const classes = useStyles();
 
   const route = () => {
     router.push('/moving/date');
+  }
+
+  const processAddress = (item) => {
+
+
+    console.log(item);
   }
   return (<>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -78,40 +124,71 @@ export default function Address() {
             Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
           </Typography>
 
-          <form onSubmit={route}>
-            <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
-            <br/>
-            <br/>
-            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined"
-                       className={classes.inputLength}/>
-            <br/>
-            <br/>
-            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
-                       className={classes.inputLength}/>
-            <br/>
-            <br/>
+          <TextField
+            id="postalCode"
+            label="Postcode"
+            required
+            variant="outlined"
+            className={classes.inputLength}
+            error={postalCodeInputError}
+            helperText={postalCodeInputHelperText}
+          />
+          <br/>
+          <br/>
+          <TextField
+            id="houseNumber"
+            label="Huisnummer"
+            required
+            variant="outlined"
+            className={classes.inputLength}
+            error={houseNumberInputError}
+            helperText={houseNumberInputHelperText}
+          />
+          <br/>
+          <br/>
+          <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
+                     className={classes.inputLength}/>
+          <br/>
+          <br/>
 
+          <Button color="primary" onClick={handleAddress} sx={{marginBottom: "20px"}} type="button" variant="contained" endIcon={<SearchIcon/>}>Zoeken</Button>
+
+
+          <Typography variant="h5">
+            Gevonden adressen
+          </Typography>
+          <Typography mb="10px">
+            Staat uw adres niet in de lijst, controleer dan de ingevulde postcode, huisnummer en eventueel huisnummertoevoeging en probeer opnieuw.
+          </Typography>
+
+          <div>
             {
-              addresses !== null && addresses.map((address) =>
-                <p>
-                  address.id
-                </p>
-              )
+              results !== undefined && results !== null && results.adressen !== undefined &&
+                results.adressen.map((result) => (
+                  <Grid sx={{marginBottom: "5px"}}>
+                    <Button
+                      onClick={() => {processAddress(result)}}
+                      color="primary" type="button" variant="contained" endIcon={<ChevronRight/>}>
+                      {result.straat + " " + result.huisnummer}
+                      {result.huisnummertoevoeging !== null && result.huisnummertoevoeging}
+                      {", " + result.postcode + " " + result.woonplaats}
+                    </Button>
+                  </Grid>
+                ))
             }
+          </div>
 
-            <Grid
-              justifyContent="space-between" // Add it here :)
-              container>
-              <Grid item>
-                <Link href="/moving">
-                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
-              </Grid>
+          <Grid
+            sx={{marginTop: '30px'}}
+            justifyContent="space-between" // Add it here :)
+            container>
+            <Grid item>
+              <Link href="/moving">
+                <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+              </Link>
             </Grid>
-          </form>
+           </Grid>
+
         </Grid>
       </Grid>
 

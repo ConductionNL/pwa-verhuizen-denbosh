@@ -39,29 +39,6 @@ function Index() {
   const router = useRouter();
   var request = null;
 
-  // const id = getIdFromStorage..
-  const id = 'new';
-
-  if (id != 'new') {
-     request = useGet({
-      path: "/requests" + id
-    });
-  }
-
-  const {mutate: post} = useMutate({
-    verb: "POST",
-    path: `/requests/` + id,
-  });
-
-  const save = () => {
-    request.properties.datum = date.toISOString().split('T')[0];
-    post(request).then(() => {updateSession(request.id)});
-  }
-
-  const updateSession = (id) => {
-    // Set id in session
-  }
-
   const handleDate = (event) => {
     event.preventDefault();
 
