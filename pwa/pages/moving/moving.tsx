@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import React from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import {Typography, Box} from "@mui/material";
+import {Typography, Box, Avatar} from "@mui/material";
 import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
