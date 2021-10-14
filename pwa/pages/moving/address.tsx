@@ -17,11 +17,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
+      textAlign: "center",
     },
-  },
-  divStyle: {
-    marginTop: 20,
-    textAlign: "center"
   }
 }));
 
@@ -130,7 +127,6 @@ export default function Address() {
           </Typography>
 
           <form onSubmit={route}>
-            <div className={classes.divStyle}>
               <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined"
                          className={classes.inputStyle}/>
               <br/>
@@ -151,7 +147,6 @@ export default function Address() {
                   </p>
                 )
               }
-            </div>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>

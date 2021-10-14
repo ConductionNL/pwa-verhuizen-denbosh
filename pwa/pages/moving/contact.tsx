@@ -12,13 +12,12 @@ import {useGet, useMutate} from "restful-react";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
+    textAlign: "left",
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
+      textAlign: "center",
     },
-  },
-  divStyle: {
-    textAlign: "center"
   },
 }));
 
@@ -56,7 +55,6 @@ function Index() {
   const updateSession = (id) => {
     // Set id in session
   }
-
 
   const [emailInputError, setEmailInputError] = useState(false);
   const [emailInputHelperText, setEmailInputHelperText] = useState('');
@@ -133,7 +131,6 @@ function Index() {
           </Typography>
 
           <form onSubmit={handleContact}>
-            <div className={classes.divStyle}>
               <TextField
                 className={classes.inputLength}
                 error={emailInputError}
@@ -156,7 +153,6 @@ function Index() {
               />
               <br/>
               <br/>
-            </div>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>

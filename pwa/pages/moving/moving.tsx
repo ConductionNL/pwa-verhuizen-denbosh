@@ -29,11 +29,19 @@ const useStyles = makeStyles((theme) => ({
   stepsStyle:
     {
       marginRight: 15,
-      textAlign: "center"
     },
   boxStyle: {
+    display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    margin: '0 !important',
+    [theme.breakpoints.up('md')]: {
+      display: "flex",
+      alignItems: "left",
+      justifyContent: "left",
+      displayStaticWrapperAs: "mobile",
+      margin: 'auto !important',
+    },
   },
   titleStyle: {
     marginBottom: 20
