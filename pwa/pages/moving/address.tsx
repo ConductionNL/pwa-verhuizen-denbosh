@@ -183,7 +183,7 @@ export default function Address() {
             justifyContent="space-between" // Add it here :)
             container>
             <Grid item>
-              <Link href="/moving">
+              <Link href="/moving/moving">
                 <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
               </Link>
             </Grid>

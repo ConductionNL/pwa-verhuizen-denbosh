@@ -28,12 +28,13 @@ export default function UserManagement() {
 
       if (info !== null && info !== undefined && params.has('state')) {
         let data = {
+          bsn: info.email,
           name: info.name,
           firstName: info.first_name,
           lastName: info.last_name,
         }
         sessionStorage.setItem('user', JSON.stringify(data));
-        router.push('/moving/address');
+        router.push('/moving/moving');
         return null;
       }
     }

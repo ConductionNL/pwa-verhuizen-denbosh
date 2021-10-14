@@ -8,6 +8,10 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import { ForwardRounded } from "@mui/icons-material";
+import {createRequest} from "../../components/utility/RequestHandler";
+import {useUserContext} from "../../components/context/userContext";
+import {useGet} from "restful-react";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,16 +42,17 @@ function Index() {
   const classes = useStyles();
   const title = 'Deze stappen ga je doorlopen';
   const router = useRouter();
+  const userContext = useUserContext();
+  const context = useAppContext();
+
 
   const handleDate = (event) => {
     event.preventDefault();
 
-    // Session set address
+    createRequest(userContext.user, context);
 
-    router.push("/moving/address", undefined, { shallow: true })
+    // router.push("/moving/address", undefined, { shallow: true })
   }
-
-  const [value, setValue] = React.useState(new Date());
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -70,7 +75,7 @@ function Index() {
             <Grid justifyContent="space-between" // Add it here :)
               container>
               <Grid item sm={12}>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Starten</Button>
               </Grid>
             </Grid>
           </form>
