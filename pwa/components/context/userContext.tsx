@@ -4,11 +4,9 @@ const UserContext = createContext(undefined);
 
 export function UserContextWrapper({ children }) {
 
-  const ISSERVER = typeof window === "undefined";
-
   let storedUser = null;
 
-  if(!ISSERVER) {
+  if(typeof window != "undefined") {
     storedUser = sessionStorage.getItem('user');
   }
 

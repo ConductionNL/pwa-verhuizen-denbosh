@@ -61,7 +61,6 @@ export function updateRequest(context, key, value) {
       .then(response => response.json())
       .then((data) =>  {
         if (typeof window !== "undefined") {
-          console.log(data);
 
           let result = {
             id: data.id,
@@ -93,7 +92,6 @@ export function submitRequest(context) {
       .then(response => response.json())
       .then((data) =>  {
         if (typeof window !== "undefined") {
-          console.log(data);
 
           let result = {
             id: data.id,
