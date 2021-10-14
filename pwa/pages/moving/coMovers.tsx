@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Index() {
-  const title = 'Meeverhuizers';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
   var request = null;
   const classes = useStyles();

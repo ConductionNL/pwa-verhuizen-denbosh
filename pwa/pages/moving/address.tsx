@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Address() {
 
-  const title = 'Adres';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
 
   const [postalCode, setPostalCode] = useState("");
   const [houseNumber, setHouseNumber] = useState("");

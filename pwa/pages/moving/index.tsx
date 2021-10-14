@@ -15,7 +15,7 @@ import {useAppContext} from "../../components/context/state";
 
 function Index() {
 
-  const title = 'Verhuizing doorgeven';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
 
   const [loading, setLoading] = useState(false);
 

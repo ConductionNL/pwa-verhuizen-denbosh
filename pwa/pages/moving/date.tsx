@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Index() {
   const classes = useStyles();
-  const title = 'Verhuisdatum';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
   var request = null;
 

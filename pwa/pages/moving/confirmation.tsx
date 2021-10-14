@@ -11,7 +11,7 @@ import SendIcon from "@mui/icons-material/Send";
 import {useGet} from "restful-react";
 
 function Index() {
-  const title = 'Bevestiging';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
   var request = null;
 
