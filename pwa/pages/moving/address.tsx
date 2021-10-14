@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React, {ReactNode, useState} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
@@ -12,7 +12,7 @@ import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
-import {useGet} from "restful-react";
+import {useGet, useMutate} from "restful-react";
 import {useUserContext} from "../../components/context/userContext";
 import {useAppContext} from "../../components/context/state";
 import {type} from "os";
@@ -82,10 +82,12 @@ export default function Address() {
             <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined" className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined"
+                       className={classes.inputLength}/>
             <br/>
             <br/>
-            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined" className={classes.inputLength}/>
+            <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
+                       className={classes.inputLength}/>
             <br/>
             <br/>
 
@@ -102,11 +104,11 @@ export default function Address() {
               container>
               <Grid item>
                 <Link href="/moving">
-                  <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>

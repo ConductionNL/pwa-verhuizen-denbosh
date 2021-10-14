@@ -28,7 +28,7 @@ export default function CheckList() {
             <Person />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="indiener" secondary="Jan 9, 2014" />
+        <ListItemText primary="Indiener" secondary="John Doe" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -36,7 +36,7 @@ export default function CheckList() {
             <LocationOn/>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="oud adres" secondary="Jan 7, 2014" />
+        <ListItemText primary="Oud adres" secondary="Appelstraat 1, 1234AB 's Hertogenbosch" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -44,7 +44,7 @@ export default function CheckList() {
             <LocationOn/>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="nieuw adres" secondary="Jan 7, 2014" />
+        <ListItemText primary="Nieuw adres" secondary="Appelstraat 2, 1234AB 's Hertogenbosch" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -52,7 +52,7 @@ export default function CheckList() {
             <CalendarToday />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="verhuisdatum" secondary="July 20, 2014" />
+        <ListItemText primary="Verhuisdatum" secondary="July 20, 2014" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -60,7 +60,7 @@ export default function CheckList() {
             <People />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="verhuizende personen" secondary="July 20, 2014" />
+        <ListItemText primary="Meeverhuizers" secondary="July 20, 2014" />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -68,7 +68,7 @@ export default function CheckList() {
             <Person />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="contactinformatie" secondary="July 20, 2014" />
+        <ListItemText primary="Contactgegevens" secondary="Email: john@doe.com, telefoonnummer: +3161234567" />
       </ListItem>
     </List>
   );
