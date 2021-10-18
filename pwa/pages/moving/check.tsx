@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   listStyle: {
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.down('md')]: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center"

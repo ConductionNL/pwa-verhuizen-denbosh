@@ -13,7 +13,7 @@ import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   listStyle: {
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.down('md')]: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center"    },
@@ -58,7 +58,7 @@ function Index() {
             </Typography>
         </Grid>
           {/*}*/}
-        <Grid item sm={12} className={classes.listStyle}>
+        <Grid item sm={12} xs={12} className={classes.listStyle}>
           <CheckList/>
         </Grid>
       </Grid>
