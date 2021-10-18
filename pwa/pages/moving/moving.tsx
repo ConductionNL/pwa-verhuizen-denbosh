@@ -7,7 +7,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
-import { ForwardRounded } from "@mui/icons-material";
+import {ForwardRounded} from "@mui/icons-material";
 import {createRequest} from "../../components/utility/RequestHandler";
 import {useUserContext} from "../../components/context/userContext";
 import {useGet} from "restful-react";
@@ -48,7 +48,13 @@ const useStyles = makeStyles((theme) => ({
   },
   titleStyle: {
     marginBottom: 20
-  }
+  },
+  listStyle: {
+    [theme.breakpoints.down('md')]: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"    },
+  },
 }));
 
 function Index() {
@@ -63,7 +69,7 @@ function Index() {
     event.preventDefault();
 
     createRequest(userContext.user, context);
-    router.push("/moving/address", undefined, { shallow: true })
+    router.push("/moving/address", undefined, {shallow: true})
   }
 
   return <>
@@ -71,34 +77,36 @@ function Index() {
       <Grid container spacing={3}>
         <Stepper currentStep={0}/>
 
-        <Grid item sm={12}>
+        <Grid item sm={12} className={classes.listStyle}>
           <Typography variant="h4" className={classes.titleStyle}>
             Deze stappen ga je doorlopen
           </Typography>
-
-          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+        </Grid>
+        <Grid item sm={12}>
+          <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
             <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
             <span>Geef je nieuwe adres op</span>
           </Box>
-          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+          <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
             <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
             <span>Geef de datum op wanneer je gaat verhuis</span>
           </Box>
-          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+          <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
             <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
             <span>Geef aan met wie je gaat verhuizen</span>
           </Box>
-          <Box className={classes.boxStyle} sx={{p: 2, display: 'flex'}}>
+          <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
             <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
             <span>Geef aan hoe we je kunnen bereiken</span>
           </Box>
           <br/>
-
+        </Grid>
+        <Grid item sm={12}>
           <form onSubmit={handleDate} style={{textAlign: "center"}}>
             <Grid justifyContent="space-between" // Add it here :)
                   container>
               <Grid item sm={12}>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Starten</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Starten</Button>
               </Grid>
             </Grid>
           </form>

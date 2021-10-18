@@ -9,11 +9,22 @@ import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
 import SendIcon from "@mui/icons-material/Send";
 import {useGet} from "restful-react";
+import makeStyles from "@mui/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+  listStyle: {
+    [theme.breakpoints.down('md')]: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"    },
+  },
+}));
 
 function Index() {
   const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
   var request = null;
+  const classes = useStyles();
 
   // const id = getIdFromStorage..
   const id = 'new';
@@ -45,7 +56,9 @@ function Index() {
             <Typography mb="10px">
               De volgende gegevens zijn succesvol verzonden naar de gemeente.
             </Typography>
+        </Grid>
           {/*}*/}
+        <Grid item sm={12} xs={12} className={classes.listStyle}>
           <CheckList/>
         </Grid>
       </Grid>

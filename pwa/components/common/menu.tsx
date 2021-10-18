@@ -1,36 +1,13 @@
 import React from 'react';
-import { alpha } from '@mui/material/styles';
+import {alpha} from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-
 import Box from "@mui/material/Box";
-
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import LockIcon from '@mui/icons-material/Lock';
-import MailIcon from '@mui/icons-material/Mail';
-import PersonIcon from '@mui/icons-material/Person';
-
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
 import Link from "next/link";
-import Drawer from '@mui/material/Drawer';
 import {useRouter} from 'next/router';
-
-
-import ActionMenu from "../../components/common/actionmenu";
-import PageHeader from "./pageheader";
-import Grid from "@mui/material/Grid";
-import {eraseCookie, getCookie, setCookie} from "../../components/utility/CookieHandler";
-import {useGet} from "restful-react";
 import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 
@@ -112,9 +89,9 @@ const handleLogout = (context) => {
     context.setUser(null);
     sessionStorage.setItem('user', null);
 
-      // @ts-ignore
-      window.location.href = 'http://localhost/logout';
-    }
+    // @ts-ignore
+    window.location.href = 'http://localhost/logout';
+  }
 }
 
 export default function MainMenu() {
@@ -170,36 +147,33 @@ export default function MainMenu() {
             {/*}*/}
 
             <div className={classes.grow}/>
-
-            {/*<Box style={{marginRight: "15px"}}>*/}
-            {/*  <Typography variant="h6" color="inherit">*/}
-            {/*    {*/}
-            {/*      context.user !== null &&*/}
-            {/*      <Link href="/user" >*/}
-            {/*      <span style={{color: 'white'}}>*/}
-            {/*        {*/}
-            {/*          context.user.name*/}
-            {/*        }*/}
-            {/*      </span>*/}
-            {/*      </Link>*/}
-            {/*    }*/}
-
-            {/*  </Typography>*/}
-            {/*</Box>*/}
-            {/*<Box marginRight={2}>*/}
-            {/*  <Typography variant="h6" color="inherit">*/}
-            {/*        {*/}
-            {/*          context.user !== null*/}
-            {/*            ?*/}
-            {/*              <span onClick={() => {handleLogout(context)}} style={{color: 'white'}}>Uitloggen</span>*/}
-            {/*            :*/}
-            {/*              <Link href="http://localhost/login/adfs/conduction" >*/}
-            {/*                <span style={{color: 'white'}}>Inloggen</span>*/}
-            {/*              </Link>*/}
-            {/*        }*/}
-            {/*  </Typography>*/}
-            {/*</Box>*/}
-
+            <Box style={{marginRight: "15px", textAlign: "left"}}>
+              <Typography variant="h6" color="inherit">
+                {
+                  userContext.user !== null &&
+                  <span style={{color: 'white'}}>
+                {
+                userContext.user.name
+                }
+                  </span>
+                }
+              </Typography>
+            </Box>
+            <Box marginRight={2}>
+              <Typography variant="h6" color="inherit">
+                {
+                  userContext.user !== null
+                    ?
+                    <span onClick={() => {
+                      handleLogout(context)
+                    }} style={{color: 'white'}}>Uitloggen</span>
+                    :
+                    <Link href="http://localhost/login/adfs/conduction">
+                      <span style={{color: 'white'}}>Inloggen</span>
+                    </Link>
+                }
+              </Typography>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
