@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React, {ReactNode} from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
@@ -15,7 +15,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
 import {useGet, useMutate} from "restful-react";
 import {updateRequest} from "../../components/utility/RequestHandler";
-import {useAppContext} from "../../components/context/state";
+import { useAppContext } from "../../components/context/state";
+import { useUserContext } from "../../components/context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,6 +41,13 @@ function Index() {
   const router = useRouter();
   let request = null;
   let context = useAppContext();
+  const userContext = useUserContext();
+
+  useEffect(() => {
+    if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
+      router.push("/moving");
+    }
+  }, []);
 
   const handleDate = (event) => {
     event.preventDefault();

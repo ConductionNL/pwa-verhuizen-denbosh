@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import {Link, Typography} from "@mui/material";
@@ -9,8 +9,9 @@ import CheckList from "../../components/moving/listCheck";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
 import {useGet, useMutate} from "restful-react";
-import {useAppContext} from "../../components/context/state";
-import {submitRequest} from "../../components/utility/RequestHandler";
+import { submitRequest } from "../../components/utility/RequestHandler";
+import { useAppContext } from "../../components/context/state";
+import { useUserContext } from "../../components/context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -34,6 +35,13 @@ function Index() {
   const context = useAppContext();
   let request = null;
   const classes = useStyles();
+  const userContext = useUserContext();
+
+  useEffect(() => {
+    if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
+      router.push("/moving");
+    }
+  }, []);
 
 
   const handleContact = (event) => {

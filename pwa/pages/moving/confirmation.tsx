@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
@@ -10,6 +10,7 @@ import CheckList from "../../components/moving/listCheck";
 import SendIcon from "@mui/icons-material/Send";
 import {useGet} from "restful-react";
 import makeStyles from "@mui/styles/makeStyles";
+import { useUserContext } from "../../components/context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   listStyle: {
@@ -25,6 +26,13 @@ function Index() {
   const router = useRouter();
   var request = null;
   const classes = useStyles();
+  const userContext = useUserContext();
+
+  useEffect(() => {
+    if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
+      router.push("/moving");
+    }
+  }, []);
 
   // const id = getIdFromStorage..
   const id = 'new';
