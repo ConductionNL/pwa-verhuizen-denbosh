@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React, {useState} from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
@@ -10,14 +10,19 @@ import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
 import {useGet, useMutate} from "restful-react";
 import {updateRequest} from "../../components/utility/RequestHandler";
-import {useAppContext} from "../../components/context/state";
+import { useAppContext } from "../../components/context/state";
+import { useUserContext } from "../../components/context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
-    textAlign: "left",
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
+    },
+  },
+  contactStyle: {
+    textAlign: "left",
+    [theme.breakpoints.down('md')]: {
       textAlign: "center",
     },
   },
@@ -28,6 +33,13 @@ function Index() {
   const router = useRouter();
   const context = useAppContext();
   let request = null;
+  const userContext = useUserContext();
+
+  useEffect(() => {
+    if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
+      router.push("/moving");
+    }
+  }, []);
 
   const [emailInputError, setEmailInputError] = useState(false);
   const [emailInputHelperText, setEmailInputHelperText] = useState('');
@@ -104,15 +116,17 @@ function Index() {
 
         <Stepper currentStep={3}/>
 
-        <Grid item sm={12}>
+        <Grid item sm={12} xs={12}>
           <Typography variant="h4">
             Hoe kunnen we je bereiken?
           </Typography>
           <Typography mb="10px">
             Vul je emailadres en/of je telefoonnummer in.
           </Typography>
-
+        </Grid>
+        <Grid item sm={12} xs={12} className={classes.contactStyle}>
           <form onSubmit={handleContact}>
+            <Grid item sm={8}>
               <TextField
                 className={classes.inputLength}
                 error={emailInputError}
@@ -122,8 +136,8 @@ function Index() {
                 type="text"
                 variant="outlined"
               />
-              <br/>
-              <br/>
+            </Grid>
+            <Grid item sm={8} style={{marginTop: 10, marginBottom: 20}}>
               <TextField
                 className={classes.inputLength}
                 error={telephoneInputError}
@@ -133,8 +147,7 @@ function Index() {
                 type="text"
                 variant="outlined"
               />
-              <br/>
-              <br/>
+            </Grid>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>

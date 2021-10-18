@@ -27,7 +27,7 @@ export default function CheckList() {
     <List className={classes.inputLength} sx={{backgroundColor: 'background.paper' }}>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar sx={{ backgroundColor: "#ad9156"}}>
             <Person />
           </Avatar>
         </ListItemAvatar>
@@ -35,7 +35,7 @@ export default function CheckList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar sx={{ backgroundColor: "#ad9156" }}>
             <LocationOn/>
           </Avatar>
         </ListItemAvatar>
@@ -43,7 +43,7 @@ export default function CheckList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar sx={{ backgroundColor: "#ad9156" }}>
             <LocationOn/>
           </Avatar>
         </ListItemAvatar>
@@ -51,7 +51,7 @@ export default function CheckList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar sx={{ backgroundColor: "#ad9156" }}>
             <CalendarToday />
           </Avatar>
         </ListItemAvatar>
@@ -59,7 +59,7 @@ export default function CheckList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar sx={{ backgroundColor: "#ad9156" }}>
             <People />
           </Avatar>
         </ListItemAvatar>
@@ -67,7 +67,7 @@ export default function CheckList() {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar sx={{ backgroundColor: "#ad9156" }}>
             <Person />
           </Avatar>
         </ListItemAvatar>

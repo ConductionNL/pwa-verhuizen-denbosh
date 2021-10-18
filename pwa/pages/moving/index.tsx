@@ -12,14 +12,19 @@ import SendIcon from '@mui/icons-material/Send';
 import {ChevronRight} from "@mui/icons-material";
 import {LoadingButton} from "@mui/lab";
 import {useAppContext} from "../../components/context/state";
+import {useUserContext} from "../../components/context/userContext";
+import {useRouter} from "next/router";
+import {createRequest} from "../../components/utility/RequestHandler";
 
 function Index() {
 
   const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
 
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
 
   const context = useAppContext();
+  let userContext = useUserContext();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -30,7 +35,13 @@ function Index() {
       }
     }
 
-  },[]);
+  }, []);
+
+  const handleStart = (event) => {
+    event.preventDefault();
+
+    router.push("/moving/moving", undefined, {shallow: true})
+  }
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -44,38 +55,60 @@ function Index() {
             U gaat een verhuizing doorgeven in of naar de gemeente 's-Hertogenbosch.
           </Typography>
           <br/>
-          <Typography variant="h6" color="#19224C" mb="40px">
-            U moet in dit formulier inloggen met DigiD.
-          </Typography>
           {
-            loading == true
-            ?
+            userContext.user == null &&
+            < Typography variant="h6" color="#19224C" mb="40px">
+              U moet in dit formulier inloggen met DigiD.
+            </Typography>
+          }
+          {
+            loading == true && userContext.user == null &&
             <LoadingButton sx={{width: '200px'}} loading loadingIndicator="inloggen..." variant="outlined">
-            Fetch data
+              Fetch data
             </LoadingButton>
-            :
-            <Link href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl +  "/moving?state=8412312632"}>
-            <Button variant="contained" style={{backgroundColor: "#F5F5F5", color: "black", marginBottom: '20px'}} endIcon={<ChevronRight />}>
-            <img style={{width: '40px', marginRight: '10px'}} src="https://www.logius.nl/sites/default/files/afbeeldingen/producten/digid_eo_rgb_100px_4.png" alt=""/>Inloggen Met DigiD
-            </Button>
+          }
+          {
+            loading == false && userContext.user == null &&
+            <Link
+              href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl + "/moving?state=8412312632"}>
+              <Button variant="contained" style={{backgroundColor: "#F5F5F5", color: "black", marginBottom: '20px'}}
+                      endIcon={<ChevronRight/>}>
+                <img style={{width: '40px', marginRight: '10px'}}
+                     src="https://www.logius.nl/sites/default/files/afbeeldingen/producten/digid_eo_rgb_100px_4.png"
+                     alt=""/>Inloggen Met DigiD
+              </Button>
             </Link>
           }
-
-
-
           <div>
-            <Typography fontWeight="bold">
-              Heeft u nog geen DigiD?
-            </Typography>
-            <br/>
-            <Typography>
-              Vraag uw DigiD aan op <a href="https://www.digid.nl" target="_blank">www.digid.nl</a>
-            </Typography>
+            {
+              userContext.user == null &&
+              <div>
+                <Typography fontWeight="bold">
+                  Heeft u nog geen DigiD?
+                </Typography>
+                <Typography>
+                  Vraag uw DigiD aan op <a href="https://www.digid.nl" target="_blank">www.digid.nl</a>
+                </Typography>
+              </div>
+            }
           </div>
+          {
+            userContext.user !== null ??
+            <Grid item sm={12}>
+              <form onSubmit={handleStart} style={{textAlign: "center"}}>
+                <Grid justifyContent="space-between" // Add it here :)
+                      container>
+                  <Grid item sm={12}>
+                    <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Starten</Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+          }
         </div>
       </Grid>
-
     </Layout>
+
   </>
 }
 
