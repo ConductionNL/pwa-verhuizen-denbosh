@@ -18,8 +18,6 @@ import {Avatar, Box} from "@mui/material";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { styled } from '@mui/material/styles';
-import { MuiThemeProvider, createMuiTheme } from '@mui/styles'
-
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
