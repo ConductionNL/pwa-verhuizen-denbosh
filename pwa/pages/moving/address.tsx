@@ -21,17 +21,18 @@ import {ForwardRounded} from "@material-ui/icons";
 import {updateRequest} from "../../components/utility/RequestHandler";
 
 const useStyles = makeStyles((theme) => ({
-  inputLength: {
+  inputStyle: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
+      textAlign: "center",
     },
-  },
+  }
 }));
 
 export default function Address() {
 
-  const title = 'Adres';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
 
   const [results, setResults] = useState(null);
 
@@ -143,7 +144,7 @@ export default function Address() {
             label="Postcode"
             required
             variant="outlined"
-            className={classes.inputLength}
+            className={classes.inputStyle}
             error={postalCodeInputError}
             helperText={postalCodeInputHelperText}
           />
@@ -154,14 +155,14 @@ export default function Address() {
             label="Huisnummer"
             required
             variant="outlined"
-            className={classes.inputLength}
+            className={classes.inputStyle}
             error={houseNumberInputError}
             helperText={houseNumberInputHelperText}
           />
           <br/>
           <br/>
           <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
-                     className={classes.inputLength}/>
+                     className={classes.inputStyle}/>
           <br/>
           <br/>
 

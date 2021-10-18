@@ -5,9 +5,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import {CalendarToday, LocationOn, People, Person} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,13 +12,19 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  inputLength: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '400px',
+    },
+  },
 }));
 
 export default function CheckList() {
   const classes = useStyles();
 
   return (
-    <List className={classes.root}>
+    <List className={classes.inputLength} sx={{backgroundColor: 'background.paper' }}>
       <ListItem>
         <ListItemAvatar>
           <Avatar>

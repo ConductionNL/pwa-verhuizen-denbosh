@@ -17,8 +17,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import ChatIcon from "@mui/icons-material/Chat";
 import {Paper} from "@mui/material";
 import LogoutIcon from "@mui/icons-material/ExitToApp";
+import {useUserContext} from "../context/userContext";
+import Typography from "@mui/material/Typography";
+import {Login} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
+  footerStyle: {
+    marginTop: 50
+  },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -50,20 +56,23 @@ export default function Footer() {
     setState({...state, ['bottumNavigation']: newValue});
   }
 
+  let userContext = useUserContext();
 
   return (
-    <footer>
+    <footer  className={classes.footerStyle}>
       <Paper style={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
         <BottomNavigation
           value={state['bottumNavigation']} onChange={handleChange}
           showLabels
           className={classes.sectionMobile}
         >
-          <BottomNavigationAction label="Home" icon={<HomeIcon/>}/>
-          <BottomNavigationAction label="Klantvragen" icon={<SearchIcon/>}/>
-          <BottomNavigationAction label="Notificaties" icon={<NotificationsIcon/>}/>
-          <BottomNavigationAction label="Chatten" icon={<ChatIcon/>}/>
-          <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
+          {
+            userContext.user !== null
+              ?
+              <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
+              :
+              <BottomNavigationAction label="Login" icon={<Login/>}/>
+          }
         </BottomNavigation>
       </Paper>
     </footer>

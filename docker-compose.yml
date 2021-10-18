@@ -1,14 +1,14 @@
 version: "3.4"
 
 services:
-#  pwa:
-#    &pwa
-#    image: ghcr.io/conductionnl/verhuizen-conduction-pwa:dev
-#    build: pwa
-#    depends_on:
-#      - php
-#    ports:
-#      - "81:3000"
+  pwa:
+    &pwa
+    image: ghcr.io/conductionnl/verhuizen-pwa:dev
+    build: pwa
+    depends_on:
+      - php
+    ports:
+      - "81:3000"
   
   php:
     &php

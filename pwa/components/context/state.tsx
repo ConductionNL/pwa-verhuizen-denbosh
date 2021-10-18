@@ -19,7 +19,7 @@ export function AppWrapper({ children }) {
     }
     else
     {
-      meUrl = 'https://verhuizen.demodam.nl/users/me';
+      meUrl = 'https://verhuizen.demodam.nl/api/users/me';
       apiUrl = 'https://verhuizen.demodam.nl/api';
       baseUrl = 'https://verhuizen.demodam.nl';
       frontendUrl = 'https://verhuizen.demodam.nl';
