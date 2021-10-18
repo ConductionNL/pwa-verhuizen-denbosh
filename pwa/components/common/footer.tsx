@@ -17,8 +17,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import ChatIcon from "@mui/icons-material/Chat";
 import {Paper} from "@mui/material";
 import LogoutIcon from "@mui/icons-material/ExitToApp";
+import {useUserContext} from "../context/userContext";
+import Typography from "@mui/material/Typography";
+import {Login} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
+  footerStyle: {
+    marginTop: 50
+  },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -50,69 +56,25 @@ export default function Footer() {
     setState({...state, ['bottumNavigation']: newValue});
   }
 
+  let userContext = useUserContext();
 
   return (
-    <footer>
+    <footer  className={classes.footerStyle}>
       <Paper style={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
         <BottomNavigation
           value={state['bottumNavigation']} onChange={handleChange}
           showLabels
           className={classes.sectionMobile}
         >
-
-            <BottomNavigationAction label="Home" icon={<HomeIcon/>}/>
-            <BottomNavigationAction label="Klantvragen" icon={<SearchIcon/>}/>
-            <BottomNavigationAction label="Notificaties" icon={<NotificationsIcon/>}/>
-            <BottomNavigationAction label="Chatten" icon={<ChatIcon/>}/>
-            <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
-            </BottomNavigation>
-            </Paper>
-            <Box
-            px={{xs: 3, sm: 10}}
-            py={{xs: 5, sm: 10}}
-            bgcolor="#00205C"
-            color="white"
-            className={classes.sectionDesktop}
-            >
-            <Container maxWidth="lg">
-            <Grid container spacing={5}>
-            <Grid item xs={12} sm={6}>
-            <Box borderBottom={1}>Help</Box>
-            <Box>
-            <Link href="/" color="inherit">
-            Contact
-            </Link>
-            </Box>
-            <Box>
-            <Link href="/" color="inherit">
-            Support
-            </Link>
-            </Box>
-            <Box>
-            <Link href="/" color="inherit">
-            Privacy
-            </Link>
-            </Box>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-            <Box borderBottom={1}>Contact</Box>
-            <Box>Wolvenhoek 1, 's-Hertogenbosch
-            </Box>
-            <Box>
-            <Link href="tel:(073) 615 51 55" color="inherit">
-              (073) 615 51 55
-            </Link>
-            </Box>
-            <Box>
-              Postadres: <br/>
-              Postbus 12345 <br/>
-              5200 GZ ‘s-Hertogenbosch
-            </Box>
-            </Grid>
-            </Grid>
-            </Container>
-            </Box>
-            </footer>
-            );
-            }
+          {
+            userContext.user !== null
+              ?
+              <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
+              :
+              <BottomNavigationAction label="Login" icon={<Login/>}/>
+          }
+        </BottomNavigation>
+      </Paper>
+    </footer>
+  );
+}

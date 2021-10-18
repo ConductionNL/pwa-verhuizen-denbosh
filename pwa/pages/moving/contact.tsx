@@ -9,51 +9,25 @@ import Stepper from "../../components/moving/stepper";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
 import {useGet, useMutate} from "restful-react";
+import {updateRequest} from "../../components/utility/RequestHandler";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
+    textAlign: "left",
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
+      textAlign: "center",
     },
   },
 }));
 
 function Index() {
-  const title = 'Controle';
+  const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
-  var request = null;
-
-  // const id = getIdFromStorage..
-  const id = 'new';
-
-  if (id != 'new') {
-    request = useGet({
-      path: "/requests" + id
-    });
-  }
-
-  const {mutate: post} = useMutate({
-    verb: "POST",
-    path: `/requests/` + id,
-  });
-
-  const save = () => {
-    let emailInput = document.getElementById('email');
-    let telephoneInput = document.getElementById('telephone');
-
-    request.properties.contactgegevens = {
-      email: emailInput.value,
-      telefoonnummer: telephoneInput.value
-    };
-
-    post(request).then(() => {updateSession(request.id)});
-  }
-
-  const updateSession = (id) => {
-    // Set id in session
-  }
-
+  const context = useAppContext();
+  let request = null;
 
   const [emailInputError, setEmailInputError] = useState(false);
   const [emailInputHelperText, setEmailInputHelperText] = useState('');
@@ -72,7 +46,7 @@ function Index() {
     setTelephoneInputError(false);
     setTelephoneInputHelperText('');
 
-    if (emailInput.value.length == 0 && telephoneInput.value.length == 0) {
+    if (emailInput.value.length == 0 || telephoneInput.value.length == 0) {
       setEmailInputError(true);
       setEmailInputHelperText('Vul een geldig e-mailadres in');
       setTelephoneInputError(true);
@@ -89,6 +63,12 @@ function Index() {
       }
     }
 
+    if (telephoneInput.value.length != 10) {
+      setTelephoneInputError(true);
+      setTelephoneInputHelperText('Vul een geldig telefoonnummer in');
+      valid = false;
+    }
+
     return valid;
   }
 
@@ -100,8 +80,17 @@ function Index() {
     if (!valid) {
       return;
     }
-    // Session set address
-    // save()
+
+    let emailInput = (document.getElementById('email') as HTMLInputElement);
+    let telephoneInput = (document.getElementById('telephone') as HTMLInputElement);
+
+    let contact = {
+      email: emailInput.value,
+      telephone: telephoneInput.value,
+    };
+
+    updateRequest(context, 'contact', contact);
+
 
     router.push("/moving/check", undefined, { shallow: true })
   }
@@ -124,29 +113,28 @@ function Index() {
           </Typography>
 
           <form onSubmit={handleContact}>
-            <TextField
-              className={classes.inputLength}
-              error={emailInputError}
-              helperText={emailInputHelperText}
-              id="email"
-              label="Email"
-              type="email"
-              variant="outlined"
-            />
-            <br/>
-            <br/>
-            <TextField
-              className={classes.inputLength}
-              error={telephoneInputError}
-              helperText={telephoneInputHelperText}
-              id="telephone"
-              label="Telefoonnummer"
-              type="text"
-              variant="outlined"
-            />
-            <br/>
-            <br/>
-
+              <TextField
+                className={classes.inputLength}
+                error={emailInputError}
+                helperText={emailInputHelperText}
+                id="email"
+                label="Email"
+                type="text"
+                variant="outlined"
+              />
+              <br/>
+              <br/>
+              <TextField
+                className={classes.inputLength}
+                error={telephoneInputError}
+                helperText={telephoneInputHelperText}
+                id="telephone"
+                label="Telefoonnummer"
+                type="text"
+                variant="outlined"
+              />
+              <br/>
+              <br/>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>
@@ -156,7 +144,7 @@ function Index() {
                 </Link>
               </Grid>
               <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight />}>Ga verder</Button>
+                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
               </Grid>
             </Grid>
           </form>

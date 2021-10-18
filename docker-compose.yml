@@ -1,9 +1,18 @@
 version: "3.4"
 
 services:
+  pwa:
+    &pwa
+    image: ghcr.io/conductionnl/verhuizen-pwa:dev
+    build: pwa
+    depends_on:
+      - php
+    ports:
+      - "81:3000"
+  
   php:
     &php
-    image: conduction/commonground-gateway-php:dev
+    image: ghcr.io/conductionnl/commonground-gateway-php:dev
     depends_on:
       - db
     volumes:
@@ -21,7 +30,7 @@ services:
 
   api:
     &nginx
-    image: conduction/commonground-gateway-nginx:latest
+    image: ghcr.io/conductionnl/commonground-gateway-nginx:latest
     depends_on:
       - php
     ports:

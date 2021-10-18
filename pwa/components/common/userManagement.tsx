@@ -13,8 +13,6 @@ import {useRouter} from "next/router";
 
 export default function UserManagement() {
 
-
-
   const handleLogin = () => {
     if (typeof window !== "undefined") {
       let userContext = useUserContext();
@@ -28,12 +26,15 @@ export default function UserManagement() {
 
       if (info !== null && info !== undefined && params.has('state')) {
         let data = {
+          bsn: info.email,
           name: info.name,
           firstName: info.first_name,
           lastName: info.last_name,
         }
+
+        userContext.setUser(null);
         sessionStorage.setItem('user', JSON.stringify(data));
-        router.push('/moving/address');
+        router.push('/moving/moving');
         return null;
       }
     }
