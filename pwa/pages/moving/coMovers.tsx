@@ -17,10 +17,13 @@ const useStyles = makeStyles((theme) => ({
       width: '400px',
     },
   },
-  boxStyle: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+  listStyle: {
+    textAlign: "center",
+    [theme.breakpoints.down('md')]: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    },
   },
 }));
 
@@ -73,12 +76,12 @@ function Index() {
           <Typography mb="10px">
             Onderstaande personen kunnen door jou verhuist worden.
           </Typography>
-
+        </Grid>
+        <Grid item sm={12} xs={12} >
           <form onSubmit={handleCoMovers}>
-            <div className={classes.boxStyle}>
+            <div className={classes.listStyle}>
               <CheckboxList/>
             </div>
-
             <br/>
             <Grid
               justifyContent="space-between" // Add it here :)
