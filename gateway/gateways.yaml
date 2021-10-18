@@ -5,12 +5,25 @@ App\Entity\Gateway:
         apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
         location: https://conduction.demodam.nl/api/v1/pdc
         documentation: https://raw.githubusercontent.com/ConductionNL/productenendienstencatalogus/master/api/public/schema/openapi.yaml
+    gateway_11:
+        name: as
+        auth: apikey
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://conduction.demodam.nl/api/v1/as
+        documentation: https://raw.githubusercontent.com/ConductionNL/productenendienstencatalogus/master/api/public/schema/openapi.yaml
+    gateway_12:
+        name: vrc
+        auth: apikey
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://conduction.demodam.nl/api/v1/vrc
+        documentation: https://raw.githubusercontent.com/ConductionNL/productenendienstencatalogus/master/api/public/schema/openapi.yaml
     gateway_2:
         name: brp
-        auth: username-password
+        auth: apikey
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
         username: begraven
         password: demodam
-        location: http://vrij-brp.demodam.nl/haal-centraal-brp-bevragen/api/v1.3
+        location: https://conduction.demodam.nl/api/v1/brp
         documentation: https://raw.githubusercontent.com/ConductionNL/brpservice/master/api/public/schema/openapi.yaml
         accept: application/hal+json
     gateway_3:

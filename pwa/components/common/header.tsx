@@ -1,16 +1,20 @@
 import Logo from 'components/common/logo';
 import MainMenu from 'components/common/menu';
-import Container from '@material-ui/core/Container';
-import {makeStyles} from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
+import Container from '@mui/material/Container';
+import makeStyles from '@mui/styles/makeStyles';
+import Toolbar from "@mui/material/Toolbar";
 import React from "react";
-import IconButton from "@material-ui/core/IconButton";
+import IconButton from "@mui/material/IconButton";
+import {Link} from "@mui/material";
+import {maxHeight} from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
+      alignItems: "center",
+      justifyContent: "center"
     },
   },
   sectionMobile: {
@@ -28,7 +32,7 @@ export default function Header() {
     <header>
 
       <div className={classes.sectionDesktop}>
-        <Logo />
+        <img style={{maxHeight: '100px'}} src="https://www.s-hertogenbosch.nl/typo3conf/ext/website_shertogenbosch/Resources/Public/Images/logo.svg"/>
       </div>
 
       <MainMenu />

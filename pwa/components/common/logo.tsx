@@ -1,14 +1,14 @@
 import Image from 'next/image';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
 
 export default function Logo() {
   return (
     <>
       <Container>
-        <div style={{margin: 'auto',width: '400px'}}>
+        <div style={{margin: 'auto',marginBottom: '20px', marginTop: '10px', width: '400px'}}>
           <Link href="/">
-            <Image src="/../public/logo_zaanstad.svg" height={100} width={400} alt="Picture of the author"/>
+            <Image src="/logo_denbosch.svg" height={75} width={300} alt="Picture of the author"/>
           </Link>
         </div>
       </Container>

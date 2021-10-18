@@ -1,15 +1,16 @@
 import Head from "next/head";
-import Container from "@material-ui/core/Container";
-import Box from '@material-ui/core/Box';
+import Container from "@mui/material/Container";
+import Box from '@mui/material/Box';
 import React from "react";
 
 import Header from "./header";
 import Footer from "./footer";
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import {RestfulProvider, useGet} from "restful-react";
 import {useAppContext} from "../context/state";
 import {setCookie} from "../utility/CookieHandler";
 import UserManagement from "./userManagement";
+import { createTheme, Theme, ThemeProvider } from '@mui/material/styles';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +19,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#F5F5F5',
   }
 }));
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#001759" 
+    },
+    secondary: {
+      main: "#ddc999"
+    }
+  },
+});
 
 
 const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="default-description"}) => {
@@ -28,9 +40,7 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
 
   return (
     <>
-      <RestfulProvider
-        base={context.apiUrl}
-        requestOptions={(url, method, requestBody) => ({ headers: { Accept: 'application/json' }, credentials: 'include', mode: 'cors' })}>
+      <ThemeProvider theme={theme}>
         <Head>
           <title>{title}</title>
         </Head>
@@ -46,7 +56,7 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
         </Container>
 
         <Footer />
-      </RestfulProvider>
+      </ThemeProvider>
     </>
   );
 

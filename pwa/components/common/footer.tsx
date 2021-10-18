@@ -1,19 +1,30 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import PersonIcon from '@material-ui/icons/Person';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PersonIcon from '@mui/icons-material/Person';
 
-import {makeStyles} from "@material-ui/core/styles";
-import { useRouter } from 'next/router';
+import makeStyles from '@mui/styles/makeStyles';
+import {useRouter} from 'next/router';
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import ChatIcon from "@mui/icons-material/Chat";
+import {Paper} from "@mui/material";
+import LogoutIcon from "@mui/icons-material/ExitToApp";
+import {useUserContext} from "../context/userContext";
+import Typography from "@mui/material/Typography";
+import {Login} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
+  footerStyle: {
+    marginTop: 50
+  },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -37,90 +48,39 @@ export default function Footer() {
   });
 
   const handleChange = (event, newValue) => {
-    if(newValue == 'displayUserDrawer'){
-      // setState({ ...state, ['displayUserDrawer']: true });
+    switch (newValue) {
+      case 0:
+        router.push('/')
     }
-    else {
-      router.push('/' + newValue)
-    }
-    setState({ ...state, ['bottumNavigation']: newValue });
-  };
 
+    setState({...state, ['bottumNavigation']: newValue});
+  }
+
+  const handleLogout = () => {
+    sessionStorage.setItem('user', null);
+    userContext.setUser(null);
+    router.push('/');
+  }
+
+  let userContext = useUserContext();
 
   return (
-    <footer>
-      <BottomNavigation
-        value={state['bottumNavigation']} onChange={handleChange}
-        showLabels
-        className={classes.sectionMobile}
-      >
-        <BottomNavigationAction label="Messages" value="messages" icon={<MailIcon />} />
-        <BottomNavigationAction label="Tasks" value="tasks" icon={<NotificationsIcon />} />
-        <BottomNavigationAction label="User" value="displayUserDrawer" icon={<PersonIcon />} />
-      </BottomNavigation>
-      <Box
-        px={{ xs: 3, sm: 10 }}
-        py={{ xs: 5, sm: 10 }}
-        bgcolor="#A3B2B6"
-        color="white"
-        className={classes.sectionDesktop}
-      >
-        <Container maxWidth="lg">
-          <Grid container spacing={5}>
-            <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Help</Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Contact
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Support
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Privacy
-                </Link>
-              </Box>
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Participerende gemeenten</Box>
-              <Box>Deventer
-              </Box>
-              <Box>Enschede
-              </Box>
-              <Box>Groningen
-              </Box>
-              <Box>Leeuwarden</Box>
-              <Box>Zaanstad
-              </Box>
-              <Box>Zwolle
-              </Box>
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Contact</Box>
-              <Box>
-                  Stadhuisplein 100 <br />
-                  1506 MZ Zaandam
-              </Box>
-              <Box>
-                <Link href="tel:14 075" color="inherit">
-                14 075
-                </Link>
-              </Box>
-              <Box>
-                <Link href="mailto:info@Zaanstad.nl" color="inherit">
-                  info@Zaanstad.nl
-                </Link>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+    <footer  className={classes.footerStyle}>
+      <Paper style={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+        <BottomNavigation
+          value={state['bottumNavigation']} onChange={handleChange}
+          showLabels
+          className={classes.sectionMobile}
+        >
+          {
+            userContext.user !== null
+              ?
+              <BottomNavigationAction onClick={handleLogout} label="Logout" icon={<LogoutIcon/>}/>
+              :
+              <BottomNavigationAction label="Login" icon={<Login/>}/>
+          }
+        </BottomNavigation>
+      </Paper>
     </footer>
   );
 }
