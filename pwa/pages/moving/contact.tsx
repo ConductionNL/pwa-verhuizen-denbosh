@@ -14,10 +14,14 @@ import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
-    textAlign: "left",
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
+    },
+  },
+  contactStyle: {
+    textAlign: "left",
+    [theme.breakpoints.down('md')]: {
       textAlign: "center",
     },
   },
@@ -104,15 +108,17 @@ function Index() {
 
         <Stepper currentStep={3}/>
 
-        <Grid item sm={12}>
+        <Grid item sm={12} xs={12}>
           <Typography variant="h4">
             Hoe kunnen we je bereiken?
           </Typography>
           <Typography mb="10px">
             Vul je emailadres en/of je telefoonnummer in.
           </Typography>
-
+        </Grid>
+        <Grid item sm={12} xs={12} className={classes.contactStyle}>
           <form onSubmit={handleContact}>
+            <Grid item sm={8}>
               <TextField
                 className={classes.inputLength}
                 error={emailInputError}
@@ -122,8 +128,8 @@ function Index() {
                 type="text"
                 variant="outlined"
               />
-              <br/>
-              <br/>
+            </Grid>
+            <Grid item sm={8} style={{marginTop: 10, marginBottom: 20}}>
               <TextField
                 className={classes.inputLength}
                 error={telephoneInputError}
@@ -133,8 +139,7 @@ function Index() {
                 type="text"
                 variant="outlined"
               />
-              <br/>
-              <br/>
+            </Grid>
             <Grid
               justifyContent="space-between" // Add it here :)
               container>

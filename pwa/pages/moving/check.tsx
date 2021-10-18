@@ -19,10 +19,12 @@ const useStyles = makeStyles((theme) => ({
       width: '400px',
     },
   },
-  boxStyle: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+  listStyle: {
+    [theme.breakpoints.down('md')]: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    },
   },
 }));
 
@@ -47,13 +49,14 @@ function Index() {
 
       <Grid container spacing={3}>
         <Stepper currentStep={4}/>
-        <Grid item sm={12}>
+        <Grid item sm={12} xs={12}>
           <Typography variant="h4">
             Controleer je gegevens
           </Typography>
-
+        </Grid>
+        <Grid item sm={12} xs={12}>
           <form onSubmit={handleContact}>
-            <div className={classes.boxStyle}>
+            <div className={classes.listStyle}>
               <CheckList/>
             </div>
             <br/>
