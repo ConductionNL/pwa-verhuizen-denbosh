@@ -9,6 +9,8 @@ import CheckList from "../../components/moving/listCheck";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
 import {useGet, useMutate} from "restful-react";
+import {useAppContext} from "../../components/context/state";
+import {submitRequest} from "../../components/utility/RequestHandler";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -27,36 +29,15 @@ const useStyles = makeStyles((theme) => ({
 function Index() {
   const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
+  const context = useAppContext();
+  let request = null;
   const classes = useStyles();
-  var request = null;
 
-  // const id = getIdFromStorage..
-  const id = 'new';
-
-  if (id != 'new') {
-   request = useGet({
-      path: "/requests" + id
-    });
-  }
-
-  const {mutate: post} = useMutate({
-    verb: "POST",
-    path: `/requests/` + id,
-  });
-
-  const save = () => {
-    post(request).then(() => {updateSession(request.id)});
-  }
-
-  const updateSession = (id) => {
-    // Set id in session
-  }
 
   const handleContact = (event) => {
     event.preventDefault();
 
-    // Session set address
-    // save()
+    submitRequest(context);
 
     router.push("/moving/confirmation", undefined, {shallow: true})
   }

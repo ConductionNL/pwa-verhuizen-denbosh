@@ -30,7 +30,6 @@ function Index() {
       }
     }
 
-    console.log(context.baseUrl);
   },[]);
 
   return <>

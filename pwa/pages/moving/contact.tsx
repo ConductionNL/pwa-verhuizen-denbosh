@@ -9,6 +9,8 @@ import Stepper from "../../components/moving/stepper";
 import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
 import {useGet, useMutate} from "restful-react";
+import {updateRequest} from "../../components/utility/RequestHandler";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   inputLength: {
@@ -24,37 +26,8 @@ const useStyles = makeStyles((theme) => ({
 function Index() {
   const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
   const router = useRouter();
-  var request = null;
-
-  // const id = getIdFromStorage..
-  const id = 'new';
-
-  if (id != 'new') {
-    request = useGet({
-      path: "/requests" + id
-    });
-  }
-
-  const {mutate: post} = useMutate({
-    verb: "POST",
-    path: `/requests/` + id,
-  });
-
-  const save = () => {
-    let emailInput = document.getElementById('email');
-    let telephoneInput = document.getElementById('telephone');
-
-    request.properties.contactgegevens = {
-      email: emailInput.value,
-      telefoonnummer: telephoneInput.value
-    };
-
-    post(request).then(() => {updateSession(request.id)});
-  }
-
-  const updateSession = (id) => {
-    // Set id in session
-  }
+  const context = useAppContext();
+  let request = null;
 
   const [emailInputError, setEmailInputError] = useState(false);
   const [emailInputHelperText, setEmailInputHelperText] = useState('');
@@ -107,10 +80,19 @@ function Index() {
     if (!valid) {
       return;
     }
-    // Session set address
-    // save()
 
-    router.push("/moving/check", undefined, {shallow: true})
+    let emailInput = (document.getElementById('email') as HTMLInputElement);
+    let telephoneInput = (document.getElementById('telephone') as HTMLInputElement);
+
+    let contact = {
+      email: emailInput.value,
+      telephone: telephoneInput.value,
+    };
+
+    updateRequest(context, 'contact', contact);
+
+
+    router.push("/moving/check", undefined, { shallow: true })
   }
 
   const classes = useStyles();

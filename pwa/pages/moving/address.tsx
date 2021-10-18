@@ -3,7 +3,11 @@ import React, {ReactNode, useEffect, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import {Typography, TextField} from "@mui/material";
+import ActionMenu from "../../components/common/actionmenu";
+import Hidden from "@mui/material/Hidden";
+import PageHeader from "../../components/common/pageheader";
+import {Tab, Tabs, Typography, Box, TextField, Avatar} from "@mui/material";
+import PaperCard from "../../components/common/paperCard";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
@@ -11,6 +15,10 @@ import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import {useGet, useMutate} from "restful-react";
 import {useUserContext} from "../../components/context/userContext";
 import {useAppContext} from "../../components/context/state";
+import {type} from "os";
+import SearchIcon from '@mui/icons-material/Search';
+import {ForwardRounded} from "@material-ui/icons";
+import {updateRequest} from "../../components/utility/RequestHandler";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -22,93 +30,98 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 export default function Address() {
 
   const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
 
-  const [postalCode, setPostalCode] = useState("");
-  const [houseNumber, setHouseNumber] = useState("");
-  const [houseNumberSuffix, setHouseNumberSuffix] = useState("");
-  const [addresses, setAddresses] = useState(null);
+  const [results, setResults] = useState(null);
+
+  const [postalCodeInputError, setPostalCodeInputError] = useState(false);
+  const [postalCodeInputHelperText, setPostalCodeInputHelperText] = useState('');
+
+  const [houseNumberInputError, setHouseNumberInputError] = useState(false);
+  const [houseNumberInputHelperText, setHouseNumberInputHelperText] = useState('');
 
   let context = useAppContext();
   const router = useRouter();
 
-  const [requestId, setRequestId] = useState(null);
+  const checkInputs = () => {
+    let valid = true;
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
+    let postalCodeInput = (document.getElementById('postalCode') as HTMLInputElement);
+    let houseNumberInput = (document.getElementById('houseNumber') as HTMLInputElement);
 
-      let user = sessionStorage.getItem('user');
-      console.log('user');
-      console.log(user);
+    setPostalCodeInputError(false);
+    setPostalCodeInputHelperText('');
+    setHouseNumberInputError(false);
+    setHouseNumberInputHelperText('');
 
-      if (user == null) {
-        router.push('/moving');
-      }
-      // console.log('if request is undefined');
-      // console.log(sessionStorage.getItem('request') === undefined || sessionStorage.getItem('request') === null);
-      console.log(sessionStorage.getItem('request'));
-      // if (sessionStorage.getItem('request') === undefined || sessionStorage.getItem('request') === null || sessionStorage.getItem('request') === 'undefined') {
-
-        createRequest({
-          organization: 'https://conduction.nl',
-          submitters: [user.name]
-        }).then((request) => {
-          sessionStorage.setItem('request', request.id);
-          console.log('created request');
-          console.log(request);
-        });
-      // } else {
-      //   console.log('requestid');
-      //   console.log(sessionStorage.getItem('request'));
-      // }
+    if (postalCodeInput.value.length == 0) {
+      valid = false;
+      setPostalCodeInputError(true);
+      setPostalCodeInputHelperText('postcode is verplicht');
     }
-  }, []);
 
-  const {mutate: createRequest} = useMutate({
-    verb: "POST",
-    path: `/gateways/vrc/requests`,
-  });
+    if (houseNumberInput.value.length == 0) {
+      valid = false;
+      setHouseNumberInputError(true);
+      setHouseNumberInputHelperText('huisnummer is verplicht');
+    }
 
-  if (typeof window !== "undefined") {
-    const {data: request} = useGet({
-      path: "/gateways/vrc/requests/" + sessionStorage.getItem('request'),
-      debounce: true,
-    });
-    console.log('retrieved request');
-    console.log(request);
+    return valid;
   }
 
-
-  const {data: info} = useGet({
-    path: "/gateways/zaken/zaken",
-    debounce: true,
-  });
-
   const handleAddress = () => {
-
     if (typeof window !== 'undefined') {
+
+      let valid = checkInputs();
+
+      if (!valid) {
+        return;
+      }
+
       let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
       let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
       let suffix = (document.getElementById('houseNumberSuffix') as HTMLInputElement).value;
 
       if (typeof postalCode === 'string') {
-        setPostalCode(postalCode.toUpperCase());
-      } else {
-        setPostalCode(postalCode);
+        postalCode = postalCode.toUpperCase();
       }
-      setHouseNumber(houseNumber);
-      setHouseNumberSuffix(suffix);
 
+      fetch(context.apiUrl + "/gateways/as/adressen?postcode=" + postalCode + '&huisnummer=' + houseNumber + "&huisnummertoevoeging=" + suffix, {
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then(response => response.json())
+        .then((data) =>  {
+            setResults(data);
+        });
+
+      }
     }
-
-  }
 
   const classes = useStyles();
 
   const route = () => {
+    router.push('/moving/date');
+  }
+
+  const processAddress = (item) => {
+
+    if (item.huisnummertoevoeging !== null) {
+      updateRequest(
+        context,
+        'adres',
+        item.straat + " " + item.huisnummer + item.huisnummertoevoeging + ", " + item.postcode + " " + item.woonplaats
+      )
+    } else {
+      updateRequest(
+        context,
+        'adres',
+        item.straat + " " + item.huisnummer + ", " + item.postcode + " " + item.woonplaats
+      )
+    }
+
     router.push('/moving/date');
   }
   return (<>
@@ -126,40 +139,71 @@ export default function Address() {
             Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
           </Typography>
 
-          <form onSubmit={route}>
-              <TextField onChange={handleAddress} id="postalCode" label="Postcode" variant="outlined"
-                         className={classes.inputStyle}/>
-              <br/>
-              <br/>
-              <TextField onChange={handleAddress} id="houseNumber" label="Huisnummer" variant="outlined"
-                         className={classes.inputStyle}/>
-              <br/>
-              <br/>
-              <TextField onChange={handleAddress} id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
-                         className={classes.inputStyle}/>
-              <br/>
-              <br/>
+          <TextField
+            id="postalCode"
+            label="Postcode"
+            required
+            variant="outlined"
+            className={classes.inputStyle}
+            error={postalCodeInputError}
+            helperText={postalCodeInputHelperText}
+          />
+          <br/>
+          <br/>
+          <TextField
+            id="houseNumber"
+            label="Huisnummer"
+            required
+            variant="outlined"
+            className={classes.inputStyle}
+            error={houseNumberInputError}
+            helperText={houseNumberInputHelperText}
+          />
+          <br/>
+          <br/>
+          <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
+                     className={classes.inputStyle}/>
+          <br/>
+          <br/>
 
-              {
-                addresses !== null && addresses.map((address) =>
-                  <p>
-                    address.id
-                  </p>
-                )
-              }
-            <Grid
-              justifyContent="space-between" // Add it here :)
-              container>
-              <Grid item>
-                <Link href="/moving">
-                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
-              </Grid>
+          <Button color="primary" onClick={handleAddress} sx={{marginBottom: "20px"}} type="button" variant="contained" endIcon={<SearchIcon/>}>Zoeken</Button>
+
+
+          <Typography variant="h5">
+            Gevonden adressen
+          </Typography>
+          <Typography mb="10px">
+            Staat uw adres niet in de lijst, controleer dan de ingevulde postcode, huisnummer en eventueel huisnummertoevoeging en probeer opnieuw.
+          </Typography>
+
+          <div>
+            {
+              results !== undefined && results !== null && results.adressen !== undefined &&
+                results.adressen.map((result) => (
+                  <Grid sx={{marginBottom: "5px"}}>
+                    <Button
+                      onClick={() => {processAddress(result)}}
+                      color="primary" type="button" variant="contained" endIcon={<ChevronRight/>}>
+                      {result.straat + " " + result.huisnummer}
+                      {result.huisnummertoevoeging !== null && result.huisnummertoevoeging}
+                      {", " + result.postcode + " " + result.woonplaats}
+                    </Button>
+                  </Grid>
+                ))
+            }
+          </div>
+
+          <Grid
+            sx={{marginTop: '30px'}}
+            justifyContent="space-between" // Add it here :)
+            container>
+            <Grid item>
+              <Link href="/moving/moving">
+                <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+              </Link>
             </Grid>
-          </form>
+           </Grid>
+
         </Grid>
       </Grid>
 
