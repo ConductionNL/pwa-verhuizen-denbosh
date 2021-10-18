@@ -49,7 +49,7 @@ function Index() {
 
       <Grid container spacing={3}>
         <Stepper currentStep={4}/>
-        <Grid item sm={12} sx={12}>
+        <Grid item sm={12} xs={12}>
           <Typography variant="h4">
             Controleer je gegevens
           </Typography>
