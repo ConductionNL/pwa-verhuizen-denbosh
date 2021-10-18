@@ -19,8 +19,8 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "api-platform.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
+  {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
@@ -41,7 +41,7 @@ spec:
     - host: {{ .Values.ingress.hostname }}
       http:
         paths:
-          - path: {{ .Values.ingress.path }}/api{{ if eq .Values.ingress.className "nginx" }}(/|$)(.*){{ end }}
+          - path: {{ .Values.ingress.path }}/api
             {{- if and .Values.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .Values.ingress.pathType }}
             {{- end }}
@@ -55,7 +55,7 @@ spec:
               serviceName: {{ $gateway }}
               servicePort: {{ $svcPort }}
               {{- end }}
-          - path: {{ .Values.ingress.path }}/digid{{ if eq .Values.ingress.className "nginx" }}(/|$)(.*){{ end }}
+          - path: {{ .Values.ingress.path }}/digid
             {{- if and .Values.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .Values.ingress.pathType }}
             {{- end }}
@@ -69,7 +69,7 @@ spec:
               serviceName: {{ $gateway }}
               servicePort: {{ $svcPort }}
               {{- end }}
-          - path: {{ .Values.ingress.path }}/saml{{ if eq .Values.ingress.className "nginx" }}(/|$)(.*){{ end }}
+          - path: {{ .Values.ingress.path }}/saml
             {{- if and .Values.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .Values.ingress.pathType }}
             {{- end }}
@@ -83,7 +83,7 @@ spec:
               serviceName: {{ $gateway }}
               servicePort: {{ $svcPort }}
           {{- end }}
-          - path: {{ .Values.ingress.path }}/login{{ if eq .Values.ingress.className "nginx" }}(/|$)(.*){{ end }}
+          - path: {{ .Values.ingress.path }}/login
             {{- if and .Values.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .Values.ingress.pathType }}
             {{- end }}
@@ -97,7 +97,7 @@ spec:
               serviceName: {{ $gateway }}
               servicePort: {{ $svcPort }}
           {{- end }}
-          - path: {{ .Values.ingress.path }}/{{ if eq .Values.ingress.className "nginx" }}(.*){{ end }}
+          - path: {{ .Values.ingress.path }}/
             {{- if and .Values.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .Values.ingress.pathType }}
             {{- end }}
