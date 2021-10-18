@@ -1,34 +1,49 @@
 import {useUserContext} from "../context/userContext";
 
 export function createRequest(user, context) {
-  fetch(context.apiUrl + '/gateways/vrc/requests', {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      organization: "http://webresourcecatalogus.conduction.svc.cluster.local/organizations/b2d3176e-f1c6-4365-ab86-dd253c65fc43",
-      submitters: [
-        {
-          bsn: user.bsn
-        }
-      ]
+
+  if (typeof window !== "undefined") {
+    let organization;
+
+    if (window.location.href.includes('http://localhost')) {
+      organization = 'http://webresourcecatalogus.conduction.svc.cluster.local/organizations/b2d3176e-f1c6-4365-ab86-dd253c65fc43';
+    } else if (window.location.href.includes('https://verhuizen.demodam.nl')) {
+      organization = 'http://webresourcecatalogus.conduction.svc.cluster.local/organizations/b2d3176e-f1c6-4365-ab86-dd253c65fc43';
+    }
+    else
+    {
+      organization = 'http://webresourcecatalogus.verhuizen.svc.cluster.local/organizations/4f387d0e-a2e5-44c0-9902-c31b63a8ee36';
+    }
+
+    fetch(context.apiUrl + '/gateways/vrc/requests', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        organization: organization,
+        submitters: [
+          {
+            bsn: user.bsn
+          }
+        ]
+      })
     })
-  })
-    .then(response => response.json())
-    .then((data) =>  {
-      if (typeof window !== "undefined") {
+      .then(response => response.json())
+      .then((data) =>  {
+        if (typeof window !== "undefined") {
 
-        let result = {
-          id: data.id,
-          reference: data.reference,
-          organization: data.organization,
-          properties: data.properties
+          let result = {
+            id: data.id,
+            reference: data.reference,
+            organization: data.organization,
+            properties: data.properties
+          }
+
+          sessionStorage.setItem('request', JSON.stringify(result));
+          return null;
         }
-
-        sessionStorage.setItem('request', JSON.stringify(result));
-        return null;
-      }
-    });
+      });
+  }
 
 }
 

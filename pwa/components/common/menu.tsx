@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {alpha} from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import AppBar from '@mui/material/AppBar';
@@ -118,6 +118,15 @@ export default function MainMenu() {
   const loginUser = (status) => {
     setState({...state, ['loggedIn']: status});
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem('user') !== null) {
+        userContext.setUser(JSON.parse(sessionStorage.getItem('user')));
+      }
+    }
+  }, []);
+
 
 
   const handleLogout = () => {

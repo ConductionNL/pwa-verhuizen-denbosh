@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import {updateRequest} from "../../components/utility/RequestHandler";
 import WarningIcon from '@mui/icons-material/Warning';
 import { useUserContext } from "../../components/context/userContext";
+import LoginScreen from "../../components/moving/loginScreen";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -142,99 +143,105 @@ export default function Address() {
   return (<>
     <Layout title={title} description="waar kan ik deze description zien">
 
-      <Grid container spacing={3}>
+      {
+        userContext.user == null
+          ?
+          <LoginScreen />
+          :
+          <Grid container spacing={3}>
 
-        <Stepper currentStep={0}/>
+            <Stepper currentStep={0}/>
 
-        <Grid item sm={12}>
-          <Grid item sm={12}>
-            <Typography variant="h4">
-              Wat wordt je nieuwe adres?
-            </Typography>
-            <Typography mb="10px">
-              Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
-            </Typography>
+            <Grid item sm={12}>
+              <Grid item sm={12}>
+                <Typography variant="h4">
+                  Wat wordt je nieuwe adres?
+                </Typography>
+                <Typography mb="10px">
+                  Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
+                </Typography>
+              </Grid>
+              <Grid item sm={12} style={{marginTop: 20}}>
+                <TextField
+                  id="postalCode"
+                  label="Postcode"
+                  required
+                  variant="outlined"
+                  className={classes.inputStyle}
+                  error={postalCodeInputError}
+                  helperText={postalCodeInputHelperText}
+                />
+                <br/>
+                <br/>
+                <TextField
+                  id="houseNumber"
+                  label="Huisnummer"
+                  required
+                  variant="outlined"
+                  className={classes.inputStyle}
+                  error={houseNumberInputError}
+                  helperText={houseNumberInputHelperText}
+                />
+                <br/>
+                <br/>
+                <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
+                           className={classes.inputStyle}/>
+                <br/>
+                <br/>
+
+                <Button color="primary" onClick={handleAddress} sx={{marginBottom: "20px"}} type="button"
+                        variant="contained"
+                        endIcon={<SearchIcon/>}>Zoeken</Button>
+              </Grid>
+            </Grid>
+            <Grid item sm={12}>
+              <Typography variant="h5">
+                Gevonden adressen
+              </Typography>
+              <Typography mb="10px">
+                Staat uw adres niet in de lijst, controleer dan de ingevulde postcode, huisnummer en eventueel
+                huisnummertoevoeging en probeer opnieuw.
+              </Typography>
+
+              <div>
+                {
+                  results !== undefined && results !== null && results.adressen !== undefined &&
+                  results.adressen.map((result) => (
+                    <Grid sx={{marginBottom: "5px"}}>
+                      <Button
+                        onClick={() => {
+                          processAddress(result)
+                        }}
+                        color="primary" type="button" variant="contained" endIcon={<ChevronRight/>}>
+                        {result.straat + " " + result.huisnummer}
+                        {result.huisnummertoevoeging !== null && result.huisnummertoevoeging}
+                        {", " + result.postcode + " " + result.woonplaats}
+                      </Button>
+                    </Grid>
+                  ))
+                }
+              </div>
+            </Grid>
+            <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
+              <div>{icon ? <WarningIcon color="warning" fontSize="large"/> : null}</div>
+            </Grid>
+            <Grid item xs={10} sm={10} md={10}>
+              <Typography variant="h5">{errorMessageTitle}</Typography>
+              <div>{errorMessageText}</div>
+            </Grid>
+            <Grid
+              sx={{marginTop: '30px'}}
+              justifyContent="space-between" // Add it here :)
+              container>
+              <Grid item>
+                <Link href="/moving/moving">
+                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+                </Link>
+              </Grid>
+            </Grid>
+
           </Grid>
-          <Grid item sm={12} style={{marginTop: 20}}>
-            <TextField
-              id="postalCode"
-              label="Postcode"
-              required
-              variant="outlined"
-              className={classes.inputStyle}
-              error={postalCodeInputError}
-              helperText={postalCodeInputHelperText}
-            />
-            <br/>
-            <br/>
-            <TextField
-              id="houseNumber"
-              label="Huisnummer"
-              required
-              variant="outlined"
-              className={classes.inputStyle}
-              error={houseNumberInputError}
-              helperText={houseNumberInputHelperText}
-            />
-            <br/>
-            <br/>
-            <TextField id="houseNumberSuffix" label="Huisnummertoevoeging" variant="outlined"
-                       className={classes.inputStyle}/>
-            <br/>
-            <br/>
-
-            <Button color="primary" onClick={handleAddress} sx={{marginBottom: "20px"}} type="button"
-                    variant="contained"
-                    endIcon={<SearchIcon/>}>Zoeken</Button>
-          </Grid>
-        </Grid>
-        <Grid item sm={12}>
-          <Typography variant="h5">
-            Gevonden adressen
-          </Typography>
-          <Typography mb="10px">
-            Staat uw adres niet in de lijst, controleer dan de ingevulde postcode, huisnummer en eventueel
-            huisnummertoevoeging en probeer opnieuw.
-          </Typography>
-
-          <div>
-            {
-              results !== undefined && results !== null && results.adressen !== undefined &&
-              results.adressen.map((result) => (
-                <Grid sx={{marginBottom: "5px"}}>
-                  <Button
-                    onClick={() => {
-                      processAddress(result)
-                    }}
-                    color="primary" type="button" variant="contained" endIcon={<ChevronRight/>}>
-                    {result.straat + " " + result.huisnummer}
-                    {result.huisnummertoevoeging !== null && result.huisnummertoevoeging}
-                    {", " + result.postcode + " " + result.woonplaats}
-                  </Button>
-                </Grid>
-              ))
-            }
-          </div>
-        </Grid>
-        <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
-          <div>{icon ? <WarningIcon color="warning" fontSize="large"/> : null}</div>
-        </Grid>
-        <Grid item xs={10} sm={10} md={10}>
-          <Typography variant="h5">{errorMessageTitle}</Typography>
-          <div>{errorMessageText}</div>
-        </Grid>
-        <Grid
-          sx={{marginTop: '30px'}}
-          justifyContent="space-between" // Add it here :)
-          container>
-          <Grid item>
-            <Link href="/moving/moving">
-              <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-            </Link>
-          </Grid>
-        </Grid>
-
-      </Grid>
+      }
     </Layout>
   </>);
 }

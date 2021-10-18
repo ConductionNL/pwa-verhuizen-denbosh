@@ -10,6 +10,7 @@ import {ChevronLeft, ChevronRight} from "@mui/icons-material";
 import {useGet, useMutate} from "restful-react";
 import makeStyles from "@mui/styles/makeStyles";
 import { useUserContext } from "../../components/context/userContext";
+import LoginScreen from "../../components/moving/loginScreen";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -75,37 +76,43 @@ function Index() {
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
-      <Grid container spacing={3}>
-        <Stepper currentStep={2}/>
-        <Grid item sm={12}>
-          <Typography variant="h4">
-            Wie gaat er verhuizen?
-          </Typography>
-          <Typography mb="10px">
-            Onderstaande personen kunnen door jou verhuist worden.
-          </Typography>
-        </Grid>
-        <Grid item sm={12} xs={12} >
-          <form onSubmit={handleCoMovers}>
-            <div className={classes.listStyle}>
-              <CheckboxList/>
-            </div>
-            <br/>
-            <Grid
-              justifyContent="space-between" // Add it here :)
-              container>
-              <Grid item>
-                <Link href={'/moving/date'}>
-                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
-              </Grid>
+      {
+        userContext.user == null
+          ?
+          <LoginScreen />
+          :
+          <Grid container spacing={3}>
+            <Stepper currentStep={2}/>
+            <Grid item sm={12}>
+              <Typography variant="h4">
+                Wie gaat er verhuizen?
+              </Typography>
+              <Typography mb="10px">
+                Onderstaande personen kunnen door jou verhuist worden.
+              </Typography>
             </Grid>
-          </form>
-        </Grid>
-      </Grid>
+            <Grid item sm={12} xs={12} >
+              <form onSubmit={handleCoMovers}>
+                <div className={classes.listStyle}>
+                  <CheckboxList/>
+                </div>
+                <br/>
+                <Grid
+                  justifyContent="space-between" // Add it here :)
+                  container>
+                  <Grid item>
+                    <Link href={'/moving/date'}>
+                      <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+          </Grid>
+      }
     </Layout>
   </>;
 }
