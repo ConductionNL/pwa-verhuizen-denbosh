@@ -16,13 +16,18 @@ export function AppWrapper({ children }) {
       apiUrl = 'http://localhost/api';
       baseUrl = 'http://localhost';
       frontendUrl = 'http://localhost:3000';
-    }
-    else
-    {
+    } else if (window.location.href.includes('https://verhuizen.demodam.nl')) {
       meUrl = 'https://verhuizen.demodam.nl/api/users/me';
       apiUrl = 'https://verhuizen.demodam.nl/api';
       baseUrl = 'https://verhuizen.demodam.nl';
       frontendUrl = 'https://verhuizen.demodam.nl';
+    }
+    else
+    {
+      meUrl = 'https://verhuizen.accp.s-hertogenbosch.nl/api/users/me';
+      apiUrl = 'https://verhuizen.accp.s-hertogenbosch.nl/api';
+      baseUrl = 'https://verhuizen.accp.s-hertogenbosch.nl';
+      frontendUrl = 'https://verhuizen.accp.s-hertogenbosch.nl';
     }
 
 
