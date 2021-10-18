@@ -12,6 +12,7 @@ import {useAppContext} from "../../components/context/state";
 import SearchIcon from '@mui/icons-material/Search';
 import {updateRequest} from "../../components/utility/RequestHandler";
 import WarningIcon from '@mui/icons-material/Warning';
+import { useUserContext } from "../../components/context/userContext";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -41,6 +42,13 @@ export default function Address() {
 
   let context = useAppContext();
   const router = useRouter();
+  const userContext = useUserContext();
+
+  useEffect(() => {
+      if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
+        router.push("/moving");
+      }
+  }, []);
 
   const checkInputs = () => {
     let valid = true;

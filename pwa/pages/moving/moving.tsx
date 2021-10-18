@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { useEffect} from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import {Typography, Box, Avatar} from "@mui/material";
@@ -11,7 +11,7 @@ import {ForwardRounded} from "@mui/icons-material";
 import {createRequest} from "../../components/utility/RequestHandler";
 import {useUserContext} from "../../components/context/userContext";
 import {useGet} from "restful-react";
-import {useAppContext} from "../../components/context/state";
+import { useAppContext } from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -64,6 +64,12 @@ function Index() {
   const userContext = useUserContext();
   const context = useAppContext();
 
+  useEffect(() => {
+      if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
+        router.push("/moving");
+      }
+  }, []);
+
 
   const handleDate = (event) => {
     event.preventDefault();
@@ -84,19 +90,19 @@ function Index() {
         </Grid>
         <Grid item sm={12}>
           <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
-            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
             <span>Geef je nieuwe adres op</span>
           </Box>
           <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
-            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
             <span>Geef de datum op wanneer je gaat verhuis</span>
           </Box>
           <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
-            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
             <span>Geef aan met wie je gaat verhuizen</span>
           </Box>
           <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
-            <Avatar className={classes.stepsStyle} sx={{margin: 0}}><ForwardRounded/></Avatar>
+            <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
             <span>Geef aan hoe we je kunnen bereiken</span>
           </Box>
           <br/>
