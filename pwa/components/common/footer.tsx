@@ -56,6 +56,12 @@ export default function Footer() {
     setState({...state, ['bottumNavigation']: newValue});
   }
 
+  const handleLogout = () => {
+    sessionStorage.setItem('user', null);
+    userContext.setUser(null);
+    router.push('/');
+  }
+
   let userContext = useUserContext();
 
   return (
@@ -69,7 +75,7 @@ export default function Footer() {
           {
             userContext.user !== null
               ?
-              <BottomNavigationAction label="Logout" icon={<LogoutIcon/>}/>
+              <BottomNavigationAction onClick={handleLogout} label="Logout" icon={<LogoutIcon/>}/>
               :
               <BottomNavigationAction label="Login" icon={<Login/>}/>
           }
