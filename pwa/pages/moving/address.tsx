@@ -3,7 +3,7 @@ import React, {ReactNode, useEffect, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import {Tab, Tabs, Typography, Box, TextField, Avatar} from "@mui/material";
+import {Tab, Tabs, Typography, Box, TextField, Avatar, Backdrop, CircularProgress} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
@@ -40,6 +40,14 @@ export default function Address() {
   const [errorMessageText, setErrorMessageText] = useState('');
   const [errorMessageTitle, setErrorMessageTitle] = useState('');
   const [icon, setIcon] = useState(false);
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   let context = useAppContext();
   const router = useRouter();
@@ -89,6 +97,8 @@ export default function Address() {
         return;
       }
 
+      handleToggle();
+
       let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
       let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
       let suffix = (document.getElementById('houseNumberSuffix') as HTMLInputElement).value;
@@ -103,6 +113,7 @@ export default function Address() {
       })
         .then(response => response.json())
         .then((data) => {
+          handleClose();
           setResults(data);
         });
 
@@ -243,6 +254,12 @@ export default function Address() {
           </Grid>
       }
     </Layout>
+    <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>
   </>);
 }
 
