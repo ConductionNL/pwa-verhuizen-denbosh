@@ -35,11 +35,37 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.pwa.image.image }}:{{ .Values.pwa.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.pwa.image.pullPolicy }}
-          volumeMounts:
-            - mountPath: /.env.local
-              name: env-local
-              readOnly: true
-              subPath: .env.local
+          env:
+            - name: NEXT_PUBLIC_ENTRYPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: gateway-location
+                  name: {{ include "api-platform.fullname" . }}
+            - name: NEXT_PUBLIC_ME_URL
+              valueFrom:
+                  configMapKeyRef:
+                      key: me-url
+                      name: {{ include "api-platform.fullname" . }}
+            - name: NEXT_PUBLIC_API_URL
+              valueFrom:
+                  configMapKeyRef:
+                      key: api-url
+                      name: {{ include "api-platform.fullname" . }}
+            - name: NEXT_PUBLIC_BASE_URL
+              valueFrom:
+                  configMapKeyRef:
+                      key: base-url
+                      name: {{ include "api-platform.fullname" . }}
+            - name: NEXT_PUBLIC_FRONTEND_URL
+              valueFrom:
+                  configMapKeyRef:
+                      key: frontend-url
+                      name: {{ include "api-platform.fullname" . }}
+            - name: NEXT_PUBLIC_ORGANIZATION
+              valueFrom:
+                  configMapKeyRef:
+                      key: organization
+                      name: {{ include "api-platform.fullname" . }}
           ports:
             - name: http
               containerPort: 3000
@@ -66,11 +92,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-        - configMap:
-            defaultMode: 420
-            items:
-            - key: .env.local
-              path: .env.local
-            name: {{ include "api-platform.fullname" . }}
-          name: env-local

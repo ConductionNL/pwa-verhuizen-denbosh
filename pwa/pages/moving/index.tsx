@@ -16,16 +16,23 @@ import {useUserContext} from "../../components/context/userContext";
 import {useRouter} from "next/router";
 import {createRequest} from "../../components/utility/RequestHandler";
 import LoginScreen from "../../components/moving/loginScreen";
+import getConfig from 'next/config'
 
 function Index() {
 
   const title = 'Gemeente \'s-Hertogenbosch | Verhuizing doorgeven';
+  const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
   const [loading, setLoading] = useState(false);
   const router = useRouter()
 
   const context = useAppContext();
   let userContext = useUserContext();
+
+  useEffect(() => {
+    console.log(publicRuntimeConfig);
+    console.log(serverRuntimeConfig);
+  }, []);
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
