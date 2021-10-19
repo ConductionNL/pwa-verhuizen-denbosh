@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {alpha} from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import AppBar from '@mui/material/AppBar';
@@ -12,6 +12,7 @@ import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
 import Button from "@mui/material/Button";
 import {ChevronRight} from "@mui/icons-material";
+import {Stack} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -119,6 +120,15 @@ export default function MainMenu() {
     setState({...state, ['loggedIn']: status});
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem('user') !== null) {
+        userContext.setUser(JSON.parse(sessionStorage.getItem('user')));
+      }
+    }
+  }, []);
+
+
 
   const handleLogout = () => {
     sessionStorage.setItem('user', null);
@@ -133,59 +143,39 @@ export default function MainMenu() {
     <div className={classes.grow}>
       <AppBar position="static" className={classes.appbar}>
         <Container>
-          <Toolbar>
-
-            {/*{*/}
-            {/*<div className={classes.sectionMobile}>*/}
-            {/*  <IconButton aria-label="show 17 new notifications" color="inherit"*/}
-            {/*              onClick={toggleDrawer('displayUserDrawer', true)}>*/}
-            {/*    <MenuIcon/>*/}
-            {/*  </IconButton>*/}
-            {/*  <Drawer anchor={'left'} open={state['displayUserDrawer']}*/}
-            {/*          onClose={toggleDrawer('displayUserDrawer', false)}>*/}
-            {/*    <div*/}
-            {/*      className={classes.list}*/}
-            {/*      role="presentation"*/}
-            {/*      onClick={toggleDrawer('displayUserDrawer', false)}*/}
-            {/*      onKeyDown={toggleDrawer('displayUserDrawer', false)}*/}
-            {/*    >*/}
-            {/*      <ActionMenu/>*/}
-            {/*    </div>*/}
-            {/*  </Drawer>*/}
-            {/*</div>*/}
-            {/*}*/}
-
-            <div className={classes.grow}/>
-            <Box style={{marginRight: "15px", textAlign: "left"}}>
-              <Typography variant="h6" color="inherit">
-                {
-                  userContext.user !== null &&
-                  <span style={{color: 'white'}}>
-                {
+          <Stack
+            sx={{minHeight: '64px'}}
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={2}
+          >
+            <Typography variant="h6" color="inherit">
+              {
+                userContext.user !== null &&
+                <span style={{color: 'white'}}>
+              {
                 userContext.user.name
-                }
-                  </span>
-                }
-              </Typography>
-            </Box>
-            <Box marginRight={2}>
-              <Typography variant="h6" color="inherit">
-                {
-                  userContext.user !== null
-                    ?
-                    <span onClick={handleLogout} style={{color: 'white'}}>Uitloggen</span>
-                    :
-                    // <Link href="http://localhost/login/adfs/conduction">
-                    //   <span style={{color: 'white'}}>Inloggen</span>
-                    // </Link>
-                    <Link
-                      href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl + "/moving?state=8412312632"}>
-                      <span style={{color: 'white'}}>Inloggen</span>
-                    </Link>
-                }
-              </Typography>
-            </Box>
-          </Toolbar>
+              }
+                </span>
+              }
+            </Typography>
+            <Typography variant="h6" color="inherit">
+              {
+                userContext.user !== null
+                  ?
+                  <span onClick={handleLogout} style={{color: 'white'}}>Uitloggen</span>
+                  :
+                  // <Link href="http://localhost/login/adfs/conduction">
+                  //   <span style={{color: 'white'}}>Inloggen</span>
+                  // </Link>
+                  <Link
+                    href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl + "/moving?state=8412312632"}>
+                    <span style={{color: 'white'}}>Inloggen</span>
+                  </Link>
+              }
+            </Typography>
+          </Stack>
         </Container>
       </AppBar>
     </div>

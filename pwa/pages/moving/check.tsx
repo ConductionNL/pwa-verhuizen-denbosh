@@ -12,6 +12,7 @@ import {useGet, useMutate} from "restful-react";
 import { submitRequest } from "../../components/utility/RequestHandler";
 import { useAppContext } from "../../components/context/state";
 import { useUserContext } from "../../components/context/userContext";
+import LoginScreen from "../../components/moving/loginScreen";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -54,37 +55,42 @@ function Index() {
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
-
-      <Grid container spacing={3}>
-        <Stepper currentStep={4}/>
-        <Grid item sm={12} xs={12}>
-          <Typography variant="h4">
-            Controleer je gegevens
-          </Typography>
-        </Grid>
-        <Grid item sm={12} xs={12}>
-          <form onSubmit={handleContact}>
-            <div className={classes.listStyle}>
-              <CheckList/>
-            </div>
-            <br/>
-            <Grid
-              justifyContent="space-between" // Add it here :)
-              container>
-              <Grid item>
-                <Link href="/moving/contact">
-                  <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight/>}>
-                  Nu verzenden
-                </Button>
-              </Grid>
+      {
+        userContext.user == null
+          ?
+          <LoginScreen />
+          :
+          <Grid container spacing={3}>
+            <Stepper currentStep={4}/>
+            <Grid item sm={12} xs={12}>
+              <Typography variant="h4">
+                Controleer je gegevens
+              </Typography>
             </Grid>
-          </form>
-        </Grid>
-      </Grid>
+            <Grid item sm={12} xs={12}>
+              <form onSubmit={handleContact}>
+                <div className={classes.listStyle}>
+                  <CheckList/>
+                </div>
+                <br/>
+                <Grid
+                  justifyContent="space-between" // Add it here :)
+                  container>
+                  <Grid item>
+                    <Link href="/moving/contact">
+                      <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight/>}>
+                      Nu verzenden
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+          </Grid>
+      }
 
     </Layout>
   </>;
