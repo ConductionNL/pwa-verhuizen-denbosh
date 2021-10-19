@@ -12,7 +12,6 @@ export function AppWrapper({ children }) {
     organization: process.env.NEXT_PUBLIC_ORGANIZATION !== undefined ? process.env.NEXT_PUBLIC_ORGANIZATION : 'http://webresourcecatalogus.conduction.svc.cluster.local/organizations/b2d3176e-f1c6-4365-ab86-dd253c65fc43',
   }
 
-
   return (
     <AppContext.Provider value={sharedState}>
       {children}

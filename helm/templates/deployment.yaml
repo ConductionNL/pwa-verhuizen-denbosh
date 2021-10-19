@@ -70,7 +70,7 @@ spec:
         - configMap:
             defaultMode: 420
             items:
-            - key: .env
+            - key: .env.local
               path: .env.local
             name: env-local
           name: env-local
