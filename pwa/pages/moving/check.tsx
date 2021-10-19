@@ -16,10 +16,7 @@ import LoginScreen from "../../components/moving/loginScreen";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '400px',
-    },
+    width: '400px',
   },
   listStyle: {
     [theme.breakpoints.down('md')]: {
@@ -67,7 +64,7 @@ function Index() {
                 Controleer je gegevens
               </Typography>
             </Grid>
-            <Grid item sm={12} xs={12}>
+            <Grid item sm={12} xs={12} md={12}>
               <form onSubmit={handleContact}>
                 <div className={classes.listStyle}>
                   <CheckList/>

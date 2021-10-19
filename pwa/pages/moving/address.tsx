@@ -163,8 +163,8 @@ export default function Address() {
 
             <Stepper currentStep={0}/>
 
-            <Grid item sm={12}>
-              <Grid item sm={12}>
+            <Grid item xs={2} sm={2} md={2}>
+              <Grid item xs={2} sm={2} md={2}>
                 <Typography variant="h4">
                   Wat wordt je nieuwe adres?
                 </Typography>
@@ -172,7 +172,7 @@ export default function Address() {
                   Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
                 </Typography>
               </Grid>
-              <Grid item sm={12} style={{marginTop: 20}}>
+              <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
                 <TextField
                   id="postalCode"
                   label="Postcode"
@@ -205,7 +205,7 @@ export default function Address() {
                         endIcon={<SearchIcon/>}>Zoeken</Button>
               </Grid>
             </Grid>
-            <Grid item sm={12}>
+            <Grid item xs={2} sm={2} md={2}>
               <Typography variant="h5">
                 Gevonden adressen
               </Typography>

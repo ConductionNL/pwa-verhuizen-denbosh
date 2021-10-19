@@ -67,7 +67,7 @@ function Index() {
         <Grid container spacing={3}>
           <Stepper currentStep={1}/>
 
-          <Grid item sm={12}>
+          <Grid item sm={12} xs={12} md={12}>
             <Typography variant="h4">
               Wanneer ga je verhuizen?
             </Typography>
@@ -76,9 +76,9 @@ function Index() {
               liggen.
             </Typography>
           </Grid>
-          <Grid item sm={12}>
+          <Grid item sm={12} xs={12} md={12}>
             <form onSubmit={handleDate}>
-              <Grid item sm={12} className={classes.calendarAlign}>
+              <Grid item sm={12} xs={12} md={12} className={classes.calendarAlign}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   {
                     request != null && request.properties != null && request.properties.includes("datum") && request.properties.datum != null ?
@@ -112,12 +112,12 @@ function Index() {
               <Grid
                 justifyContent="space-between" // Add it here :)
                 container>
-                <Grid item>
+                <Grid item sm={6} xs={6} md={6}>
                   <Link href="/moving/address">
                     <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
                   </Link>
                 </Grid>
-                <Grid item>
+                <Grid item sm={6} xs={6} md={6}>
                   <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
                 </Grid>
               </Grid>
