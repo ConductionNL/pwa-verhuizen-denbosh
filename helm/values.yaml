@@ -7,6 +7,11 @@ pwa:
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "dev"
+  apiUrl: ""
+  meUrl: ""
+  baseUrl: ""
+  frontendUrl: ""
+  organization: ""
     
 gateway: 
   enabled: true
