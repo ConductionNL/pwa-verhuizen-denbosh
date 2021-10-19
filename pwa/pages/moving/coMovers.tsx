@@ -91,7 +91,7 @@ function Index() {
                 Onderstaande personen kunnen door jou verhuist worden.
               </Typography>
             </Grid>
-            <Grid item sm={12} xs={12} >
+            <Grid item sm={12} xs={12} md={12}>
               <form onSubmit={handleCoMovers}>
                 <div className={classes.listStyle}>
                   <CheckboxList/>
