@@ -3,7 +3,7 @@ import React, {ReactNode, useEffect, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import {Tab, Tabs, Typography, Box, TextField, Avatar} from "@mui/material";
+import {Tab, Tabs, Typography, Box, TextField, Avatar, Backdrop, CircularProgress} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
@@ -41,6 +41,14 @@ export default function Address() {
   const [errorMessageTitle, setErrorMessageTitle] = useState('');
   const [icon, setIcon] = useState(false);
 
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
   let context = useAppContext();
   const router = useRouter();
   const userContext = useUserContext();
@@ -61,9 +69,9 @@ export default function Address() {
     setPostalCodeInputHelperText('');
     setHouseNumberInputError(false);
     setHouseNumberInputHelperText('');
-    setIcon(false)
-    setErrorMessageTitle("")
-    setErrorMessageText("")
+    setIcon(false);
+    setErrorMessageTitle("");
+    setErrorMessageText("");
 
     if (postalCodeInput.value.length == 0) {
       valid = false;
@@ -89,6 +97,8 @@ export default function Address() {
         return;
       }
 
+      handleToggle();
+
       let postalCode = (document.getElementById('postalCode') as HTMLInputElement).value;
       let houseNumber = (document.getElementById('houseNumber') as HTMLInputElement).value;
       let suffix = (document.getElementById('houseNumberSuffix') as HTMLInputElement).value;
@@ -103,6 +113,8 @@ export default function Address() {
       })
         .then(response => response.json())
         .then((data) => {
+          handleClose();
+          console.log(data);
           setResults(data);
         });
 
@@ -117,7 +129,9 @@ export default function Address() {
 
   const processAddress = (item) => {
 
-    if (item.woonplaats !== '\'s-Hertogenbosch') {
+    let codes = [1595, 3611, 1596, 3612];
+
+    if (!codes.includes(item.woonplaatsNummer)) {
       setIcon(true)
       setErrorMessageTitle("Let op!")
       setErrorMessageText("Het nieuwe adres dat je opgeeft ligt helaas niet in een gemeente die deze service gebruikt. Geef de adreswijziging door op de website van de gemeente waar je naar toe verhuist.")
@@ -152,8 +166,8 @@ export default function Address() {
 
             <Stepper currentStep={0}/>
 
-            <Grid item sm={12}>
-              <Grid item sm={12}>
+            <Grid item xs={2} sm={2} md={2}>
+              <Grid item xs={2} sm={2} md={2}>
                 <Typography variant="h4">
                   Wat wordt je nieuwe adres?
                 </Typography>
@@ -161,7 +175,7 @@ export default function Address() {
                   Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
                 </Typography>
               </Grid>
-              <Grid item sm={12} style={{marginTop: 20}}>
+              <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
                 <TextField
                   id="postalCode"
                   label="Postcode"
@@ -194,7 +208,7 @@ export default function Address() {
                         endIcon={<SearchIcon/>}>Zoeken</Button>
               </Grid>
             </Grid>
-            <Grid item sm={12}>
+            <Grid item xs={2} sm={2} md={2}>
               <Typography variant="h5">
                 Gevonden adressen
               </Typography>
@@ -243,6 +257,12 @@ export default function Address() {
           </Grid>
       }
     </Layout>
+    <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>
   </>);
 }
 

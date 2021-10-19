@@ -13,10 +13,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   inputLength: {
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '400px',
-    },
+    width: '400px',
   },
 }));
 

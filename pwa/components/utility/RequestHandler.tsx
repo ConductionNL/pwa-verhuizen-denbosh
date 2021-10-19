@@ -3,24 +3,13 @@ import {useUserContext} from "../context/userContext";
 export function createRequest(user, context) {
 
   if (typeof window !== "undefined") {
-    let organization;
-
-    if (window.location.href.includes('http://localhost')) {
-      organization = 'http://webresourcecatalogus.conduction.svc.cluster.local/organizations/b2d3176e-f1c6-4365-ab86-dd253c65fc43';
-    } else if (window.location.href.includes('https://verhuizen.demodam.nl')) {
-      organization = 'http://webresourcecatalogus.conduction.svc.cluster.local/organizations/b2d3176e-f1c6-4365-ab86-dd253c65fc43';
-    }
-    else
-    {
-      organization = 'http://webresourcecatalogus.verhuizen.svc.cluster.local/organizations/4f387d0e-a2e5-44c0-9902-c31b63a8ee36';
-    }
 
     fetch(context.apiUrl + '/gateways/vrc/requests', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        organization: organization,
+        organization: context.organization,
         submitters: [
           {
             bsn: user.bsn

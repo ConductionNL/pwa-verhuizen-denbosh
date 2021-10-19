@@ -206,7 +206,7 @@ export default function CustomizedSteppers(currentStep) {
   };
 
   return (
-    <Box sx={{ width: '100%', marginTop: '20px', textAlign: "center" }}>
+    <Box sx={{ width: '100%', marginTop: '20px', marginBottom: '30px !important', textAlign: "center" }}>
       <Avatar sx={{ backgroundColor: "#001759", marginLeft: "auto", marginRight: "auto" }}>
         <LocalShippingIcon />
       </Avatar>

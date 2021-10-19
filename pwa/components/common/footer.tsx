@@ -20,6 +20,7 @@ import LogoutIcon from "@mui/icons-material/ExitToApp";
 import {useUserContext} from "../context/userContext";
 import Typography from "@mui/material/Typography";
 import {Login} from "@mui/icons-material";
+import {useAppContext} from "../context/state";
 
 const useStyles = makeStyles((theme) => ({
   footerStyle: {
@@ -41,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Footer() {
   const classes = useStyles();
-  const router = useRouter()
+  const router = useRouter();
+  const context = useAppContext();
 
   const [state, setState] = React.useState({
     bottumNavigation: 0,
@@ -62,6 +64,12 @@ export default function Footer() {
     router.push('/');
   }
 
+  const handleLogin = () => {
+    if (typeof window !== "undefined") {
+      window.location.href = context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl + "/moving?state=8412312632";
+    }
+  }
+
   let userContext = useUserContext();
 
   return (
@@ -77,7 +85,7 @@ export default function Footer() {
               ?
               <BottomNavigationAction onClick={handleLogout} label="Logout" icon={<LogoutIcon/>}/>
               :
-              <BottomNavigationAction label="Login" icon={<Login/>}/>
+              <BottomNavigationAction onClick={handleLogin} label="Login" icon={<Login/>}/>
           }
         </BottomNavigation>
       </Paper>
