@@ -3,7 +3,7 @@ entries:
   commonground-gateway:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2021-10-19T12:22:54.7719729+02:00"
+    created: "2021-10-19T12:48:43.0578165+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -23,7 +23,7 @@ entries:
   pwa-verhuizen-s-hertogenbosch:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-10-19T12:22:54.7599728+02:00"
+    created: "2021-10-19T12:48:43.0418175+02:00"
     dependencies:
     - alias: gateway
       condition: gateway.enabled
@@ -31,10 +31,10 @@ entries:
       repository: https://raw.githubusercontent.com/ConductionNL/commonground-gateway/master/api/helm/
       version: 0.1.2
     description: A Helm chart for the Verhuizen PWA of 's-Hertogenbosch
-    digest: 05b1d971a91c6e91b0c61aa6aae0ab08654717120ea4bd4e99cdbde3d48648e3
+    digest: ad558fe02a6eab5ee2124d2a029da2475f4d382e3bb170154ef4da76b93c7ec2
     name: pwa-verhuizen-s-hertogenbosch
     type: application
     urls:
     - pwa-verhuizen-s-hertogenbosch-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-19T12:22:54.7469742+02:00"
+generated: "2021-10-19T12:48:43.0253054+02:00"

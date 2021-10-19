@@ -36,7 +36,7 @@ spec:
           image: "{{ .Values.pwa.image.image }}:{{ .Values.pwa.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.pwa.image.pullPolicy }}
           volumeMounts:
-            - mountPath: /.env.local
+            - mountPath: /usr/src/pwa/.env.local
               name: env-local
               readOnly: true
               subPath: .env.local
