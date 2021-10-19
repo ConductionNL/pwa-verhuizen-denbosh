@@ -46,8 +46,14 @@ function Index() {
 
   const handleDate = (event) => {
     event.preventDefault();
+    console.log(date);
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0');
+    let yyyy = date.getFullYear();
 
-    updateRequest(context, 'verhuisdatum', date.toISOString().split('T')[0])
+    let formattedDate = dd + '-' + mm + '-' + yyyy;
+
+    updateRequest(context, 'datum', formattedDate)
     router.push("/moving/coMovers", undefined, {shallow: true})
   }
 

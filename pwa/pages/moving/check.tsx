@@ -13,6 +13,7 @@ import { submitRequest } from "../../components/utility/RequestHandler";
 import { useAppContext } from "../../components/context/state";
 import { useUserContext } from "../../components/context/userContext";
 import LoginScreen from "../../components/moving/loginScreen";
+import { updateRequest } from "../../components/utility/RequestHandler";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -48,6 +49,12 @@ function Index() {
   const handleContact = (event) => {
     event.preventDefault();
 
+    console.log(userContext.user);
+    return;
+
+    updateRequest(context, 'eigenaar', true,);
+    updateRequest(context, 'ingangsdatum', '01-01-2000',);
+    updateRequest(context, 'doorgegeven_gegevens', false,);
     submitRequest(context);
 
     router.push("/moving/confirmation", undefined, {shallow: true})

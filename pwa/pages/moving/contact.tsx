@@ -97,12 +97,8 @@ function Index() {
     let emailInput = (document.getElementById('email') as HTMLInputElement);
     let telephoneInput = (document.getElementById('telephone') as HTMLInputElement);
 
-    let contact = {
-      email: emailInput.value,
-      telephone: telephoneInput.value,
-    };
-
-    updateRequest(context, 'contact', contact);
+    updateRequest(context, 'email', emailInput.value,);
+    updateRequest(context, 'tel', telephoneInput.value);
 
 
     router.push("/moving/check", undefined, { shallow: true })
