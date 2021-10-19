@@ -69,9 +69,9 @@ export default function Address() {
     setPostalCodeInputHelperText('');
     setHouseNumberInputError(false);
     setHouseNumberInputHelperText('');
-    setIcon(false)
-    setErrorMessageTitle("")
-    setErrorMessageText("")
+    setIcon(false);
+    setErrorMessageTitle("");
+    setErrorMessageText("");
 
     if (postalCodeInput.value.length == 0) {
       valid = false;

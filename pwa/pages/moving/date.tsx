@@ -18,6 +18,7 @@ import {updateRequest} from "../../components/utility/RequestHandler";
 import { useAppContext } from "../../components/context/state";
 import { useUserContext } from "../../components/context/userContext";
 import LoginScreen from "../../components/moving/loginScreen";
+import WarningIcon from "@mui/icons-material/Warning";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,8 +48,19 @@ function Index() {
   const handleDate = (event) => {
     event.preventDefault();
 
-    updateRequest(context, 'verhuisdatum', date.toISOString().split('T')[0])
-    router.push("/moving/coMovers", undefined, {shallow: true})
+    let pastDate = new Date();
+    pastDate.setDate(pastDate.getDate() - 5);
+
+    if (date < pastDate) {
+      let newDate = new Date();
+      console.log(newDate.toISOString().split('T')[0]);
+      updateRequest(context, 'verhuisdatum', newDate.toISOString().split('T')[0]);
+    } else {
+      console.log(date.toISOString().split('T')[0]);
+      updateRequest(context, 'verhuisdatum', date.toISOString().split('T')[0]);
+    }
+
+    router.push("/moving/coMovers", undefined, {shallow: true});
   }
 
   const maxDateOfMoveObject = new Date();
@@ -56,6 +68,10 @@ function Index() {
   // let maxDateOfMove = maxDateOfMoveObject.toISOString().split('T')[0];
 
   const [date, setValue] = React.useState(new Date());
+
+  const [errorMessageText, setErrorMessageText] = useState('');
+  const [errorMessageTitle, setErrorMessageTitle] = useState('');
+  const [icon, setIcon] = useState(false);
 
   return <>
   <Layout title={title} description="waar kan ik deze description zien">
@@ -80,35 +96,37 @@ function Index() {
             <form onSubmit={handleDate}>
               <Grid item sm={12} className={classes.calendarAlign}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  {
-                    request != null && request.properties != null && request.properties.includes("datum") && request.properties.datum != null ?
-                      <StaticDatePicker
-                        minDate={new Date()}
-                        maxDate={maxDateOfMoveObject}
-                        displayStaticWrapperAs="desktop"
-                        openTo="day"
-                        value={request.properties.datum}
-                        onChange={(newValue) => {
-                          setValue(newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                      /> :
-                      <StaticDatePicker
-                        minDate={new Date()}
-                        maxDate={maxDateOfMoveObject}
-                        displayStaticWrapperAs="desktop"
-                        openTo="day"
-                        value={date}
-                        onChange={(newValue) => {
-                          setValue(newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                  }
+                    <StaticDatePicker
+                      maxDate={maxDateOfMoveObject}
+                      displayStaticWrapperAs="desktop"
+                      openTo="day"
+                      value={date}
+                      onChange={(newValue) => {
+                        let date = new Date();
+                        date.setDate(date.getDate() - 5);
+                        setIcon(false);
+                        setErrorMessageTitle("");
+                        setErrorMessageText("");
+                        setValue(newValue);
+
+                        if (newValue < date) {
+                          setIcon(true);
+                          setErrorMessageTitle("Uw verhuizing was langer dan 5 dagen geleden.");
+                          setErrorMessageText("De gemeente zal uw verhuisdatum aanpassen naar de datum van vandaag.");
+                        }
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
                 </LocalizationProvider>
                 <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
               </Grid>
-              <br/>
+              <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
+                <div>{icon ? <WarningIcon color="warning" fontSize="large"/> : null}</div>
+              </Grid>
+              <Grid item xs={10} sm={10} md={10}>
+                <Typography>{errorMessageTitle}</Typography>
+                <Typography>{errorMessageText}</Typography>
+              </Grid>
               <Grid
                 justifyContent="space-between" // Add it here :)
                 container>
