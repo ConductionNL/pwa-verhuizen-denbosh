@@ -12,6 +12,7 @@ import {createRequest} from "../../components/utility/RequestHandler";
 import {useUserContext} from "../../components/context/userContext";
 import {useGet} from "restful-react";
 import { useAppContext } from "../../components/context/state";
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LoginScreen from "../../components/moving/loginScreen";
 
 const useStyles = makeStyles((theme) => ({
@@ -80,14 +81,21 @@ function Index() {
             <LoginScreen />
           :
           <Grid container spacing={3}>
-            <Stepper currentStep={0}/>
+            <Box sx={{ width: '100%', marginTop: '20px', textAlign: "center" }}>
+              <Avatar sx={{ backgroundColor: "#001759", marginLeft: "auto", marginRight: "auto" }}>
+                <LocalShippingIcon />
+              </Avatar>
+              <Typography mb={1} fontWeight="medium">
+                Ik ga verhuizen
+              </Typography>
+            </Box>
 
-            <Grid item sm={12} className={classes.listStyle}>
+            <Grid item sm={12} xs={12} md={12} className={classes.listStyle}>
               <Typography variant="h4" className={classes.titleStyle}>
                 Deze stappen ga je doorlopen
               </Typography>
             </Grid>
-            <Grid item sm={12}>
+            <Grid item sm={12} xs={12} md={12}>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef je nieuwe adres op</span>
@@ -104,13 +112,13 @@ function Index() {
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef aan hoe we je kunnen bereiken</span>
               </Box>
-              <br/>
             </Grid>
-            <Grid item sm={12}>
+            <br/>
+            <Grid item sm={12} xs={12} md={12}>
               <form onSubmit={handleDate} style={{textAlign: "center"}}>
                 <Grid justifyContent="space-between" // Add it here :)
                       container>
-                  <Grid item sm={12}>
+                  <Grid item sm={12} xs={12} md={12}>
                     <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Starten</Button>
                   </Grid>
                 </Grid>

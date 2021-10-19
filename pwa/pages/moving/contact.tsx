@@ -59,28 +59,33 @@ function Index() {
     setTelephoneInputError(false);
     setTelephoneInputHelperText('');
 
-    if (emailInput.value.length == 0 || telephoneInput.value.length == 0) {
+    if (emailInput.value.length == 0 && telephoneInput.value.length == 0) {
       setEmailInputError(true);
-      setEmailInputHelperText('Vul een geldig e-mailadres in');
+      setEmailInputHelperText('Vul of een e-mailadres in of een telefoonnummer');
       setTelephoneInputError(true);
-      setTelephoneInputHelperText('Vul een geldig telefoonnummer in');
       valid = false;
     }
 
-    if (emailInput.value.length > 0) {
-      const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-      if (re.test(String(emailInput.value).toLowerCase()) == false) {
-        setEmailInputError(true);
-        setEmailInputHelperText('Vul een geldig e-mailadres in');
-        valid = false;
+    if (emailInput.value.length !== 0 || telephoneInput.value.length !== 0) {
+      if (emailInput.value.length > 0) {
+        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if (re.test(String(emailInput.value).toLowerCase()) == false) {
+          setEmailInputError(true);
+          setEmailInputHelperText('Vul een geldig e-mailadres in');
+          valid = false;
+        }
+      }
+
+      if (telephoneInput.value.length > 0) {
+        const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        if (re.test(String(telephoneInput.value).toLowerCase()) == false) {
+          setTelephoneInputError(true);
+          setTelephoneInputHelperText('Vul een geldig telefoonnummer in');
+          valid = false;
+        }
       }
     }
 
-    if (telephoneInput.value.length != 10) {
-      setTelephoneInputError(true);
-      setTelephoneInputHelperText('Vul een geldig telefoonnummer in');
-      valid = false;
-    }
 
     return valid;
   }
