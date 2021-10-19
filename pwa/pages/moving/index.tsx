@@ -16,6 +16,8 @@ import {useUserContext} from "../../components/context/userContext";
 import {useRouter} from "next/router";
 import {createRequest} from "../../components/utility/RequestHandler";
 import LoginScreen from "../../components/moving/loginScreen";
+import getConfig from "next/config";
+
 
 function Index() {
 
@@ -26,6 +28,12 @@ function Index() {
 
   const context = useAppContext();
   let userContext = useUserContext();
+
+  const { publicRuntimeConfig } = getConfig()
+
+  useEffect(() => {
+    console.log(publicRuntimeConfig);
+  }, []);
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
