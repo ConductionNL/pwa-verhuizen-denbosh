@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Tab, Tabs, Typography, Box} from "@mui/material";
+import {Tab, Tabs, Typography, Box, Stack} from "@mui/material";
 import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
@@ -33,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
   calendarAlign: {
     [theme.breakpoints.up('md')]: {
       float: "left",
+    },
+  },
+  textAlign: {
+    textAlign: "center",
+    [theme.breakpoints.up('md')]: {
+      textAlign: "left"
     },
   },
 }));
@@ -81,21 +87,25 @@ function Index() {
         <LoginScreen />
         :
         <Grid container spacing={3}>
-          <Stepper currentStep={1}/>
-
-          <Grid item sm={12} xs={12} md={12}>
-            <Typography variant="h4">
-              Wanneer ga je verhuizen?
-            </Typography>
-            <Typography mb="10px">
-              Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
-              liggen.
-            </Typography>
+          <Grid item sx={{width: '100%'}}>
+            <Stepper currentStep={1}/>
           </Grid>
-          <Grid item sm={12} xs={12} md={12}>
-            <form onSubmit={handleDate}>
-              <Grid item sm={12} xs={12} md={12} className={classes.calendarAlign}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
+
+
+          <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
+            <Grid item>
+              <Typography variant="h4">
+                Wanneer ga je verhuizen?
+              </Typography>
+              <Typography mb="10px">
+                Kies je verhuisdatum in de onderstaande kalender. De verhuisdatum mag maximaal 28 dagen in de toekomst
+                liggen.
+              </Typography>
+            </Grid>
+            <Grid item style={{marginTop: 20, width: "100%"}}>
+              <form onSubmit={handleDate}>
+                <Grid item className={classes.calendarAlign}>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <StaticDatePicker
                       maxDate={maxDateOfMoveObject}
                       displayStaticWrapperAs="desktop"
@@ -117,30 +127,44 @@ function Index() {
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
-                </LocalizationProvider>
-                <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
-              </Grid>
-              <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
-                <div>{icon ? <WarningIcon color="warning" fontSize="large"/> : null}</div>
-              </Grid>
-              <Grid item xs={10} sm={10} md={10}>
-                <Typography>{errorMessageTitle}</Typography>
-                <Typography>{errorMessageText}</Typography>
-              </Grid>
-              <Grid
-                justifyContent="space-between" // Add it here :)
-                container>
-                <Grid item sm={6} xs={6} md={6}>
-                  <Link href="/moving/address">
-                    <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-                  </Link>
+                  </LocalizationProvider>
+                  <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
                 </Grid>
-                <Grid item sm={6} xs={6} md={6}>
-                  <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
+                <Grid
+                  sx={{marginBottom: '20px'}}
+                  justifyContent="space-between" // Add it here :)
+                  container>
+                  <Stack
+                    sx={{width: '100%'}}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <div>{icon ? <WarningIcon sx={{marginRight: "20px"}} color="warning" fontSize="large"/> : null}</div>
+                    <div>
+                      <Typography>{errorMessageTitle}</Typography>
+                      <Typography>{errorMessageText}</Typography>
+                    </div>
+                  </Stack>
                 </Grid>
-              </Grid>
-            </form>
+                <Grid
+                  justifyContent="space-between" // Add it here :)
+                  container>
+                  <Stack
+                    sx={{width: '100%'}}
+                    direction="row"
+                    justifyContent="space-between"
+                  >
+                    <Link href="/moving/address">
+                      <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+                    </Link>
+                    <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
+                  </Stack>
+                </Grid>
+              </form>
+            </Grid>
           </Grid>
+
         </Grid>
     }
   </Layout>

@@ -27,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center"
     },
   },
+  textAlign: {
+    textAlign: "center",
+    [theme.breakpoints.up('md')]: {
+      textAlign: "left"
+    },
+  },
 }));
 
 function Index() {
@@ -81,36 +87,43 @@ function Index() {
           ?
           <LoginScreen />
           :
-          <Grid container spacing={3}>
-            <Stepper currentStep={2}/>
-            <Grid item sm={12}>
-              <Typography variant="h4">
-                Wie gaat er verhuizen?
-              </Typography>
-              <Typography mb="10px">
-                Onderstaande personen kunnen door jou verhuist worden.
-              </Typography>
+          <Grid container spacing={2}>
+
+            <Grid item sx={{width: '100%'}}>
+              <Stepper currentStep={2}/>
             </Grid>
-            <Grid item sm={12} xs={12} md={12}>
-              <form onSubmit={handleCoMovers}>
-                <div className={classes.listStyle}>
-                  <CheckboxList/>
-                </div>
-                <br/>
-                <Grid
-                  justifyContent="space-between" // Add it here :)
-                  container>
-                  <Grid item>
-                    <Link href={'/moving/date'}>
-                      <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-                    </Link>
+
+            <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
+              <Grid item>
+                <Typography variant="h4">
+                  Wie gaat er verhuizen?
+                </Typography>
+                <Typography mb="10px">
+                  Onderstaande personen kunnen door jou verhuist worden.
+                </Typography>
+              </Grid>
+              <Grid item>
+                <form onSubmit={handleCoMovers}>
+                  <div className={classes.listStyle}>
+                    <CheckboxList/>
+                  </div>
+                  <br/>
+                  <Grid
+                    justifyContent="space-between" // Add it here :)
+                    container>
+                    <Grid item>
+                      <Link href={'/moving/date'}>
+                        <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
-                  </Grid>
-                </Grid>
-              </form>
+                </form>
+              </Grid>
             </Grid>
+
           </Grid>
       }
     </Layout>

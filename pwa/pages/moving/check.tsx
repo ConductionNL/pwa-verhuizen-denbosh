@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center"
     },
   },
+  textAlign: {
+    textAlign: "center",
+    [theme.breakpoints.up('md')]: {
+      textAlign: "left"
+    },
+  },
 }));
 
 function Index() {
@@ -58,33 +64,39 @@ function Index() {
           <LoginScreen />
           :
           <Grid container spacing={3}>
-            <Stepper currentStep={4}/>
-            <Grid item sm={12} xs={12}>
-              <Typography variant="h4">
-                Controleer je gegevens
-              </Typography>
+
+            <Grid item sx={{width: '100%'}}>
+              <Stepper currentStep={4}/>
             </Grid>
-            <Grid item sm={12} xs={12} md={12}>
-              <form onSubmit={handleContact}>
-                <div className={classes.listStyle}>
-                  <CheckList/>
-                </div>
-                <br/>
-                <Grid
-                  justifyContent="space-between" // Add it here :)
-                  container>
-                  <Grid item>
-                    <Link href="/moving/contact">
-                      <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
-                    </Link>
+
+            <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
+              <Grid>
+                <Typography variant="h4">
+                  Controleer je gegevens
+                </Typography>
+              </Grid>
+              <Grid item>
+                <form onSubmit={handleContact}>
+                  <div className={classes.listStyle}>
+                    <CheckList/>
+                  </div>
+                  <br/>
+                  <Grid
+                    justifyContent="space-between" // Add it here :)
+                    container>
+                    <Grid item>
+                      <Link href="/moving/contact">
+                        <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight/>}>
+                        Nu verzenden
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Button type="submit" variant="contained" color="primary" endIcon={<ChevronRight/>}>
-                      Nu verzenden
-                    </Button>
-                  </Grid>
-                </Grid>
-              </form>
+                </form>
+              </Grid>
             </Grid>
           </Grid>
       }

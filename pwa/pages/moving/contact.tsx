@@ -27,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
   },
+  textAlign: {
+    textAlign: "center",
+    [theme.breakpoints.up('md')]: {
+      textAlign: "left"
+    },
+  },
 }));
 
 function Index() {
@@ -125,53 +131,57 @@ function Index() {
           :
           <Grid container spacing={3}>
 
-            <Stepper currentStep={3}/>
-
-            <Grid item sm={12} xs={12}>
-              <Typography variant="h4">
-                Hoe kunnen we je bereiken?
-              </Typography>
-              <Typography mb="10px">
-                Vul je emailadres en/of je telefoonnummer in.
-              </Typography>
+            <Grid item sx={{width: '100%'}}>
+              <Stepper currentStep={3}/>
             </Grid>
-            <Grid item sm={12} xs={12} className={classes.contactStyle}>
-              <form onSubmit={handleContact}>
-                <Grid item sm={8}>
-                  <TextField
-                    className={classes.inputLength}
-                    error={emailInputError}
-                    helperText={emailInputHelperText}
-                    id="email"
-                    label="Email"
-                    type="text"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item sm={8} style={{marginTop: 10, marginBottom: 20}}>
-                  <TextField
-                    className={classes.inputLength}
-                    error={telephoneInputError}
-                    helperText={telephoneInputHelperText}
-                    id="telephone"
-                    label="Telefoonnummer"
-                    type="text"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid
-                  justifyContent="space-between" // Add it here :)
-                  container>
+
+            <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
+              <Grid>
+                <Typography variant="h4">
+                  Hoe kunnen we je bereiken?
+                </Typography>
+                <Typography mb="10px">
+                  Vul je emailadres en/of je telefoonnummer in.
+                </Typography>
+              </Grid>
+              <Grid item style={{marginTop: 20, width: "100%"}}>
+                <form onSubmit={handleContact}>
                   <Grid item>
-                    <Link href="/moving/coMovers">
-                      <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
-                    </Link>
+                    <TextField
+                      className={classes.inputLength}
+                      error={emailInputError}
+                      helperText={emailInputHelperText}
+                      id="email"
+                      label="Email"
+                      type="text"
+                      variant="outlined"
+                    />
                   </Grid>
-                  <Grid item>
-                    <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
+                  <Grid item style={{marginTop: 10, marginBottom: 20}}>
+                    <TextField
+                      className={classes.inputLength}
+                      error={telephoneInputError}
+                      helperText={telephoneInputHelperText}
+                      id="telephone"
+                      label="Telefoonnummer"
+                      type="text"
+                      variant="outlined"
+                    />
                   </Grid>
-                </Grid>
-              </form>
+                  <Grid
+                    justifyContent="space-between" // Add it here :)
+                    container>
+                    <Grid item>
+                      <Link href="/moving/coMovers">
+                        <Button variant="text" startIcon={<ChevronLeft />}> Ga terug</Button>
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Ga verder</Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Grid>
             </Grid>
           </Grid>
       }

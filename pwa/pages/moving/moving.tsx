@@ -57,6 +57,12 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "center",
       justifyContent: "center"    },
   },
+  textAlign: {
+    textAlign: "center",
+    [theme.breakpoints.up('md')]: {
+      textAlign: "left"
+    },
+  },
 }));
 
 function Index() {
@@ -90,19 +96,19 @@ function Index() {
               </Typography>
             </Box>
 
-            <Grid item sm={12} xs={12} md={12} className={classes.listStyle}>
-              <Typography variant="h4" className={classes.titleStyle}>
+            <Grid item sm={12} xs={12} md={12} className={classes.textAlign}>
+              <Typography variant="h4">
                 Deze stappen ga je doorlopen
               </Typography>
             </Grid>
-            <Grid item sm={12} xs={12} md={12}>
+            <Grid item>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
-                <span>Geef je nieuwe adres op</span>
+                <span>Geef het adres op waar je naartoe verhuist</span>
               </Box>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
-                <span>Geef de datum op wanneer je gaat verhuis</span>
+                <span>Geef de datum op wanneer je gaat verhuisen</span>
               </Box>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
@@ -114,7 +120,7 @@ function Index() {
               </Box>
             </Grid>
             <br/>
-            <Grid item sm={12} xs={12} md={12}>
+            <Grid item>
               <form onSubmit={handleDate} style={{textAlign: "center"}}>
                 <Grid justifyContent="space-between" // Add it here :)
                       container>
