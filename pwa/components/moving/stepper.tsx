@@ -19,7 +19,6 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { styled } from '@mui/material/styles';
 
-
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,
@@ -162,6 +161,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
+    stepIcon: {
+      color: "#e5e8ee"
+    },
   }),
 );
 
@@ -205,7 +207,7 @@ export default function CustomizedSteppers(currentStep) {
 
   return (
     <Box sx={{ width: '100%', marginTop: '20px', textAlign: "center" }}>
-      <Avatar sx={{ backgroundColor: "#439BD3", marginLeft: "auto", marginRight: "auto" }}>
+      <Avatar sx={{ backgroundColor: "#001759", marginLeft: "auto", marginRight: "auto" }}>
         <LocalShippingIcon />
       </Avatar>
       <Typography mb={1} fontWeight="medium">
@@ -214,10 +216,13 @@ export default function CustomizedSteppers(currentStep) {
       <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel
+              StepIconProps={{
+                classes: { root: classes.stepIcon }
+              }} ></StepLabel>
           </Step>
         ))}
-      </Stepper>
+        </Stepper>
     </Box>
   );
 }

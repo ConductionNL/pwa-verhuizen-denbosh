@@ -10,6 +10,7 @@ import {RestfulProvider, useGet} from "restful-react";
 import {useAppContext} from "../context/state";
 import {setCookie} from "../utility/CookieHandler";
 import UserManagement from "./userManagement";
+import { createTheme, Theme, ThemeProvider } from '@mui/material/styles';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +19,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#F5F5F5',
   }
 }));
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#001759" 
+    },
+    secondary: {
+      main: "#ddc999"
+    }
+  },
+});
 
 
 const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="default-description"}) => {
@@ -28,6 +40,7 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
 
   return (
     <>
+      <ThemeProvider theme={theme}>
         <Head>
           <title>{title}</title>
         </Head>
@@ -43,6 +56,7 @@ const Layout = ({children, title="Welcome to Demodam!", h1 =null, description="d
         </Container>
 
         <Footer />
+      </ThemeProvider>
     </>
   );
 
