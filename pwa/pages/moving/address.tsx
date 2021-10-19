@@ -114,6 +114,7 @@ export default function Address() {
         .then(response => response.json())
         .then((data) => {
           handleClose();
+          console.log(data);
           setResults(data);
         });
 
@@ -128,7 +129,9 @@ export default function Address() {
 
   const processAddress = (item) => {
 
-    if (item.woonplaats !== '\'s-Hertogenbosch') {
+    let codes = [1595, 3611, 1596, 3612];
+
+    if (!codes.includes(item.woonplaatsNummer)) {
       setIcon(true)
       setErrorMessageTitle("Let op!")
       setErrorMessageText("Het nieuwe adres dat je opgeeft ligt helaas niet in een gemeente die deze service gebruikt. Geef de adreswijziging door op de website van de gemeente waar je naar toe verhuist.")
