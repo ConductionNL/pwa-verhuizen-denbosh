@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {alpha} from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import AppBar from '@mui/material/AppBar';
@@ -10,6 +10,8 @@ import Link from "next/link";
 import {useRouter} from 'next/router';
 import {useAppContext} from "../context/state";
 import {useUserContext} from "../context/userContext";
+import Button from "@mui/material/Button";
+import {ChevronRight} from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -117,6 +119,22 @@ export default function MainMenu() {
     setState({...state, ['loggedIn']: status});
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem('user') !== null) {
+        userContext.setUser(JSON.parse(sessionStorage.getItem('user')));
+      }
+    }
+  }, []);
+
+
+
+  const handleLogout = () => {
+    sessionStorage.setItem('user', null);
+    userContext.setUser(null);
+    router.push('/');
+  }
+
   let context = useAppContext();
   let userContext = useUserContext();
 
@@ -164,11 +182,13 @@ export default function MainMenu() {
                 {
                   userContext.user !== null
                     ?
-                    <span onClick={() => {
-                      handleLogout(context)
-                    }} style={{color: 'white'}}>Uitloggen</span>
+                    <span onClick={handleLogout} style={{color: 'white'}}>Uitloggen</span>
                     :
-                    <Link href="http://localhost/login/adfs/conduction">
+                    // <Link href="http://localhost/login/adfs/conduction">
+                    //   <span style={{color: 'white'}}>Inloggen</span>
+                    // </Link>
+                    <Link
+                      href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl + "/moving?state=8412312632"}>
                       <span style={{color: 'white'}}>Inloggen</span>
                     </Link>
                 }

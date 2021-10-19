@@ -10,3 +10,9 @@ data:
   {{- else }}
   gateway-location: {{ .Values.gateway.location }}
   {{- end }}
+  .env.local: |-
+      NEXT_PUBLIC_API_URL={{ .Values.pwa.apiUrl }}
+      NEXT_PUBLIC_ME_URL={{ .Values.pwa.meUrl }}
+      NEXT_PUBLIC_BASE_URL={{ .Values.pwa.baseUrl }}
+      NEXT_PUBLIC_FRONTEND_URL={{ .Values.pwa.frontendUrl }}
+      NEXT_PUBLIC_ORGANIZATION={{ .Values.pwa.organization }}

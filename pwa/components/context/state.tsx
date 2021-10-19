@@ -4,36 +4,13 @@ const AppContext = createContext(undefined);
 
 export function AppWrapper({ children }) {
 
-  let sharedState = {};
-  let meUrl;
-  let apiUrl;
-  let baseUrl;
-  let frontendUrl;
-
-  if (typeof window !== 'undefined') {
-    if (window.location.href.includes('http://localhost')) {
-      meUrl = 'http://localhost/me';
-      apiUrl = 'http://localhost/api';
-      baseUrl = 'http://localhost';
-      frontendUrl = 'http://localhost:3000';
-    }
-    else
-    {
-      meUrl = 'https://verhuizen.demodam.nl/api/users/me';
-      apiUrl = 'https://verhuizen.demodam.nl/api';
-      baseUrl = 'https://verhuizen.demodam.nl';
-      frontendUrl = 'https://verhuizen.demodam.nl';
-    }
-
-
-    sharedState = {
-      meUrl: meUrl,
-      apiUrl: apiUrl,
-      baseUrl: baseUrl,
-      frontendUrl: frontendUrl,
-    }
+  let sharedState = {
+    meUrl: process.env.NEXT_PUBLIC_ME_URL !== undefined ? process.env.NEXT_PUBLIC_ME_URL : 'http://localhost/me',
+    apiUrl: process.env.NEXT_PUBLIC_API_URL !== undefined ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost/api',
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL !== undefined ? process.env.NEXT_PUBLIC_BASE_URL : 'http://localhost',
+    frontendUrl: process.env.NEXT_PUBLIC_FRONTEND_URL !== undefined ? process.env.NEXT_PUBLIC_FRONTEND_URL : 'http://localhost:3000',
+    organization: process.env.NEXT_PUBLIC_ORGANIZATION !== undefined ? process.env.NEXT_PUBLIC_ORGANIZATION : 'http://webresourcecatalogus.conduction.svc.cluster.local/organizations/b2d3176e-f1c6-4365-ab86-dd253c65fc43',
   }
-
 
   return (
     <AppContext.Provider value={sharedState}>
