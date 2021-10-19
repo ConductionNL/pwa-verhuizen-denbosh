@@ -72,5 +72,5 @@ spec:
             items:
             - key: .env.local
               path: .env.local
-            name: env-local
+            name: {{ include "api-platform.fullname" . }}
           name: env-local
