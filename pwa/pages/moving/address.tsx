@@ -119,7 +119,6 @@ export default function Address() {
         .then(response => response.json())
         .then((data) => {
           handleClose();
-          console.log(data);
           setResults(data);
         });
 
@@ -143,21 +142,13 @@ export default function Address() {
       return;
     }
 
-    if (item.huisnummertoevoeging !== null) {
-      updateRequest(
-        context,
-        'adres',
-        item.straat + " " + item.huisnummer + item.huisnummertoevoeging + ", " + item.postcode + " " + item.woonplaats
-      )
-    } else {
-      updateRequest(
-        context,
-        'adres',
-        item.straat + " " + item.huisnummer + ", " + item.postcode + " " + item.woonplaats
-      )
-    }
+    updateRequest(
+      context,
+      'adress',
+      item.id
+    )
 
-    router.push('/moving/date');
+    // router.push('/moving/date');
   }
   return (<>
     <Layout title={title} description="waar kan ik deze description zien">

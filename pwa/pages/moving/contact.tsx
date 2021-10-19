@@ -108,15 +108,21 @@ function Index() {
     let emailInput = (document.getElementById('email') as HTMLInputElement);
     let telephoneInput = (document.getElementById('telephone') as HTMLInputElement);
 
-    let contact = {
-      email: emailInput.value,
-      telephone: telephoneInput.value,
-    };
+    if (emailInput.value.length == 0) {
+      updateRequest(context, 'email', "");
+    } else {
+      updateRequest(context, 'email', emailInput.value);
+    }
 
-    updateRequest(context, 'contact', contact);
+    if (telephoneInput.value.length == 0) {
+      updateRequest(context, 'tel', "");
+    } else {
+      updateRequest(context, 'tel', telephoneInput.value);
+    }
 
 
-    router.push("/moving/check", undefined, { shallow: true })
+
+    // router.push("/moving/check", undefined, { shallow: true })
   }
 
   const classes = useStyles();

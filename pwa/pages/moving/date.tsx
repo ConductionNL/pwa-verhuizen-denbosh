@@ -59,11 +59,9 @@ function Index() {
 
     if (date < pastDate) {
       let newDate = new Date();
-      console.log(newDate.toISOString().split('T')[0]);
-      updateRequest(context, 'verhuisdatum', newDate.toISOString().split('T')[0]);
+      updateRequest(context, 'datum', newDate.toISOString().split('T')[0]);
     } else {
-      console.log(date.toISOString().split('T')[0]);
-      updateRequest(context, 'verhuisdatum', date.toISOString().split('T')[0]);
+      updateRequest(context, 'datum', date.toISOString().split('T')[0]);
     }
 
     router.push("/moving/coMovers", undefined, {shallow: true});
