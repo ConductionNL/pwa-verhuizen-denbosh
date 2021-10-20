@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'flex',
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      marginTop: '20px',
+      marginBottom: '20px'
     },
   },
   sectionMobile: {
