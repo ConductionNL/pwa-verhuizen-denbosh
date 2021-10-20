@@ -36,6 +36,7 @@ export function createRequest(user, context) {
           console.log(result);
 
           sessionStorage.setItem('request', JSON.stringify(result));
+
           return null;
         }
       });
@@ -43,7 +44,7 @@ export function createRequest(user, context) {
 
 }
 
-export function updateRequest(context, key, value) {
+export function updateRequest(context, key, value, promise = null) {
   if (typeof window !== "undefined") {
     let request = JSON.parse(sessionStorage.getItem('request'));
     request.properties[key] = value;
@@ -66,6 +67,12 @@ export function updateRequest(context, key, value) {
           }
 
           sessionStorage.setItem('request', JSON.stringify(result));
+
+          if (promise !== null) {
+            updateRequest(promise.context, promise.key, promise.value)
+          }
+
+
           return null;
         }
       });

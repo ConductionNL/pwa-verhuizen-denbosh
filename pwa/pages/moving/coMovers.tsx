@@ -11,6 +11,8 @@ import {useGet, useMutate} from "restful-react";
 import makeStyles from "@mui/styles/makeStyles";
 import { useUserContext } from "../../components/context/userContext";
 import LoginScreen from "../../components/moving/loginScreen";
+import {updateRequest} from "../../components/utility/RequestHandler";
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   inputStyle: {
@@ -41,13 +43,7 @@ function Index() {
   var request = null;
   const classes = useStyles();
   const userContext = useUserContext();
-
-  useEffect(() => {
-    if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
-      router.push("/moving");
-    }
-  }, []);
-
+  const context = useAppContext();
 
   // const id = getIdFromStorage..
   const id = 'new';
@@ -75,7 +71,24 @@ function Index() {
   const handleCoMovers = (event) => {
     event.preventDefault();
 
-    // Session set address
+    let values = [];
+
+    for(let i = 0; i < event.target.length; i++) {
+      if (event.target[i].checked) {
+        values.push(event.target[i].value);
+      }
+    }
+
+    updateRequest(
+      context,
+      'wie',
+      values.toString(),
+      {
+        context: context,
+        key: 'wie_bsn',
+        value: values.toString()
+      }
+    )
 
     router.push("/moving/contact", undefined, {shallow: true})
   }

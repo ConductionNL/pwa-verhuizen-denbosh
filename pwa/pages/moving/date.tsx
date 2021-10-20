@@ -19,6 +19,7 @@ import { useAppContext } from "../../components/context/state";
 import { useUserContext } from "../../components/context/userContext";
 import LoginScreen from "../../components/moving/loginScreen";
 import WarningIcon from "@mui/icons-material/Warning";
+import nlLocale from 'date-fns/locale/nl';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   calendarAlign: {
     [theme.breakpoints.up('md')]: {
-      float: "left",
+      marginRight: '100%',
     },
   },
   textAlign: {
@@ -59,9 +60,9 @@ function Index() {
 
     if (date < pastDate) {
       let newDate = new Date();
-      updateRequest(context, 'datum', newDate.toISOString().split('T')[0]);
+      updateRequest(context, 'datum', date.toLocaleDateString("nl"));
     } else {
-      updateRequest(context, 'datum', date.toISOString().split('T')[0]);
+      updateRequest(context, 'datum', date.toLocaleDateString("nl"));
     }
 
     router.push("/moving/coMovers", undefined, {shallow: true});
@@ -103,7 +104,7 @@ function Index() {
             <Grid item style={{marginTop: 20, width: "100%"}}>
               <form onSubmit={handleDate}>
                 <Grid item className={classes.calendarAlign}>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <LocalizationProvider dateAdapter={AdapterDateFns} locale={nlLocale}>
                     <StaticDatePicker
                       maxDate={maxDateOfMoveObject}
                       displayStaticWrapperAs="desktop"
@@ -119,33 +120,33 @@ function Index() {
 
                         if (newValue < date) {
                           setIcon(true);
-                          setErrorMessageTitle("Uw verhuizing was langer dan 5 dagen geleden.");
-                          setErrorMessageText("De gemeente zal uw verhuisdatum aanpassen naar de datum van vandaag.");
+                          setErrorMessageTitle("Let op!");
+                          setErrorMessageText("Uw verhuizing was langer dan 5 dagen geleden. De gemeente zal uw verhuisdatum aanpassen naar de datum van vandaag.");
                         }
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </LocalizationProvider>
-                  <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
+
                 </Grid>
-                <Grid
-                  sx={{marginBottom: '20px'}}
-                  justifyContent="space-between" // Add it here :)
-                  container>
+                <Grid item>
+                  <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toLocaleDateString("nl")}</p></span>
+                </Grid>
+                <Grid>
                   <Stack
-                    sx={{width: '100%'}}
+                    sx={{marginTop: '20px'}}
                     direction="row"
-                    justifyContent="center"
                     alignItems="center"
                   >
-                    <div>{icon ? <WarningIcon sx={{marginRight: "20px"}} color="warning" fontSize="large"/> : null}</div>
-                    <div>
-                      <Typography>{errorMessageTitle}</Typography>
-                      <Typography>{errorMessageText}</Typography>
+                    <div>{icon ? <WarningIcon color="warning" fontSize="large" sx={{marginRight: '40px'}}/> : null}</div>
+                    <div style={{textAlign: 'left'}}>
+                      <Typography variant="h5">{errorMessageTitle}</Typography>
+                      <div>{errorMessageText}</div>
                     </div>
                   </Stack>
                 </Grid>
                 <Grid
+                  sx={{marginTop: '30px'}}
                   justifyContent="space-between" // Add it here :)
                   container>
                   <Stack

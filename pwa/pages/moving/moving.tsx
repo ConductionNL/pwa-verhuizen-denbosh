@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import React, { useEffect} from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import {Typography, Box, Avatar} from "@mui/material";
+import {Typography, Box, Avatar, Stack} from "@mui/material";
 import makeStyles from '@mui/styles/makeStyles';
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
@@ -14,6 +14,7 @@ import {useGet} from "restful-react";
 import { useAppContext } from "../../components/context/state";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LoginScreen from "../../components/moving/loginScreen";
+import WarningIcon from "@mui/icons-material/Warning";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -72,12 +73,31 @@ function Index() {
   const userContext = useUserContext();
   const context = useAppContext();
 
+  const [allowed, setAllowed] = React.useState(null);
+
   const handleDate = (event) => {
     event.preventDefault();
 
     createRequest(userContext.user, context);
     router.push("/moving/address", undefined, {shallow: true})
   }
+
+  useEffect(() => {
+    if (userContext.user !== null) {
+      fetch(context.apiUrl + '/gateways/logic/people', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          brp: userContext.user.bsn,
+        })
+      })
+        .then(response => response.json())
+        .then((data) =>  {
+          setAllowed(data);
+        });
+    }
+  }, [userContext.user]);
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -101,7 +121,7 @@ function Index() {
                 Deze stappen ga je doorlopen
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid item sx={{width: '100%', minWidth: '100%'}}>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef het adres op waar je naartoe verhuist</span>
@@ -120,16 +140,38 @@ function Index() {
               </Box>
             </Grid>
             <br/>
-            <Grid item>
-              <form onSubmit={handleDate} style={{textAlign: "center"}}>
-                <Grid justifyContent="space-between" // Add it here :)
-                      container>
-                  <Grid item sm={12} xs={12} md={12}>
-                    <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Starten</Button>
-                  </Grid>
-                </Grid>
-              </form>
-            </Grid>
+            {
+              allowed !== null &&
+                <>
+                    {
+                      allowed.isEligible
+                        ?
+                          <Grid item>
+                            <form onSubmit={handleDate}>
+                              <Grid container>
+                                <Grid item sm={12} xs={12} md={12} className={classes.textAlign}>
+                                  <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Starten</Button>
+                                </Grid>
+                              </Grid>
+                            </form>
+                          </Grid>
+                        :
+                        <Grid item>
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                          >
+                            <div>{<WarningIcon color="warning" fontSize="large" sx={{marginRight: '40px'}}/>}</div>
+                            <div style={{textAlign: 'left'}}>
+                              <Typography variant="h5">Let op!</Typography>
+                              <div>U bent helaas niet gemachtigd dit verzoek uit te voeren</div>
+                            </div>
+                          </Stack>
+                        </Grid>
+                    }
+
+                </>
+            }
           </Grid>
       }
     </Layout>
