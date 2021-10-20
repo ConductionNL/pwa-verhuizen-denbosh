@@ -10,6 +10,11 @@ export function createRequest(user, context) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         organization: context.organization,
+        properties: {
+          eigenaar: true,
+          ingangsdatum: '01-01-2000',
+          doorgeven_gegevens: false
+        },
         submitters: [
           {
             bsn: user.bsn
@@ -28,6 +33,8 @@ export function createRequest(user, context) {
             properties: data.properties
           }
 
+          console.log(result);
+
           sessionStorage.setItem('request', JSON.stringify(result));
           return null;
         }
@@ -39,22 +46,7 @@ export function createRequest(user, context) {
 export function updateRequest(context, key, value) {
   if (typeof window !== "undefined") {
     let request = JSON.parse(sessionStorage.getItem('request'));
-
-    let exist = false;
-
-    for (let i = 0; i < request.properties.length; i ++) {
-      if (key in request.properties[i]) {
-        exist = true;
-        request.properties[i][key] = value;
-      }
-    }
-
-    if (!exist) {
-      let result = {};
-      result[key] = value;
-
-      request.properties.push(result);
-    }
+    request.properties[key] = value;
 
     fetch(context.apiUrl + '/gateways/vrc/requests/' + request.id, {
       method: 'PUT',

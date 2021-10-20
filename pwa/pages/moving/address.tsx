@@ -20,9 +20,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '400px',
-      textAlign: "center",
     },
-  }
+  },
+  textAlign: {
+    textAlign: "center",
+    [theme.breakpoints.up('md')]: {
+      textAlign: "left"
+    },
+  },
 }));
 
 export default function Address() {
@@ -114,7 +119,6 @@ export default function Address() {
         .then(response => response.json())
         .then((data) => {
           handleClose();
-          console.log(data);
           setResults(data);
         });
 
@@ -138,21 +142,13 @@ export default function Address() {
       return;
     }
 
-    if (item.huisnummertoevoeging !== null) {
-      updateRequest(
-        context,
-        'adres',
-        item.straat + " " + item.huisnummer + item.huisnummertoevoeging + ", " + item.postcode + " " + item.woonplaats
-      )
-    } else {
-      updateRequest(
-        context,
-        'adres',
-        item.straat + " " + item.huisnummer + ", " + item.postcode + " " + item.woonplaats
-      )
-    }
+    updateRequest(
+      context,
+      'adress',
+      item.id
+    )
 
-    router.push('/moving/date');
+    // router.push('/moving/date');
   }
   return (<>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -164,10 +160,12 @@ export default function Address() {
           :
           <Grid container spacing={3}>
 
-            <Stepper currentStep={0}/>
+            <Grid item sx={{width: '100%'}}>
+              <Stepper currentStep={0}/>
+            </Grid>
 
-            <Grid item xs={2} sm={2} md={2}>
-              <Grid item xs={2} sm={2} md={2}>
+            <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
+              <Grid item>
                 <Typography variant="h4">
                   Wat wordt je nieuwe adres?
                 </Typography>
@@ -175,7 +173,7 @@ export default function Address() {
                   Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
                 </Typography>
               </Grid>
-              <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
+              <Grid item style={{marginTop: 20, width: "100%"}}>
                 <TextField
                   id="postalCode"
                   label="Postcode"
@@ -208,7 +206,7 @@ export default function Address() {
                         endIcon={<SearchIcon/>}>Zoeken</Button>
               </Grid>
             </Grid>
-            <Grid item xs={2} sm={2} md={2}>
+            <Grid className={classes.textAlign} item>
               <Typography variant="h5">
                 Gevonden adressen
               </Typography>
@@ -244,7 +242,7 @@ export default function Address() {
               <div>{errorMessageText}</div>
             </Grid>
             <Grid
-              sx={{marginTop: '30px'}}
+              sx={{marginTop: '30px', paddingLeft: '20px', paddingRight: '20px'}}
               justifyContent="space-between" // Add it here :)
               container>
               <Grid item>

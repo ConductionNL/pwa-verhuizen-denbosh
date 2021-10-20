@@ -20,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "center",
       justifyContent: "center"    },
   },
+  textAlign: {
+    textAlign: "center",
+    [theme.breakpoints.up('md')]: {
+      textAlign: "left"
+    },
+  },
 }));
 
 function Index() {
@@ -53,27 +59,23 @@ function Index() {
           <LoginScreen />
           :
           <Grid container spacing={3}>
-            <Stepper currentStep={5}/>
-            <Grid item sm={12}>
-              {/*{*/}
-              {/*  request != null && request.status == 'submitted' ?*/}
-              <Typography variant="h4">
-                Je verhuizing is aangevraagd
-              </Typography>
-              {/*:*/}
-              {/*    <Typography variant="h4">*/}
-              {/*      Er is iets misgegeaan probeer het opnieuw*/}
-              {/*    </Typography>*/}
-              {/*}*/}
-              {/*{*/}
-              {/*  request != null && request.status == 'submitted' &&*/}
-              <Typography mb="10px">
-                De volgende gegevens zijn succesvol verzonden naar de gemeente.
-              </Typography>
+
+            <Grid item sx={{width: '100%'}}>
+              <Stepper currentStep={5}/>
             </Grid>
-            {/*}*/}
-            <Grid item sm={12} xs={12} className={classes.listStyle}>
-              <CheckList/>
+
+            <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
+              <Grid item >
+                <Typography variant="h4">
+                  Je verhuizing is aangevraagd
+                </Typography>
+                <Typography mb="10px">
+                  De volgende gegevens zijn succesvol verzonden naar de gemeente.
+                </Typography>
+              </Grid>
+              <Grid item className={classes.listStyle}>
+                <CheckList/>
+              </Grid>
             </Grid>
           </Grid>
       }
