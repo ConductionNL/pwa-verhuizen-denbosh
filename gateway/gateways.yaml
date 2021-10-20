@@ -11,6 +11,12 @@ App\Entity\Gateway:
         apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
         location: https://conduction.demodam.nl/api/v1/as
         documentation: https://raw.githubusercontent.com/ConductionNL/productenendienstencatalogus/master/api/public/schema/openapi.yaml
+    gateway_13:
+        name: logic
+        auth: apikey
+        apikey: 45c1a4b6-59d3-4a6e-86bf-88a872f35845
+        location: https://verhuizen.demodam.nl/api/v1/logicservice
+        documentation: https://raw.githubusercontent.com/ConductionNL/logicservice/master/api/public/schema/openapi.yaml
     gateway_12:
         name: vrc
         auth: apikey
