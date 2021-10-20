@@ -127,10 +127,6 @@ export default function Address() {
 
   const classes = useStyles();
 
-  const route = () => {
-    router.push('/moving/date');
-  }
-
   const processAddress = (item) => {
 
     let codes = [1595, 3611, 1596, 3612];
@@ -148,7 +144,7 @@ export default function Address() {
       item.id
     )
 
-    // router.push('/moving/date');
+    router.push('/moving/date');
   }
   return (<>
     <Layout title={title} description="waar kan ik deze description zien">

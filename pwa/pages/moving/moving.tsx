@@ -95,7 +95,6 @@ function Index() {
         .then(response => response.json())
         .then((data) =>  {
           setAllowed(data);
-          console.log(data);
         });
     }
   }, [userContext.user]);
