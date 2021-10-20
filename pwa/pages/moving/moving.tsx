@@ -101,7 +101,7 @@ function Index() {
                 Deze stappen ga je doorlopen
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid item sx={{width: '100%', minWidth: '100%'}}>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef het adres op waar je naartoe verhuist</span>
@@ -121,10 +121,9 @@ function Index() {
             </Grid>
             <br/>
             <Grid item>
-              <form onSubmit={handleDate} style={{textAlign: "center"}}>
-                <Grid justifyContent="space-between" // Add it here :)
-                      container>
-                  <Grid item sm={12} xs={12} md={12}>
+              <form onSubmit={handleDate}>
+                <Grid container>
+                  <Grid item sm={12} xs={12} md={12} className={classes.textAlign}>
                     <Button color="primary" type="submit" variant="contained" endIcon={<ChevronRight/>}>Starten</Button>
                   </Grid>
                 </Grid>
