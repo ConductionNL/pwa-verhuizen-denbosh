@@ -19,6 +19,7 @@ import { useAppContext } from "../../components/context/state";
 import { useUserContext } from "../../components/context/userContext";
 import LoginScreen from "../../components/moving/loginScreen";
 import WarningIcon from "@mui/icons-material/Warning";
+import nlLocale from 'date-fns/locale/nl';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -59,9 +60,9 @@ function Index() {
 
     if (date < pastDate) {
       let newDate = new Date();
-      updateRequest(context, 'datum', newDate.toISOString().split('T')[0]);
+      updateRequest(context, 'datum', date.toLocaleDateString("nl"));
     } else {
-      updateRequest(context, 'datum', date.toISOString().split('T')[0]);
+      updateRequest(context, 'datum', date.toLocaleDateString("nl"));
     }
 
     router.push("/moving/coMovers", undefined, {shallow: true});
@@ -103,7 +104,7 @@ function Index() {
             <Grid item style={{marginTop: 20, width: "100%"}}>
               <form onSubmit={handleDate}>
                 <Grid item className={classes.calendarAlign}>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <LocalizationProvider dateAdapter={AdapterDateFns} locale={nlLocale}>
                     <StaticDatePicker
                       maxDate={maxDateOfMoveObject}
                       displayStaticWrapperAs="desktop"
@@ -129,7 +130,7 @@ function Index() {
 
                 </Grid>
                 <Grid item>
-                  <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
+                  <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toLocaleDateString("nl")}</p></span>
                 </Grid>
                 <Grid>
                   <Stack
