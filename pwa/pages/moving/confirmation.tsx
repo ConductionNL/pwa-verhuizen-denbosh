@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
 import PageHeader from "../../components/common/pageheader";
-import {Link, TextField, Typography} from "@mui/material";
+import {Icon, Link, TextField, Typography} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import CheckList from "../../components/moving/listCheck";
@@ -12,6 +12,10 @@ import {useGet} from "restful-react";
 import makeStyles from "@mui/styles/makeStyles";
 import { useUserContext } from "../../components/context/userContext";
 import LoginScreen from "../../components/moving/loginScreen";
+import Avatar from "@mui/material/Avatar";
+import {Person} from "@mui/icons-material";
+import {Check} from "@material-ui/icons";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const useStyles = makeStyles((theme) => ({
   listStyle: {
@@ -69,6 +73,9 @@ function Index() {
                 <Typography variant="h4">
                   Je verhuizing is aangevraagd
                 </Typography>
+                <div style={{textAlign: 'center'}}>
+                  <CheckCircleIcon sx={{ color: '#AD9156', fontSize: 150 }} />
+                </div>
                 <Typography mb="10px">
                   De volgende gegevens zijn succesvol verzonden naar de gemeente.
                 </Typography>
