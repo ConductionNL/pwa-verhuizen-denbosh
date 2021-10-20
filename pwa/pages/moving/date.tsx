@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   calendarAlign: {
     [theme.breakpoints.up('md')]: {
-      float: "left",
+      marginRight: '100%',
     },
   },
   textAlign: {
@@ -119,33 +119,33 @@ function Index() {
 
                         if (newValue < date) {
                           setIcon(true);
-                          setErrorMessageTitle("Uw verhuizing was langer dan 5 dagen geleden.");
-                          setErrorMessageText("De gemeente zal uw verhuisdatum aanpassen naar de datum van vandaag.");
+                          setErrorMessageTitle("Let op!");
+                          setErrorMessageText("Uw verhuizing was langer dan 5 dagen geleden. De gemeente zal uw verhuisdatum aanpassen naar de datum van vandaag.");
                         }
                       }}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </LocalizationProvider>
+
+                </Grid>
+                <Grid item>
                   <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toISOString().split('T')[0]}</p></span>
                 </Grid>
-                <Grid
-                  sx={{marginBottom: '20px'}}
-                  justifyContent="space-between" // Add it here :)
-                  container>
+                <Grid>
                   <Stack
-                    sx={{width: '100%'}}
+                    sx={{marginTop: '20px'}}
                     direction="row"
-                    justifyContent="center"
                     alignItems="center"
                   >
-                    <div>{icon ? <WarningIcon sx={{marginRight: "20px"}} color="warning" fontSize="large"/> : null}</div>
-                    <div>
-                      <Typography>{errorMessageTitle}</Typography>
-                      <Typography>{errorMessageText}</Typography>
+                    <div>{icon ? <WarningIcon color="warning" fontSize="large" sx={{marginRight: '40px'}}/> : null}</div>
+                    <div style={{textAlign: 'left'}}>
+                      <Typography variant="h5">{errorMessageTitle}</Typography>
+                      <div>{errorMessageText}</div>
                     </div>
                   </Stack>
                 </Grid>
                 <Grid
+                  sx={{marginTop: '30px'}}
                   justifyContent="space-between" // Add it here :)
                   container>
                   <Stack

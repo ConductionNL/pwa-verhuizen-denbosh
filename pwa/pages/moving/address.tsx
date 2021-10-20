@@ -3,7 +3,7 @@ import React, {ReactNode, useEffect, useState} from "react";
 import Link from 'next/link'
 import Layout from "../../components/common/layout";
 import Grid from "@mui/material/Grid";
-import {Tab, Tabs, Typography, Box, TextField, Avatar, Backdrop, CircularProgress} from "@mui/material";
+import {Tab, Tabs, Typography, Box, TextField, Avatar, Backdrop, CircularProgress, Stack} from "@mui/material";
 import {useRouter} from "next/router";
 import Stepper from "../../components/moving/stepper";
 import makeStyles from "@mui/styles/makeStyles";
@@ -234,12 +234,18 @@ export default function Address() {
                 }
               </div>
             </Grid>
-            <Grid item xs={2} sm={2} md={2} style={{marginTop: 20}}>
-              <div>{icon ? <WarningIcon color="warning" fontSize="large"/> : null}</div>
-            </Grid>
-            <Grid item xs={10} sm={10} md={10}>
-              <Typography variant="h5">{errorMessageTitle}</Typography>
-              <div>{errorMessageText}</div>
+            <Grid>
+              <Stack
+                sx={{marginTop: '20px'}}
+                direction="row"
+                alignItems="center"
+              >
+                <div>{icon ? <WarningIcon color="warning" fontSize="large" sx={{marginRight: '40px'}}/> : null}</div>
+                <div style={{textAlign: 'left'}}>
+                  <Typography variant="h5">{errorMessageTitle}</Typography>
+                  <div>{errorMessageText}</div>
+                </div>
+              </Stack>
             </Grid>
             <Grid
               sx={{marginTop: '30px', paddingLeft: '20px', paddingRight: '20px'}}
