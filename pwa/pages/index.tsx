@@ -20,7 +20,7 @@ const Welcome = () => (
             title="Verhuizen"
             description="Het doorgeven van een verhuizing."
             link="/moving"
-            linkText="Lees meer "
+            linkText="Start formulier "
           />
         </Grid>
       </Grid>
