@@ -15,7 +15,8 @@ const generateCsp = (): [csp: string, nonce: string] => {
   let csp = ``;
   csp += `default-src 'none';`;
   csp += `base-uri 'self';`;
-  csp += `style-src https://fonts.googleapis.com 'unsafe-inline';`; // NextJS requires 'unsafe-inline'
+  csp += `prefetch-src 'self';`;
+  csp += `style-src 'self' https://fonts.googleapis.com 'unsafe-inline';`; // NextJS requires 'unsafe-inline'
   csp += `script-src 'nonce-${nonce}' 'self' ${production ? '' : "'unsafe-eval'"};`; // NextJS requires 'self' and 'unsafe-eval' in dev (faster source maps)
   csp += `img-src https://www.logius.nl https://www.s-hertogenbosch.nl;`
   // csp += `font-src https://fonts.gstatic.com http://localhost:3000;`;
