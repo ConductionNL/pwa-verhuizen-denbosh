@@ -32,9 +32,6 @@ export function createRequest(user, context) {
             organization: data.organization,
             properties: data.properties
           }
-
-          console.log(result);
-
           sessionStorage.setItem('request', JSON.stringify(result));
 
           return null;

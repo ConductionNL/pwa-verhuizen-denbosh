@@ -18,10 +18,10 @@ const generateCsp = (): [csp: string, nonce: string] => {
   csp += `prefetch-src 'self';`;
   csp += `style-src 'self' https://fonts.googleapis.com 'unsafe-inline';`; // NextJS requires 'unsafe-inline'
   csp += `script-src 'nonce-${nonce}' 'self' ${production ? '' : "'unsafe-eval'"};`; // NextJS requires 'self' and 'unsafe-eval' in dev (faster source maps)
-  csp += `img-src https://www.logius.nl https://www.s-hertogenbosch.nl;`
+  csp += `img-src 'self' https://www.logius.nl https://www.s-hertogenbosch.nl;`
   // csp += `font-src https://fonts.gstatic.com http://localhost:3000;`;
   // csp += `connect-src 'self' http://localhost;`;
-  csp += `font-src https://fonts.gstatic.com;`;
+  csp += `font-src 'self' https://fonts.gstatic.com;`;
   csp += `connect-src 'self';`;
 
   // if (typeof window !== "undefined") {
