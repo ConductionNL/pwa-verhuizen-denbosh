@@ -1,4 +1,37 @@
+let nonce = "";
+let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+for(let i = 0; i < length; i++) {
+  nonce += possible.charAt(Math.floor(Math.random() * possible.length));
+}
+
+let csp = ``;
+csp += `default-src 'none';`;
+csp += `base-uri 'self';`;
+csp += `prefetch-src 'self';`;
+csp += `style-src 'self' https://fonts.googleapis.com 'unsafe-inline';`;
+csp += `script-src 'nonce-${nonce}' 'self' 'unsafe-eval';`;
+csp += `img-src 'self' https://www.logius.nl https://www.s-hertogenbosch.nl;`
+csp += `font-src 'self' https://fonts.gstatic.com;`;
+csp += `connect-src 'self';`;
+
+
+const securityHeaders = [
+  {
+    key: 'Content-Security-Policy',
+    value: csp
+  }
+];
+
 module.exports = {
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+    ]
+  },
   images: {
     loader: 'imgix',
     path: '/',
