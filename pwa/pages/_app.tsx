@@ -9,6 +9,9 @@ import makeStyles from '@mui/styles/makeStyles';
 import {UserContextWrapper} from "../components/context/userContext";
 import {RestfulProvider} from "restful-react";
 import {RestfulProviderWrapper} from "../components/utility/RestfulProviderWrapper";
+import createCache from "@emotion/cache";
+import getConfig from "next/config";
+import {CacheProvider} from "@emotion/react";
 
 
 declare module '@mui/styles/defaultTheme' {
@@ -16,6 +19,13 @@ declare module '@mui/styles/defaultTheme' {
   interface DefaultTheme extends Theme {}
 }
 
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+const cache = createCache({
+  key: 'my-prefix-key',
+  nonce: publicRuntimeConfig.nonce,
+  prepend: true,
+});
 
 const theme = createTheme();
 
@@ -30,13 +40,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
       <AppWrapper>
         <UserContextWrapper>
-          <StyledEngineProvider injectFirst>
+          <CacheProvider value={cache}>
             <ThemeProvider theme={theme}>
               <RestfulProviderWrapper>
                 <Component {...pageProps} />
               </RestfulProviderWrapper>
             </ThemeProvider>
-          </StyledEngineProvider>
+          </CacheProvider>
         </UserContextWrapper>
       </AppWrapper>
   );
