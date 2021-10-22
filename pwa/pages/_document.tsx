@@ -19,8 +19,8 @@ const generateCsp = (): [csp: string, nonce: string] => {
   csp += `style-src 'self' https://fonts.googleapis.com 'unsafe-inline';`; // NextJS requires 'unsafe-inline'
   csp += `script-src 'nonce-${nonce}' 'self' ${production ? '' : "'unsafe-eval'"};`; // NextJS requires 'self' and 'unsafe-eval' in dev (faster source maps)
   csp += `img-src 'self' https://www.logius.nl https://www.s-hertogenbosch.nl;`
-  // csp += `font-src https://fonts.gstatic.com http://localhost:3000;`;
-  // csp += `connect-src 'self' http://localhost;`;
+  csp += `font-src https://fonts.gstatic.com http://localhost:3000;`;
+  csp += `connect-src 'self' http://localhost;`;
   csp += `font-src 'self' https://fonts.gstatic.com;`;
   csp += `connect-src 'self';`;
 
@@ -44,7 +44,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head nonce={nonce}>
           <meta property='csp-nonce' content={nonce} />
-          <meta httpEquiv='Content-Security-Policy' content={csp} />
+          {/*<meta httpEquiv='Content-Security-Policy' content={csp} />*/}
           {/* Not exactly required, but this is the PWA primary color */}
           <meta name="theme-color"/>
         </Head>

@@ -8,12 +8,13 @@ let csp = ``;
 csp += `default-src 'none';`;
 csp += `base-uri 'self';`;
 csp += `prefetch-src 'self';`;
-csp += `style-src 'self' https://fonts.googleapis.com 'unsafe-inline';`;
+csp += `style-src 'self';`;
 csp += `script-src 'nonce-${nonce}' 'self' 'unsafe-eval';`;
 csp += `img-src 'self' https://www.logius.nl https://www.s-hertogenbosch.nl;`
-csp += `font-src 'self' https://fonts.gstatic.com;`;
-csp += `connect-src 'self';`;
-
+// csp += `font-src 'self' https://fonts.gstatic.com;`;
+// csp += `connect-src 'self';`;
+csp += `font-src 'self' https://fonts.gstatic.com http://localhost:3000;`;
+csp += `connect-src 'self' http://localhost;`;
 
 const securityHeaders = [
   {
