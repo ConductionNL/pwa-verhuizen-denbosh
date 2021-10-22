@@ -8,13 +8,13 @@ let csp = ``;
 csp += `default-src 'none';`;
 csp += `base-uri 'self';`;
 csp += `prefetch-src 'self';`;
-csp += `style-src 'self' 'nonce-${nonce}' ;`;
+csp += `style-src 'nonce-${nonce}' 'self';`;
 csp += `script-src 'nonce-${nonce}' 'self' 'unsafe-eval';`;
 csp += `img-src 'self' https://www.logius.nl https://www.s-hertogenbosch.nl;`
-// csp += `font-src 'self' https://fonts.gstatic.com;`;
-// csp += `connect-src 'self';`;
-csp += `font-src 'self' https://fonts.gstatic.com http://localhost:3000;`;
-csp += `connect-src 'self' http://localhost;`;
+csp += `font-src 'self' https://fonts.gstatic.com;`;
+csp += `connect-src 'self';`;
+// csp += `font-src 'self' https://fonts.gstatic.com http://localhost:3000;`;
+// csp += `connect-src 'self' http://localhost;`;
 
 const securityHeaders = [
   {
@@ -38,6 +38,7 @@ module.exports = {
     path: '/',
   },
   publicRuntimeConfig: {
+    nonce: nonce,
     NEXT_PUBLIC_ENTRYPOINT: process.env.NEXT_PUBLIC_ENTRYPOINT || "http://localhost",
     NEXT_PUBLIC_ME_URL: process.env.NEXT_PUBLIC_ME_URL || 'http://localhost/me',
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost/api',

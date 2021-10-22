@@ -3,6 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@mui/styles';
 import crypto from 'crypto';
 import { v4 } from 'uuid';
+import getConfig from 'next/config';
 
 const generateCsp = (): [csp: string, nonce: string] => {
   const production = process.env.NODE_ENV === 'production';
@@ -37,20 +38,23 @@ const generateCsp = (): [csp: string, nonce: string] => {
   return [csp, nonce];
 };
 
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+
 export default class MyDocument extends Document {
   render() {
     const [csp, nonce] = generateCsp();
     return (
       <Html lang="en">
-        <Head nonce={nonce}>
-          <meta property='csp-nonce' content={nonce} />
+        <Head nonce={publicRuntimeConfig.nonce}>
+          <meta property='csp-nonce' content={publicRuntimeConfig.nonce} />
           {/*<meta httpEquiv='Content-Security-Policy' content={csp} />*/}
           {/* Not exactly required, but this is the PWA primary color */}
           <meta name="theme-color"/>
         </Head>
         <body>
         <Main />
-        <NextScript nonce={nonce} />
+        <NextScript nonce={publicRuntimeConfig.nonce} />
         </body>
       </Html>
     );
