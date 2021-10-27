@@ -14,8 +14,8 @@ const generateCsp = (): [csp: string, nonce: string] => {
   csp += `style-src 'self' 'nonce-${nonce}' data:;`;
   csp += `script-src 'nonce-${nonce}' 'self' 'unsafe-eval';`;
   csp += `img-src 'self' https://www.logius.nl https://www.s-hertogenbosch.nl;`
-  csp += `font-src 'self' https://fonts.gstatic.com http://localhost:3000;`;
-  csp += `connect-src 'self' http://localhost;`;
+  csp += `font-src 'self' https://fonts.gstatic.com;`;
+  csp += `connect-src 'self';`;
 
 
   return [csp, nonce];
