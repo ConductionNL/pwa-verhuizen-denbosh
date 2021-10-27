@@ -21,12 +21,6 @@ const useStyles = makeStyles((theme) => ({
       width: '400px',
     },
   },
-  contactStyle: {
-    textAlign: "left",
-    [theme.breakpoints.down('md')]: {
-      textAlign: "center",
-    },
-  },
   textAlign: {
     textAlign: "center",
     [theme.breakpoints.up('md')]: {
@@ -149,11 +143,11 @@ function Index() {
                 <Typography variant="h4">
                   Hoe kunnen we je bereiken?
                 </Typography>
-                <Typography mb="10px">
+                <Typography sx={{marginBottom: '10px'}}>
                   Vul je emailadres en/of je telefoonnummer in.
                 </Typography>
               </Grid>
-              <Grid item style={{marginTop: 20, width: "100%"}}>
+              <Grid item sx={{marginTop: '20px', width: "100%"}}>
                 <form onSubmit={handleContact}>
                   <Grid item>
                     <TextField
@@ -166,7 +160,7 @@ function Index() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item style={{marginTop: 10, marginBottom: 20}}>
+                  <Grid item sx={{marginTop: '10px', marginBottom: '20px'}}>
                     <TextField
                       className={classes.inputLength}
                       error={telephoneInputError}

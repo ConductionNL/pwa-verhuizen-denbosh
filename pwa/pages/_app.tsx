@@ -1,7 +1,5 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from "next/app";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import {AppWrapper, useAppContext} from "../components/context/state";
 import { ThemeProvider, Theme, StyledEngineProvider, createTheme } from '@mui/material/styles';
 
@@ -12,6 +10,7 @@ import {RestfulProviderWrapper} from "../components/utility/RestfulProviderWrapp
 import createCache from "@emotion/cache";
 import getConfig from "next/config";
 import {CacheProvider} from "@emotion/react";
+import {useEffect} from "react";
 
 
 declare module '@mui/styles/defaultTheme' {
@@ -28,12 +27,6 @@ const cache = createCache({
 });
 
 const theme = createTheme();
-
-const useStyles = makeStyles((theme) => {
-  root: {
-    // some css that access to theme
-  }
-});
 
 function MyApp({ Component, pageProps }: AppProps) {
 

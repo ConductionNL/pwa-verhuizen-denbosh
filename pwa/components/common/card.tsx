@@ -29,7 +29,7 @@ export default function StandardCard({smallUpperTitle = null, title = null, seco
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root} variant="outlined" style={{minHeight: '200px', display: "flex", flexDirection: "column"}}>
+    <Card className={classes.root} variant="outlined" sx={{minHeight: '200px', display: "flex", flexDirection: "column"}}>
       <CardContent>
         {
           smallUpperTitle != null &&
@@ -56,7 +56,7 @@ export default function StandardCard({smallUpperTitle = null, title = null, seco
           </Typography>
         }
       </CardContent>
-      <CardActions style={{marginTop: "auto"}}>
+      <CardActions sx={{marginTop: "auto"}}>
         <Button size="small" >
           <Link href={link}>
             Lees meer

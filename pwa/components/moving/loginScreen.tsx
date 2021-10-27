@@ -15,6 +15,19 @@ import {useAppContext} from "../../components/context/state";
 import {useUserContext} from "../../components/context/userContext";
 import {useRouter} from "next/router";
 import {createRequest} from "../../components/utility/RequestHandler";
+import makeStyles from "@mui/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+  digidImage: {
+    width: '40px', marginRight: '10px'
+  },
+  digidButton: {
+    backgroundColor: "#F5F5F5", color: "black", marginBottom: '20px'
+  },
+  alignCenter: {
+    textAlign: "center"
+  }
+}));
 
 function LoginScreen() {
 
@@ -24,7 +37,8 @@ function LoginScreen() {
   const router = useRouter()
 
   const context = useAppContext();
-  let userContext = useUserContext();
+  const classes = useStyles();
+  const userContext = useUserContext();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -45,7 +59,7 @@ function LoginScreen() {
 
   return <>
       <Grid item sm={12}>
-        <div style={{textAlign: "center"}}>
+        <div className={classes.alignCenter}>
           <Typography color="#19224C" fontWeight="bold" mt='40px' mb='40px' variant="h4" component="h2">
             {title}
           </Typography>
@@ -69,9 +83,9 @@ function LoginScreen() {
             loading == false && userContext.user == null &&
             <Link
               href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl + "/moving?state=8412312632"}>
-              <Button variant="contained" style={{backgroundColor: "#F5F5F5", color: "black", marginBottom: '20px'}}
+              <Button variant="contained" className={classes.digidButton}
                       endIcon={<ChevronRight/>}>
-                <img style={{width: '40px', marginRight: '10px'}}
+                <img className={classes.digidImage}
                      src="https://www.logius.nl/sites/default/files/afbeeldingen/producten/digid_eo_rgb_100px_4.png"
                      alt=""/>Inloggen Met DigiD
               </Button>

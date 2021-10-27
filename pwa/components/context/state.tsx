@@ -4,6 +4,9 @@ const AppContext = createContext(undefined);
 
 export function AppWrapper({ children }) {
 
+  const crypto = require('crypto');
+  let nonce = crypto.randomBytes(16).toString('base64');
+
   let sharedState = {};
   let meUrl;
   let apiUrl;
@@ -39,6 +42,7 @@ export function AppWrapper({ children }) {
       baseUrl: baseUrl,
       frontendUrl: frontendUrl,
       organization: organization,
+      nonce: nonce
     }
 
 

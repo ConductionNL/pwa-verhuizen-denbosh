@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  headerImage: {
+    maxHeight: '100px', cursor: "pointer"
+  },
 }));
 
 export default function Header() {
@@ -41,7 +44,7 @@ export default function Header() {
     <header>
 
       <div className={classes.sectionDesktop}>
-        <img onClick={direct} style={{maxHeight: '100px', cursor: "pointer"}} src="https://www.s-hertogenbosch.nl/typo3conf/ext/website_shertogenbosch/Resources/Public/Images/logo.svg"/>
+        <img onClick={direct} className={classes.headerImage} src="https://www.s-hertogenbosch.nl/typo3conf/ext/website_shertogenbosch/Resources/Public/Images/logo.svg"/>
       </div>
 
       <MainMenu />

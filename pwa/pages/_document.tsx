@@ -1,44 +1,37 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@mui/styles';
-import crypto from 'crypto';
-import { v4 } from 'uuid';
 import getConfig from 'next/config';
 
 const generateCsp = (): [csp: string, nonce: string] => {
-  const production = process.env.NODE_ENV === 'production';
 
-  // generate random nonce converted to base64. Must be different on every HTTP page load
-  const hash = crypto.createHash('sha256');
-  hash.update(v4());
-  const nonce = hash.digest('base64');
+  const nonce = publicRuntimeConfig.nonce;
 
   let csp = ``;
   csp += `default-src 'none';`;
   csp += `base-uri 'self';`;
   csp += `prefetch-src 'self';`;
-  csp += `style-src 'self' https://fonts.googleapis.com 'unsafe-inline';`; // NextJS requires 'unsafe-inline'
-  csp += `script-src 'nonce-${nonce}' 'self' ${production ? '' : "'unsafe-eval'"};`; // NextJS requires 'self' and 'unsafe-eval' in dev (faster source maps)
+  csp += `style-src 'self' 'nonce-${nonce}' data:;`;
+  csp += `script-src 'nonce-${nonce}' 'self' 'unsafe-eval';`;
   csp += `img-src 'self' https://www.logius.nl https://www.s-hertogenbosch.nl;`
-  csp += `font-src https://fonts.gstatic.com http://localhost:3000;`;
+  csp += `font-src 'self' https://fonts.gstatic.com http://localhost:3000;`;
   csp += `connect-src 'self' http://localhost;`;
-  csp += `font-src 'self' https://fonts.gstatic.com;`;
-  csp += `connect-src 'self';`;
 
-  // if (typeof window !== "undefined") {
-  //   if (window.location.href.includes('http://localhost')) {
-  //     csp += `font-src https://fonts.gstatic.com http://localhost:3000;`;
-  //     csp += `connect-src 'self' http://localhost;`;
-  //   } else {
-  //     csp += `font-src https://fonts.gstatic.com;`;
-  //     csp += `connect-src 'self';`;
-  //   }
-  // }
 
   return [csp, nonce];
 };
 
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+let referrer = "strict-origin";
+
+const inlineScript = (body, nonce) => (
+  <script
+    type='text/javascript'
+    dangerouslySetInnerHTML={{ __html: body }}
+    nonce={nonce}
+  />
+)
+
 
 
 export default class MyDocument extends Document {
@@ -47,10 +40,13 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head nonce={publicRuntimeConfig.nonce}>
+          {inlineScript(`window.__webpack_nonce__="${publicRuntimeConfig.nonce}"`, publicRuntimeConfig.nonce)}
           <meta property='csp-nonce' content={publicRuntimeConfig.nonce} />
-          {/*<meta httpEquiv='Content-Security-Policy' content={csp} />*/}
-          {/* Not exactly required, but this is the PWA primary color */}
+          <meta httpEquiv='Content-Security-Policy' content={csp} />
+          <meta name="referrer" content={referrer} />
           <meta name="theme-color"/>
+          <link nonce={publicRuntimeConfig.nonce} rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.css"/>
+
         </Head>
         <body>
         <Main />

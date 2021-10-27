@@ -64,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "left"
     },
   },
+  stepperText: {
+    width: '100%', marginTop: '20px', textAlign: "center"
+  }
 }));
 
 function Index() {
@@ -107,14 +110,14 @@ function Index() {
             <LoginScreen />
           :
           <Grid container spacing={3}>
-            <Box sx={{ width: '100%', marginTop: '20px', textAlign: "center" }}>
+            <Grid item className={classes.stepperText}>
               <Avatar sx={{ backgroundColor: "#001759", marginLeft: "auto", marginRight: "auto" }}>
                 <LocalShippingIcon />
               </Avatar>
               <Typography mb={1} fontWeight="medium">
                 Ik ga verhuizen
               </Typography>
-            </Box>
+            </Grid>
 
             <Grid item sm={12} xs={12} md={12} className={classes.textAlign}>
               <Typography variant="h4">
@@ -122,19 +125,19 @@ function Index() {
               </Typography>
             </Grid>
             <Grid item sx={{width: '100%', minWidth: '100%'}}>
-              <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
+              <Box className={classes.listStyle} sx={{p: 2, display: 'flex', alignItems: 'center'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef het adres op waar je naartoe verhuist</span>
               </Box>
-              <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
+              <Box className={classes.listStyle} sx={{p: 2, display: 'flex', alignItems: 'center'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef de datum op wanneer je gaat verhuisen</span>
               </Box>
-              <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
+              <Box className={classes.listStyle} sx={{p: 2, display: 'flex', alignItems: 'center'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef aan met wie je gaat verhuizen</span>
               </Box>
-              <Box className={classes.listStyle} sx={{p: 2, display: 'flex'}}>
+              <Box className={classes.listStyle} sx={{p: 2, display: 'flex', alignItems: 'center'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
                 <span>Geef aan hoe we je kunnen bereiken</span>
               </Box>

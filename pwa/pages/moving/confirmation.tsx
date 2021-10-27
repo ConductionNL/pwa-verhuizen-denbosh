@@ -68,7 +68,7 @@ function Index() {
               <Stepper currentStep={5}/>
             </Grid>
 
-            <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
+            <Grid sx={{marginTop: "20px", width: '100%', marginBottom: '50px'}} className={classes.textAlign} item>
               <Grid item >
                 <Typography variant="h4">
                   Je verhuizing is aangevraagd

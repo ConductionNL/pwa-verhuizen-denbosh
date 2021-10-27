@@ -83,7 +83,7 @@ function Index() {
                   <br/>
                   <Grid
                     justifyContent="space-between" // Add it here :)
-                    container>
+                    container sx={{marginBottom: '50px'}}>
                     <Grid item>
                       <Link href="/moving/contact">
                         <Button variant="text" startIcon={<ChevronLeft/>}> Ga terug</Button>

@@ -84,6 +84,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#AD9156',
     boxShadow: "none"
   },
+  colorWhite: {
+    color: 'white'
+  }
 }));
 
 const handleLogout = (context) => {
@@ -153,7 +156,7 @@ export default function MainMenu() {
             <Typography variant="h6" color="inherit">
               {
                 userContext.user !== null &&
-                <span style={{color: 'white'}}>
+                <span className={classes.colorWhite}>
               {
                 userContext.user.name
               }
@@ -164,14 +167,14 @@ export default function MainMenu() {
               {
                 userContext.user !== null
                   ?
-                  <span onClick={handleLogout} style={{color: 'white'}}>Uitloggen</span>
+                  <span onClick={handleLogout} className={classes.colorWhite}>Uitloggen</span>
                   :
                   // <Link href="http://localhost/login/adfs/conduction">
                   //   <span style={{color: 'white'}}>Inloggen</span>
                   // </Link>
                   <Link
                     href={context.baseUrl + "/digid/login?returnUrl=" + context.frontendUrl + "/moving?state=8412312632"}>
-                    <span style={{color: 'white'}}>Inloggen</span>
+                    <span className={classes.colorWhite}>Inloggen</span>
                   </Link>
               }
             </Typography>

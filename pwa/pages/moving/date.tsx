@@ -42,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "left"
     },
   },
+  mb20: {
+    marginBottom: '20px'
+  },
+  alignLeft: {
+    textAlign: 'left'
+  }
 }));
 
 function Index() {
@@ -101,7 +107,7 @@ function Index() {
                 liggen.
               </Typography>
             </Grid>
-            <Grid item style={{marginTop: 20, width: "100%"}}>
+            <Grid item style={{marginTop: '20px', width: "100%"}}>
               <form onSubmit={handleDate}>
                 <Grid item className={classes.calendarAlign}>
                   <LocalizationProvider dateAdapter={AdapterDateFns} locale={nlLocale}>
@@ -130,7 +136,7 @@ function Index() {
 
                 </Grid>
                 <Grid item>
-                  <span style={{marginBottom: 20}}><p>Verhuisdatum: {date.toLocaleDateString("nl")}</p></span>
+                  <span className={classes.mb20}><p>Verhuisdatum: {date.toLocaleDateString("nl")}</p></span>
                 </Grid>
                 <Grid>
                   <Stack
@@ -139,7 +145,7 @@ function Index() {
                     alignItems="center"
                   >
                     <div>{icon ? <WarningIcon color="warning" fontSize="large" sx={{marginRight: '40px'}}/> : null}</div>
-                    <div style={{textAlign: 'left'}}>
+                    <div className={classes.alignLeft}>
                       <Typography variant="h5">{errorMessageTitle}</Typography>
                       <div>{errorMessageText}</div>
                     </div>
@@ -150,7 +156,7 @@ function Index() {
                   justifyContent="space-between" // Add it here :)
                   container>
                   <Stack
-                    sx={{width: '100%'}}
+                    sx={{width: '100%', marginBottom: '50px'}}
                     direction="row"
                     justifyContent="space-between"
                   >

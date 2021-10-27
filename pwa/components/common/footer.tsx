@@ -74,7 +74,7 @@ export default function Footer() {
 
   return (
     <footer  className={classes.footerStyle}>
-      <Paper style={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+      <Paper sx={{position: 'fixed', bottom: '0', left: '0', right: '0'}} elevation={3}>
         <BottomNavigation
           value={state['bottumNavigation']} onChange={handleChange}
           showLabels
@@ -83,9 +83,9 @@ export default function Footer() {
           {
             userContext.user !== null
               ?
-              <BottomNavigationAction onClick={handleLogout} label="Logout" icon={<LogoutIcon/>}/>
+              <BottomNavigationAction onClick={handleLogout} label="Uitloggen" icon={<LogoutIcon/>}/>
               :
-              <BottomNavigationAction onClick={handleLogin} label="Login" icon={<Login/>}/>
+              <BottomNavigationAction onClick={handleLogin} label="Inloggen" icon={<Login/>}/>
           }
         </BottomNavigation>
       </Paper>
