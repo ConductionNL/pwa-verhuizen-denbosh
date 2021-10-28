@@ -140,11 +140,11 @@ export default function CheckList() {
                     <div>
                       {
                         mainBsn !== null &&
-                        mainBsn.verblijfplaats.adresregel1
-                      }
-                      {
-                        mainBsn !== null && mainBsn.verblijfplaats.adresregel2 !== undefined &&
-                          ", " + mainBsn.verblijfplaats.adresregel2
+                          mainBsn.verblijfplaats.straatnaam + " " +
+                          mainBsn.verblijfplaats.huisnummer +
+                          mainBsn.verblijfplaats.huisnummertoevoeging + " ," +
+                          mainBsn.verblijfplaats.postcode + " " +
+                          mainBsn.verblijfplaats.woonplaatsnaam
                       }
                     </div>
                   </div>
