@@ -166,7 +166,7 @@ export default function Address() {
                   Wat wordt je nieuwe adres?
                 </Typography>
                 <Typography mb="10px">
-                  Vul je postcode, huisnummer en eventueel toevoeging in van het nieuwe adres.
+                  Vul postcode, huisnummer en eventueel toevoeging in van je nieuwe adres
                 </Typography>
               </Grid>
               <Grid item style={{marginTop: 20, width: "100%"}}>

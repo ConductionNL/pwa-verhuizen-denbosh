@@ -109,10 +109,10 @@ function Index() {
             <Grid sx={{marginTop: "20px", width: '100%'}} className={classes.textAlign} item>
               <Grid item>
                 <Typography variant="h4">
-                  Wie gaat er verhuizen?
+                  Wie gaat er mee verhuizen?
                 </Typography>
                 <Typography mb="10px">
-                  Onderstaande personen kunnen door jou verhuist worden.
+                  Onderstaande personen kunnen door jou verhuisd worden.
                 </Typography>
               </Grid>
               <Grid item>

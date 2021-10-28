@@ -131,7 +131,7 @@ function Index() {
               </Box>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex', alignItems: 'center'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
-                <span>Geef de datum op wanneer je gaat verhuisen</span>
+                <span>Geef de datum op wanneer je gaat verhuizen</span>
               </Box>
               <Box className={classes.listStyle} sx={{p: 2, display: 'flex', alignItems: 'center'}}>
                 <Avatar className={classes.stepsStyle} sx={{ margin: 0, backgroundColor: "#ad9156"}}><ForwardRounded/></Avatar>
