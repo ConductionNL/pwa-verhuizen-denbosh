@@ -140,11 +140,13 @@ export default function CheckList() {
                     <div>
                       {
                         mainBsn !== null &&
-                          mainBsn.verblijfplaats.straatnaam + " " +
-                          mainBsn.verblijfplaats.huisnummer +
-                          mainBsn.verblijfplaats.huisnummertoevoeging + " ," +
-                          mainBsn.verblijfplaats.postcode + " " +
-                          mainBsn.verblijfplaats.woonplaatsnaam
+                          <>
+                            {mainBsn.verblijfplaats.straatnaam !== undefined ? mainBsn.verblijfplaats.straatnaam + " " : mainBsn.verblijfplaats.straat + " "}
+                            {mainBsn.verblijfplaats.huisnummer}
+                            {mainBsn.verblijfplaats.huisnummertoevoeging !== undefined ? mainBsn.verblijfplaats.huisnummertoevoeging + ", " : ", "}
+                            {mainBsn.verblijfplaats.postcode + " "}
+                            {mainBsn.verblijfplaats.woonplaatsnaam !== undefined ? mainBsn.verblijfplaats.woonplaatsnaam : mainBsn.verblijfplaats.woonplaats}
+                          </>
                       }
                     </div>
                   </div>

@@ -16,6 +16,7 @@ import Avatar from "@mui/material/Avatar";
 import {Person} from "@mui/icons-material";
 import {Check} from "@material-ui/icons";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import {useAppContext} from "../../components/context/state";
 
 const useStyles = makeStyles((theme) => ({
   listStyle: {
@@ -38,10 +39,12 @@ function Index() {
   var request = null;
   const classes = useStyles();
   const userContext = useUserContext();
+  const context = useAppContext();
+  const [requestObject, setRequestObject] = React.useState(null);
 
   useEffect(() => {
-    if (userContext.user === undefined || userContext.user === null || userContext.user === 'undefined') {
-      router.push("/moving");
+    if (typeof window !== "undefined") {
+      setRequestObject(JSON.parse(sessionStorage.getItem('request')));
     }
   }, []);
 
@@ -53,6 +56,8 @@ function Index() {
       path: "/requests" + id
     });
   }
+
+
 
   return <>
     <Layout title={title} description="waar kan ik deze description zien">
@@ -82,6 +87,12 @@ function Index() {
               </Grid>
               <Grid item className={classes.listStyle}>
                 <CheckList/>
+                {
+                  requestObject !== null &&
+                  <Link target={'_blank'} href={context.apiUrl + '/verzoek_pdf/' + requestObject.id}>
+                    <Button  sx={{marginTop: '25px'}} variant={"contained"}>Pdf downloaden</Button>
+                  </Link>
+                }
               </Grid>
             </Grid>
           </Grid>
