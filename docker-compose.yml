@@ -37,6 +37,7 @@ services:
       - "80:80"
     environment:
       - NGINX_HOST=php
+      - NGINX_ENV=${APP_ENV}
 
   db:
     image: mysql:5.7
